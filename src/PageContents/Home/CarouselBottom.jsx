@@ -2,7 +2,7 @@ import { Button, Carousel, Typography } from "@material-tailwind/react";
 import React from "react";
 
 import carousel1 from "../../assets/hero/carousel2/carousel2-1.png";
-
+import carousel2 from "../../assets/hero/carousel2/carousel2-2.png";
 function CarouselBottom() {
   return (
     <Carousel
@@ -29,9 +29,9 @@ function CarouselBottom() {
             <Typography
               variant="lead"
               color="white"
-              className="uppercase text-lightText text-xl leading-normal font-bold opacity-80"
+              className="uppercase text-lightText text-xl leading-normal font-extrabold opacity-80"
             >
-              Summer 2020
+              Summer 2023
             </Typography>
             <Typography
               variant="h1"
@@ -61,36 +61,44 @@ function CarouselBottom() {
           </div>
         </div>
       </div>
-      {/* <div className="relative h-full w-full">
-        <img alt="image 1" className="h-full w-full object-cover " />
+      <div className="relative h-full w-full ">
+        <img src={carousel2} className="h-full w-full " />
         <div className="absolute  inset-0 grid h-full w-full place-items-center ">
-          <div className="w-full mt-[74px]  flex flex-col gap-8  text-center md:w-3/4">
+          <div className="w-full  flex flex-col gap-10 ml-8 text-start md:w-3/4">
+            <Typography
+              variant="lead"
+              color="white"
+              className="uppercase text-lightText text-xl leading-normal font-extrabold opacity-80"
+            >
+              Summer 2023
+            </Typography>
             <Typography
               variant="h1"
               color="white"
-              className=" text-3xl md:text-4xl text-lightText uppercase lg:text-[50px] tracking-wider"
+              className=" text-lightText uppercase lg:text-6xl tracking-wider flex flex-col gap-6"
             >
-              Black Friday
+              <p>it's a special </p>
+              <p>gift</p>
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="tracking-wider text-lightText text-xl"
+              className="tracking-wide text-lightText text-xl"
             >
-              We know how large objects will act, but things on a <br />
-              small scale just do not act that way .
+              We know how large objects will act, but things on a <br /> small
+              scale
             </Typography>
             <div className="">
               <Button
                 size="lg"
-                className="bg-primaryColor text-lightText tracking-widest rounded-lg hover:cursor-pointer capitalize px-12 text-lg "
+                className="bg-primaryColor text-lightText  tracking-widest rounded-lg hover:cursor-pointer px-12 text-lg uppercase"
               >
-                Start Now
+                shop now
               </Button>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </Carousel>
   );
 }
