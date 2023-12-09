@@ -68,14 +68,14 @@ function CarouselBottom() {
             <Typography
               variant="lead"
               color="white"
-              className="uppercase text-lightText text-xl leading-normal font-extrabold opacity-80"
+              className="uppercase text-gray-800 text-xl leading-normal font-extrabold opacity-80"
             >
               Summer 2023
             </Typography>
             <Typography
               variant="h1"
               color="white"
-              className=" text-lightText uppercase lg:text-6xl tracking-wider flex flex-col gap-6"
+              className=" text-gray-800 uppercase lg:text-6xl tracking-wider flex flex-col gap-6"
             >
               <p>it's a special </p>
               <p>gift</p>
@@ -83,7 +83,7 @@ function CarouselBottom() {
             <Typography
               variant="lead"
               color="white"
-              className="tracking-wide text-lightText text-xl"
+              className="tracking-wide text-gray-800 text-xl"
             >
               We know how large objects will act, but things on a <br /> small
               scale
