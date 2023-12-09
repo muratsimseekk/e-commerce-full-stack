@@ -1,12 +1,14 @@
 import "./App.css";
 import Header from "./LayoutComponents/Header";
-import { CarouselWithContent } from "./PageContents/CarouselWithContent";
+import Home from "./PageContents/Home";
+import { CarouselWithContent } from "./PageContents/Home/CarouselWithContent";
+import EditorPicks from "./PageContents/Home/EditorPicks";
 
 function App() {
   return (
-    <div className="w-full  ">
+    <div className="w-full ">
       <Header />
-      <CarouselWithContent />
+      <Home />
     </div>
   );
 }

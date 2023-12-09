@@ -1,7 +1,7 @@
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 
-import hero1 from "../assets/hero/hero1.jpeg";
-import hero2 from "../assets/hero/hero2.jpg";
+import hero1 from "../../assets/hero/hero1.jpeg";
+import hero2 from "../../assets/hero/hero2.jpg";
 export function CarouselWithContent() {
   return (
     <Carousel
