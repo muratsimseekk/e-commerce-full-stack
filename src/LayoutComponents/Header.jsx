@@ -21,7 +21,7 @@ import {
 function Header() {
   return (
     <div className="w-full">
-      <div className="w-full py-6 bg-darkBg text-lightText flex justify-center ">
+      <div className="w-full py-5 bg-darkBg text-lightText flex justify-center ">
         <div className="w-[95%] flex justify-between  flex-wrap">
           <div className=" flex gap-8">
             <div className="flex gap-2 items-center">
@@ -47,7 +47,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className="w-full py-7 bg-rose-400 flex justify-center ">
+      <div className="w-full py-6 bg-rose-400 flex justify-center ">
         <div className="w-[95%]  h-full flex items-center justify-between">
           <div className="flex  justify-between w-2/5">
             <div className=" flex">
