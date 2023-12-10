@@ -59,9 +59,11 @@ function Header() {
                 <Link to="/">
                   <li>Home</li>
                 </Link>
-                <li className="flex gap-2 text-textColor">
-                  <p>Shop</p> <img src={vector} />
-                </li>
+                <Link to="/shop">
+                  <li className="flex gap-2 text-textColor">
+                    <p>Shop</p> <img src={vector} />
+                  </li>
+                </Link>
                 <li>About</li>
                 <Link to="/blog">
                   <li>Blog</li>
