@@ -81,7 +81,7 @@ function Footer() {
               </h3>
             </div>
             <div>
-              <div>
+              <div className="flex gap-1">
                 <input
                   className="p-3 rounded-l-md text-secondText bg-blue-gray-50"
                   type="email"
