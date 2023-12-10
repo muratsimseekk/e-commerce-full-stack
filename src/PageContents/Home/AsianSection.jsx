@@ -7,7 +7,7 @@ function AsianSection() {
       <div className="w-[45%]">
         <img className="object-cover" src={asianPhoto} />
       </div>
-      <div className="w-[40%]  flex flex-col gap-8 justify-center">
+      <div className="w-[40%] pl-7 flex flex-col gap-8 justify-center">
         <p className="text-mutedColor uppercase text-lg">Summer 2023</p>
         <h4 className="text-textColor font-bold text-4xl tracking-wider leading-relaxed">
           Part of the Neural <br /> Universe

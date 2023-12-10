@@ -21,7 +21,7 @@ function Featured() {
             the two major realms of Classical physics: Newtonian mechanics
           </p>
         </div>
-        <div className=" flex w-full justify-between  flex-wrap">
+        <div className=" flex w-full justify-between flex-wrap">
           <div className=" w-[32%] flex flex-col text-center gap-4 ">
             <div className="w-full relative ">
               <p className="absolute text-lightText bg-dangerRed z-10 px-3 py-1 rounded-md top-[5%] left-[5%]">
@@ -29,7 +29,7 @@ function Featured() {
               </p>
               <img className="w-full" src={foto1} />
             </div>
-            <div className="w-full  flex justify-center">
+            <div className="w-full pt-3 flex justify-center">
               <div className="w-[90%]  flex flex-col gap-6">
                 <div className="flex gap-4">
                   <p className="text-blue-300">Google</p>
@@ -67,7 +67,7 @@ function Featured() {
               </p>
               <img className="w-full" src={foto2} />
             </div>
-            <div className="w-full  flex justify-center">
+            <div className="w-full pt-3 flex justify-center">
               <div className="w-[90%]  flex flex-col gap-6">
                 <div className="flex gap-4">
                   <p className="text-blue-300">Google</p>
@@ -105,7 +105,7 @@ function Featured() {
               </p>
               <img className="w-full" src={foto3} />
             </div>
-            <div className="w-full  flex justify-center">
+            <div className="w-full pt-3 flex justify-center">
               <div className="w-[90%]  flex flex-col gap-6">
                 <div className="flex gap-4">
                   <p className="text-blue-300">Google</p>
