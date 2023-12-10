@@ -18,6 +18,7 @@ import {
   faTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 function Header() {
   return (
     <div className="w-full">
@@ -55,12 +56,16 @@ function Header() {
             </div>
             <div>
               <ul className="flex gap-4 text-secondText">
-                <li>Home</li>
+                <Link to="/">
+                  <li>Home</li>
+                </Link>
                 <li className="flex gap-2 text-textColor">
                   <p>Shop</p> <img src={vector} />
                 </li>
                 <li>About</li>
-                <li>Blog</li>
+                <Link to="/blog">
+                  <li>Blog</li>
+                </Link>
                 <li>Contact</li>
                 <li>Pages</li>
               </ul>
