@@ -4,6 +4,8 @@ import { CarouselWithContent } from "./Home/CarouselWithContent";
 import EditorPicks from "./Home/EditorPicks";
 import BestSellerProducts from "./Home/BestSellerProducts";
 import CarouselBottom from "./Home/CarouselBottom";
+import AsianSection from "./Home/AsianSection";
+import Featured from "./Home/Featured";
 
 function Home() {
   return (
@@ -12,6 +14,8 @@ function Home() {
       <EditorPicks />
       <BestSellerProducts />
       <CarouselBottom />
+      <AsianSection />
+      <Featured />
     </>
   );
 }
