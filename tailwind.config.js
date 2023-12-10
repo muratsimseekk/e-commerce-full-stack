@@ -22,6 +22,7 @@ module.exports = withMT({
         violet: "rgba(151, 125, 244, 1)",
         successColor: "rgba(45, 192, 113, 1)",
         dangerRed: "rgba(231, 64, 64, 1)",
+        lightGray: "rgba(250, 250, 250, 1)",
       },
     },
   },
