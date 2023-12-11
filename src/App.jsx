@@ -7,6 +7,7 @@ import Header from "./LayoutComponents/Header";
 import Home from "./PageComponents/Home";
 import Blog from "./PageComponents/Blog";
 import Shop from "./PageComponents/Shop";
+import About from "./PageComponents/About";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
       </Routes>
       <Footer />
