@@ -11,7 +11,7 @@ function Footer() {
   return (
     <div className="w-full   flex flex-col">
       <div className="bg-lightGray flex justify-center">
-        <div className="w-4/5  flex justify-between items-center py-10">
+        <div className="w-4/5  flex justify-between items-center py-16">
           <h2 className="text-3xl font-semibold ">Bandage</h2>
           <div className="flex gap-5 text-primaryColor">
             <FontAwesomeIcon icon={faFacebook} className="w-8 h-8" />
