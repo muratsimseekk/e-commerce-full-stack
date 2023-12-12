@@ -77,7 +77,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product2} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product2} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -94,7 +96,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product3} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product3} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -111,7 +115,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product4} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product4} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -128,7 +134,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product5} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product5} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -145,7 +153,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product6} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product6} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -162,7 +172,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product7} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product7} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -179,7 +191,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product8} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product8} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -196,7 +210,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product9} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product9} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -213,7 +229,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product10} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product10} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -230,7 +248,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product11} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product11} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
@@ -247,7 +267,9 @@ function Products() {
             </div>
           </div>
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product12} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product12} />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>
