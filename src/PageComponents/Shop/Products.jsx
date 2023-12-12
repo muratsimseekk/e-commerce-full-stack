@@ -24,6 +24,7 @@ import {
   faRedditAlien,
   faStripe,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 function Products() {
   return (
@@ -57,7 +58,9 @@ function Products() {
         </div>
         <div className="flex w-11/12  flex-wrap justify-between gap-y-12">
           <div className=" w-[23%] flex flex-col text-center gap-4 ">
-            <img src={product1} />
+            <Link to="/shop/product">
+              <img className="w-full" src={product1} alt="Product 1" />
+            </Link>
             <h4 className="text-textColor font-bold tracking-wider">
               Graphic Design
             </h4>

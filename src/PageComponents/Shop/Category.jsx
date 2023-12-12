@@ -5,6 +5,7 @@ import card2 from "../../assets/hero/shop-card/card2.png";
 import card3 from "../../assets/hero/shop-card/card3.png";
 import card4 from "../../assets/hero/shop-card/card4.png";
 import card5 from "../../assets/hero/shop-card/card5.png";
+import { Link } from "react-router-dom";
 function Category() {
   return (
     <div className="w-full   flex justify-center ">
@@ -12,8 +13,11 @@ function Category() {
         <div className="flex justify-between  py-8 px-8">
           <h2 className="bg- text-textColor text-xl font-semibold">Shop</h2>
           <div className="flex items-center gap-3  font-semibold text-lg">
-            <h3 className="text-textColor">Home</h3>
+            <Link to="/">
+              <h3 className="text-textColor">Home</h3>
+            </Link>
             <IoIosArrowForward className="h-5 w-5 text-mutedColor" />
+
             <h3 className="text-mutedColor">Shop</h3>
           </div>
         </div>
