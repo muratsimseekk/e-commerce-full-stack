@@ -286,20 +286,20 @@ function Products() {
             </div>
           </div>
         </div>
-        <div className=" bg-white border border-mutedColor rounded-md">
-          <button className="text-lg  border border-mutedColor bg-mutedColor py-4 px-3 text-lightText hover:cursor-pointer rounded-l-md ">
+        <div className=" bg-white border border-zinc rounded-md mt-8">
+          <button className="text-sm border border-zinc bg-zinc100 py-6 px-6 text-mutedColor hover:cursor-pointer rounded-l-md ">
             First
           </button>
-          <button className="text-lg  border border-mutedColor text-primaryColor py-4 px-3  hover:cursor-pointer  ">
+          <button className="text-sm border border-zinc text-primaryColor py-6 px-6  hover:cursor-pointer  ">
             1
           </button>
-          <button className="text-lg  border border-mutedColor py-4 px-3 text-lightText bg-primaryColor hover:cursor-pointer  ">
+          <button className="text-sm border border-zinc py-6 px-6 text-lightText bg-primaryColor hover:cursor-pointer  ">
             2
           </button>
-          <button className="text-lg  border border-mutedColor py-4 px-3 text-primaryColor hover:cursor-pointer  ">
+          <button className="text-sm border border-zinc py-6 px-6 text-primaryColor hover:cursor-pointer  ">
             3
           </button>
-          <button className="text-lg  border border-mutedColor py-4 px-3 text-primaryColor hover:cursor-pointer rounded-r-md ">
+          <button className="text-sm border border-zinc py-6 px-6 text-primaryColor hover:cursor-pointer rounded-r-md ">
             Next
           </button>
         </div>

@@ -26,6 +26,7 @@ module.exports = withMT({
         roseBg: "rgba(255, 233, 234, 1)",
         zinc: "rgba(133, 133, 133, 1)",
         stone: "rgba(196, 196, 196, 0.2)",
+        zinc100: "rgba(243, 243, 243, 1)",
       },
     },
   },
