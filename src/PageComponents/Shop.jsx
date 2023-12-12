@@ -7,11 +7,19 @@ import ProductPage from "./Shop/ProductPage";
 function Shop() {
   return (
     <>
-      <Category />
       <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Category />
+              <Products />
+            </>
+          }
+        />
+
         <Route path="/product" element={<ProductPage />} />
       </Routes>
-      <Products />
     </>
   );
 }

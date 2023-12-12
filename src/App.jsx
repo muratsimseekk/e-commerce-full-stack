@@ -8,6 +8,7 @@ import Home from "./PageComponents/Home";
 import Blog from "./PageComponents/Blog";
 import Shop from "./PageComponents/Shop";
 import About from "./PageComponents/About";
+import ProductPage from "./PageComponents/Shop/ProductPage";
 //Shop/* verdim cunku alt componentler icin de path acildi
 function App() {
   return (

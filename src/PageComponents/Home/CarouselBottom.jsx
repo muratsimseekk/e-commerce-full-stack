@@ -3,6 +3,7 @@ import React from "react";
 
 import carousel1 from "../../assets/hero/carousel2/carousel2-1.png";
 import carousel2 from "../../assets/hero/carousel2/carousel2-2.png";
+
 function CarouselBottom() {
   return (
     <Carousel

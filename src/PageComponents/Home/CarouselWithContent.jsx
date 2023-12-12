@@ -1,12 +1,12 @@
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 
-import hero1 from "../../assets/hero/hero1.jpeg";
 import hero2 from "../../assets/hero/hero2.jpg";
+import hero4 from "../../assets/hero/heroCategory/hero4.jpg";
 export function CarouselWithContent() {
   return (
     <Carousel
       transition={{ duration: 1 }}
-      className="h-[82vh]"
+      className="h-[calc(100vh_-_144px)] w-full"
       navigation={({ setActiveIndex, activeIndex, length }) => (
         <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
           {new Array(length).fill("").map((_, i) => (
@@ -21,8 +21,8 @@ export function CarouselWithContent() {
         </div>
       )}
     >
-      <div className="relative h-full w-full">
-        <img src={hero1} className="h-full w-full object-fit-cover " />
+      <div className="relative w-full h-full">
+        <img src={hero4} className="h-full w-full" />
         <div className="absolute  inset-0 grid h-full w-full place-items-center ">
           <div className="w-full  flex flex-col gap-10 ml-8 text-start md:w-3/4">
             <Typography
