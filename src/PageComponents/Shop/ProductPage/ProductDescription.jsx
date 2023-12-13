@@ -14,7 +14,7 @@ function ProductDescription() {
       <div className="w-4/5 ">
         <div className="flex w-full justify-between pb-16">
           <div className="w-[32%] relative">
-            <img className="w-full z-40 rounded-md" src={card1} />
+            <img className="w-full h-full z-40 rounded-md" src={card1} />
             <div className="h-full w-full bg-stone absolute -right-3 -bottom-2 -z-30 rounded-md"></div>
           </div>
           <div className="w-[32%] font-normal tracking-wider text-md flex flex-col gap-5">

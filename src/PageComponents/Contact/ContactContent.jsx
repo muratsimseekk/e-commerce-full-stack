@@ -4,10 +4,19 @@ import { LuPhone } from "react-icons/lu";
 import { FaLocationDot } from "react-icons/fa6";
 import { BsEnvelopeFill } from "react-icons/bs";
 import { PiArrowBendRightDownLight } from "react-icons/pi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAws,
+  faHooli,
+  faLyft,
+  faPiedPiperHat,
+  faRedditAlien,
+  faStripe,
+} from "@fortawesome/free-brands-svg-icons";
 
 function ContactContent() {
   return (
-    <div className="w-full  pt-32 pb-24 flex flex-col items-center">
+    <div className="w-full  pt-32 flex flex-col items-center">
       <div className="w-4/5 ">
         <div className=" w-full flex flex-col gap-32">
           <div className="flex flex-col gap-6 text-textColor">
@@ -61,6 +70,16 @@ function ContactContent() {
               Try it free now
             </Button>
           </div>
+        </div>
+      </div>
+      <div className="w-full  flex justify-center bg-lightGray pt-8">
+        <div className="w-4/5  py-6 flex justify-between items-center text-secondText">
+          <FontAwesomeIcon icon={faHooli} className="w-24 h-24" />
+          <FontAwesomeIcon icon={faLyft} className="w-24 h-24" />
+          <FontAwesomeIcon icon={faPiedPiperHat} className="w-24 h-24" />
+          <FontAwesomeIcon icon={faStripe} className="w-24 h-24" />
+          <FontAwesomeIcon icon={faAws} className="w-24 h-24" />
+          <FontAwesomeIcon icon={faRedditAlien} className="w-24 h-24" />
         </div>
       </div>
     </div>

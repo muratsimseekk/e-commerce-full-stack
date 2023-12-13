@@ -4,9 +4,9 @@ import women from "../../assets/hero/about/women.png";
 function HeaderContent() {
   return (
     <div className="w-full  flex flex-col items-center justify-start">
-      <div className="w-4/5  h-[82vh] flex  items-center relative">
-        <div className=" p-8 flex flex-col gap-8">
-          <h3 className="uppercase text-textColor font-medium">
+      <div className="w-4/5  h-[calc(100vh_-_144px)] flex  items-center relative ">
+        <div className=" p-8 flex flex-col gap-8 z-50">
+          <h3 className="uppercase text-textColor font-medium ">
             about company
           </h3>
           <h1 className="uppercase text-5xl font-bold tracking-wider text-textColor leading-relaxed ">
@@ -20,7 +20,6 @@ function HeaderContent() {
             get quote now
           </Button>
         </div>
-
         <div className="absolute w-[450px] h-[450px] bg-roseBg rounded-full right-[6%] bottom-[23%] "></div>
         <div className="absolute w-6 h-6 bg-violet rounded-full right-0 bottom-3/4"></div>
         <div className="absolute w-6 h-6 bg-violet rounded-full right-1/2 bottom-1/4"></div>

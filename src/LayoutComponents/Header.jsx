@@ -22,28 +22,33 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <div className="w-full">
-      <div className="w-full py-5 bg-darkBg text-lightText flex  justify-center ">
-        <div className="w-[95%] flex justify-between  flex-wrap">
-          <div className=" flex gap-8">
-            <div className="flex gap-2 items-center">
-              <FontAwesomeIcon icon={faPhone} />
-              <p>(225) 555-0118</p>
+      <div className=" xl:w-full xl:py-5 xl:bg-darkBg xl:text-lightText xl:flex  xl:justify-center ">
+        <div className="xl:w-[95%] xl:flex xl:justify-between  xl:flex-wrap">
+          <div className=" xl:flex xl:gap-8">
+            <div className="xl:flex xl:gap-2 xl:items-center">
+              <FontAwesomeIcon className="hidden xl:block " icon={faPhone} />
+              <p className="hidden xl:block ">(225) 555-0118</p>
             </div>
-            <div className="flex items-center gap-2">
-              <FontAwesomeIcon icon={faEnvelope} />
-              <p>michelle.rivera@example.com</p>
+            <div className="xl:flex xl:items-center xl:gap-2">
+              <FontAwesomeIcon className="hidden xl:block " icon={faEnvelope} />
+              <p className="hidden xl:block ">michelle.rivera@example.com</p>
             </div>
           </div>
           <div className=" flex items-center">
-            <p>Follow Us and get a chance to win 80%</p>
+            <p className="hidden xl:block ">
+              Follow Us and get a chance to win 80%
+            </p>
           </div>
           <div className=" flex gap-3 items-center">
-            <p className="text-lg">Follow us :</p>
+            <p className="hidden xl:block xl:text-lg">Follow us :</p>
             <div className="flex gap-3 ">
-              <FontAwesomeIcon icon={faInstagram} />
-              <FontAwesomeIcon icon={faYoutube} />
-              <FontAwesomeIcon icon={faFacebook} />
-              <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon
+                className="hidden xl:block "
+                icon={faInstagram}
+              />
+              <FontAwesomeIcon className="hidden xl:block " icon={faYoutube} />
+              <FontAwesomeIcon className="hidden xl:block " icon={faFacebook} />
+              <FontAwesomeIcon className="hidden xl:block " icon={faTwitter} />
             </div>
           </div>
         </div>
