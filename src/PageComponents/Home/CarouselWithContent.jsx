@@ -32,33 +32,36 @@ export function CarouselWithContent() {
           className="xl:h-full xl:w-full xl:hidden xl:object-cover h-full w-full "
         />
         <div className="absolute  inset-0 grid h-full w-full place-items-center ">
-          <div className="w-full  flex flex-col gap-10 ml-8 text-start md:w-3/4">
+          <div className="w-full  flex flex-col gap-10 ml-8 xl:text-start md:w-3/4">
             <Typography
               variant="lead"
               color="white"
-              className="uppercase text-lightText text-xl leading-normal font-bold opacity-80"
+              className="uppercase text-lightText font-black tracking-normal text-lg text-center xl:text-start xl:text-xl xl:leading-normal xl:font-bold xl:opacity-80"
             >
               Summer 2023
             </Typography>
             <Typography
               variant="h1"
               color="white"
-              className=" text-3xl md:text-4xl text-lightText uppercase lg:text-[50px] tracking-wider"
+              className=" xl:text-3xl text-[38px] leading-tight xl:text-start text-center text-lightText uppercase  xl:tracking-wider"
             >
-              New Collection
+              New <br className="xl:hidden block" /> Collection
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="tracking-wider text-lightText text-xl"
+              className="xl:tracking-wider text-lightText text-xl xl:text-start text-center tracking-wide"
             >
-              We know how large objects will act,
-              <br /> but things on a small scale.
+              We know how large objects <br className="xl:hidden block" /> will
+              act,
+              <br className="xl:block hidden" /> but things on a{" "}
+              <br className="xl:hidden block" />
+              small scale.
             </Typography>
-            <div className="">
+            <div className="xl:text-start text-center">
               <Button
                 size="lg"
-                className="bg-successColor text-lightText tracking-widest rounded-lg hover:cursor-pointer px-12 text-lg uppercase"
+                className="bg-successColor text-lightText  tracking-widest rounded-lg hover:cursor-pointer xl:px-12 text-lg uppercase"
               >
                 Shop Now
               </Button>
@@ -77,7 +80,7 @@ export function CarouselWithContent() {
             <Typography
               variant="h1"
               color="white"
-              className=" text-3xl md:text-4xl text-lightText uppercase lg:text-[50px] tracking-wider"
+              className=" xl:text-3xl text-[38px] leading-tight text-center text-lightText uppercase  xl:tracking-wider"
             >
               Black Friday
             </Typography>
@@ -86,13 +89,16 @@ export function CarouselWithContent() {
               color="white"
               className="tracking-wider text-lightText text-xl"
             >
-              We know how large objects will act, but things on a <br />
-              small scale just do not act that way .
+              We know how large objects will act,
+              <br className="xl:hidden block" /> but things on a{" "}
+              <br className="xl:block hidden" />
+              small scale <br className="xl:hidden block" />
+              just do not act that way .
             </Typography>
             <div className="">
               <Button
                 size="lg"
-                className="bg-primaryColor text-lightText tracking-widest rounded-lg hover:cursor-pointer capitalize px-12 text-lg "
+                className="bg-primaryColor text-lightText tracking-widest rounded-lg hover:cursor-pointer capitalize xl:px-12 text-lg "
               >
                 Start Now
               </Button>
