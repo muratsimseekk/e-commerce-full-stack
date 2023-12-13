@@ -8,7 +8,7 @@ import Home from "./PageComponents/Home";
 import Blog from "./PageComponents/Blog";
 import Shop from "./PageComponents/Shop";
 import About from "./PageComponents/About";
-import ProductPage from "./PageComponents/Shop/ProductPage";
+import Contact from "./PageComponents/Contact";
 //Shop/* verdim cunku alt componentler icin de path acildi
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
         <Route path="/shop/*" element={<Shop />} />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </div>

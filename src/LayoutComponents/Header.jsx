@@ -74,7 +74,9 @@ function Header() {
                 <Link to="/blog">
                   <li>Blog</li>
                 </Link>
-                <li>Contact</li>
+                <Link to="/contact">
+                  <li>Contact</li>
+                </Link>
                 <li>Pages</li>
               </ul>
             </div>
