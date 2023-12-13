@@ -12,20 +12,20 @@ function BestSellerProducts() {
     <div className=" w-full py-16  flex justify-center items-center">
       <div className=" w-4/5 h-4/5 flex flex-col gap-8">
         <div className="text-center  flex flex-col gap-4">
-          <p className="text-secondText text-xl tracking-wider">
+          <p className="text-secondText text-xl xl:tracking-wider tracking-wide xl:font-normal font-medium">
             Featured Products
           </p>
-          <h2 className="text-textColor font-bold text-2xl tracking-widest">
-            BESTSELLER PRODUCTS
+          <h2 className="text-textColor font-bold text-2xl xl:tracking-widest tracking-wider">
+            BESTSELLER <br className="xl:hidden block" /> PRODUCTS
           </h2>
-          <p className="text-secondText tracking-wider">
+          <p className="text-secondText tracking-wider xl:font-normal font-medium">
             Problems trying to resolve the conflict between{" "}
           </p>
         </div>
-        <div className=" flex justify-evenly gap-x-2 gap-y-20 flex-wrap">
-          <div className=" w-1/5 flex flex-col text-center gap-4 ">
+        <div className=" xl:flex xl:flex-row xl:justify-evenly flex flex-col gap-20 xl:gap-x-2 xl:gap-y-20 xl:flex-wrap">
+          <div className=" xl:w-1/5 flex flex-col text-center gap-4 ">
             <img src={foto1} />
-            <h4 className="text-textColor font-bold tracking-wider">
+            <h4 className="text-textColor pt-4 font-bold tracking-wider">
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
@@ -40,9 +40,9 @@ function BestSellerProducts() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-1/5 flex flex-col text-center gap-4 ">
+          <div className=" xl:w-1/5 flex flex-col text-center gap-4 ">
             <img src={foto2} />
-            <h4 className="text-textColor font-bold tracking-wider">
+            <h4 className="text-textColor pt-4 font-bold tracking-wider">
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
@@ -57,9 +57,9 @@ function BestSellerProducts() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-1/5 flex flex-col text-center gap-4 ">
+          <div className=" xl:w-1/5 flex flex-col text-center gap-4 ">
             <img src={foto3} />
-            <h4 className="text-textColor font-bold tracking-wider">
+            <h4 className="text-textColor pt-4 font-bold tracking-wider">
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
@@ -74,9 +74,9 @@ function BestSellerProducts() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-1/5 flex flex-col text-center gap-4 ">
+          <div className=" xl:w-1/5 flex flex-col text-center gap-4 ">
             <img src={foto4} />
-            <h4 className="text-textColor font-bold tracking-wider">
+            <h4 className="text-textColor pt-4 font-bold tracking-wider">
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
@@ -91,9 +91,9 @@ function BestSellerProducts() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-1/5 flex flex-col text-center gap-4 ">
+          <div className=" xl:w-1/5 flex flex-col text-center gap-4 ">
             <img src={foto5} />
-            <h4 className="text-textColor font-bold tracking-wider">
+            <h4 className="text-textColor pt-4 font-bold tracking-wider">
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
@@ -108,9 +108,9 @@ function BestSellerProducts() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-1/5 flex flex-col text-center gap-4 ">
+          <div className=" xl:w-1/5 flex flex-col text-center gap-4 ">
             <img src={foto6} />
-            <h4 className="text-textColor font-bold tracking-wider">
+            <h4 className="text-textColor pt-4 font-bold tracking-wider">
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
@@ -125,9 +125,9 @@ function BestSellerProducts() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-1/5 flex flex-col text-center gap-4 ">
+          <div className=" xl:w-1/5 flex flex-col text-center gap-4 ">
             <img src={foto7} />
-            <h4 className="text-textColor font-bold tracking-wider">
+            <h4 className="text-textColor pt-4 font-bold tracking-wider">
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
@@ -142,9 +142,9 @@ function BestSellerProducts() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-1/5 flex flex-col text-center gap-4 ">
+          <div className=" xl:w-1/5 flex flex-col text-center gap-4 ">
             <img src={foto8} />
-            <h4 className="text-textColor font-bold tracking-wider">
+            <h4 className="text-textColor pt-4 font-bold tracking-wider">
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
