@@ -45,7 +45,7 @@ function EditorPicks() {
                 src={womenPhoto}
               />
               <img
-                className="h-full object-cover xl:hidden block"
+                className="h-full object-cover w-full xl:hidden block"
                 src={womenPhoto2}
               />
             </div>

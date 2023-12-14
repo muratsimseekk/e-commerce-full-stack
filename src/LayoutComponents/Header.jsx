@@ -22,7 +22,7 @@ import { TbMenuDeep } from "react-icons/tb";
 import { Link } from "react-router-dom";
 function Header() {
   return (
-    <div className="w-full h-[40vh] xl:h-full">
+    <div className="w-full h-[40vh] xl:h-full xl:block flex flex-col justify-around">
       <div className=" xl:w-full xl:py-5 xl:bg-darkBg hidden xl:text-lightText xl:flex  xl:justify-center ">
         <div className="xl:w-[95%] xl:flex xl:justify-between  xl:flex-wrap">
           <div className=" xl:flex xl:gap-8">
@@ -115,7 +115,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className="xl:hidden flex justify-center pt-10 font-medium h-full ">
+      <div className="xl:hidden  flex justify-center  font-medium">
         <ul className="flex-col text-2xl text-center text-secondText">
           <Link to="/">
             <li className="py-3">Home</li>

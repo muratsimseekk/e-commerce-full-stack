@@ -23,10 +23,7 @@ export function CarouselWithContent() {
       )}
     >
       <div className="relative w-full h-full">
-        <img
-          src={hero4}
-          className="xl:h-full xl:w-full xl:block xl:object-cover hidden  "
-        />
+        <img src={hero4} className="xl:h-full xl:w-full xl:block  hidden  " />
         <img
           src={hero1Mobile}
           className="xl:h-full xl:w-full xl:hidden xl:object-cover h-full w-full "
