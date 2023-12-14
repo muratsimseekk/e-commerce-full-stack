@@ -8,21 +8,30 @@ import { IoIosArrowForward } from "react-icons/io";
 function Featured() {
   return (
     <div className=" w-full py-16  flex justify-center items-center">
-      <div className=" w-4/5 h-4/5 flex flex-col gap-8">
+      <div className=" w-4/5 h-4/5 flex flex-col gap-20">
         <div className="text-center  flex flex-col gap-4">
-          <p className="text-primaryColor font-semibold text-lg capitalize tracking-wider">
+          <p className="text-primaryColor font-semibold text-lg capitalize tracking-normal xl:tracking-wider">
             practice advise
           </p>
-          <h2 className="text-textColor font-bold text-3xl capitalize tracking-widest">
-            featured posts
+          <h2 className="text-textColor xl:font-bold xl:text-3xl capitalize xl:tracking-widest font-extrabold">
+            <span className="xl:block hidden">featured posts</span>
+            <span className="xl:hidden block text-4xl font-bold leading-snug tracking-wide">
+              featured <br /> products
+            </span>
           </h2>
           <p className="text-secondText tracking-wider">
-            Problems trying to resolve the conflict between <br />
-            the two major realms of Classical physics: Newtonian mechanics
+            <span className="xl:block hidden">
+              Problems trying to resolve the conflict between <br />
+              the two major realms of Classical physics: Newtonian mechanics
+            </span>
+            <span className="xl:hidden block font-medium">
+              Problems trying to resolve the <br /> conflict between the two
+              major
+            </span>
           </p>
         </div>
-        <div className=" flex w-full justify-between flex-wrap">
-          <div className=" w-[32%] flex flex-col text-center gap-4 ">
+        <div className=" xl:flex xl:flex-row w-full xl:justify-between xl:gap-0 flex flex-col gap-16 flex-wrap">
+          <div className="xl:w-[32%] xl:border-none xl:shadow-none shadow-md border flex flex-col text-center gap-4 ">
             <div className="w-full relative ">
               <p className="absolute text-lightText bg-dangerRed z-10 px-3 py-1 rounded-md top-[5%] left-[5%]">
                 NEW
@@ -60,7 +69,7 @@ function Featured() {
               </div>
             </div>
           </div>
-          <div className=" w-[32%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[32%] xl:border-none xl:shadow-none shadow-md border flex flex-col text-center gap-4 ">
             <div className="w-full relative">
               <p className="absolute text-lightText bg-dangerRed z-10 px-3 py-1 rounded-md top-[5%] left-[5%]">
                 NEW
@@ -98,7 +107,7 @@ function Featured() {
               </div>
             </div>
           </div>
-          <div className=" w-[32%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[32%] xl:border-none xl:shadow-none shadow-md border flex flex-col text-center gap-4 ">
             <div className="w-full relative">
               <p className="absolute text-lightText bg-dangerRed z-10 px-3 py-1 rounded-md top-[5%] left-[5%]">
                 NEW
