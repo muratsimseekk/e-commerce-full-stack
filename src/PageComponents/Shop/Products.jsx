@@ -307,27 +307,27 @@ function Products() {
           <div className="w-[85%] py-6 pb-8 flex flex-col items-center gap-8 xl:flex xl:flex-row xl:justify-between xl:items-center  text-secondText">
             <FontAwesomeIcon
               icon={faHooli}
-              className="xl:w-24 xl:h-24 w-32 h-40"
+              className="xl:w-24 xl:h-24 w-40 h-40"
             />
             <FontAwesomeIcon
               icon={faLyft}
-              className="xl:w-24 xl:h-24 w-32 h-40"
+              className="xl:w-24 xl:h-24 w-40 h-40"
             />
             <FontAwesomeIcon
               icon={faPiedPiperHat}
-              className="xl:w-24 xl:h-24 w-32 h-40"
+              className="xl:w-24 xl:h-24 w-40 h-40"
             />
             <FontAwesomeIcon
               icon={faStripe}
-              className="xl:w-24 xl:h-24 w-32 h-40"
+              className="xl:w-24 xl:h-24 w-40 h-40"
             />
             <FontAwesomeIcon
               icon={faAws}
-              className="xl:w-24 xl:h-24 w-32 h-40"
+              className="xl:w-24 xl:h-24 w-40 h-40"
             />
             <FontAwesomeIcon
               icon={faRedditAlien}
-              className="xl:w-24 xl:h-24 w-32 h-40"
+              className="xl:w-24 xl:h-24 w-40 h-40"
             />
           </div>
         </div>
