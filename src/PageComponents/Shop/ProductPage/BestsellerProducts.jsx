@@ -14,12 +14,12 @@ function BestsellerProducts() {
   return (
     <div className="py-12  w-full flex bg-lightGray justify-center">
       <div className="w-4/5 flex flex-col gap-10">
-        <h2 className="font-semibold text-2xl uppercase tracking-wider">
+        <h2 className="xl:font-semibold font-bold text-2xl uppercase tracking-wide xl:tracking-wider">
           Bestseller Products
         </h2>
         <div className="w-full h-1 bg-gray-200"></div>
-        <div className="flex flex-wrap justify-between gap-y-12 ">
-          <div className=" w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
+        <div className="flex flex-col gap-14  xl:shadow-none xl:gap-x-0 xl:flex xl:flex-row xl:flex-wrap xl:justify-between xl:gap-y-12 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
             <img className="w-full" src={bestProduct1} />
             <div className="flex flex-col gap-6 items-start pl-6 ">
               <h4 className="text-textColor font-bold tracking-wider">
@@ -34,7 +34,7 @@ function BestsellerProducts() {
               </div>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
             <img className="w-full" src={bestProduct2} />
             <div className="flex flex-col gap-6 items-start pl-6 ">
               <h4 className="text-textColor font-bold tracking-wider">
@@ -49,7 +49,7 @@ function BestsellerProducts() {
               </div>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
             <img className="w-full" src={bestProduct3} />
             <div className="flex flex-col gap-6 items-start pl-6 ">
               <h4 className="text-textColor font-bold tracking-wider">
@@ -64,7 +64,7 @@ function BestsellerProducts() {
               </div>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
             <img className="w-full" src={bestProduct4} />
             <div className="flex flex-col gap-6 items-start pl-6 ">
               <h4 className="text-textColor font-bold tracking-wider">
@@ -79,7 +79,7 @@ function BestsellerProducts() {
               </div>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
             <img className="w-full" src={bestProduct5} />
             <div className="flex flex-col gap-6 items-start pl-6 ">
               <h4 className="text-textColor font-bold tracking-wider">
@@ -94,7 +94,7 @@ function BestsellerProducts() {
               </div>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
             <img className="w-full" src={bestProduct6} />
             <div className="flex flex-col gap-6 items-start pl-6 ">
               <h4 className="text-textColor font-bold tracking-wider">
@@ -109,7 +109,7 @@ function BestsellerProducts() {
               </div>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
             <img className="w-full" src={bestProduct7} />
             <div className="flex flex-col gap-6 items-start pl-6 ">
               <h4 className="text-textColor font-bold tracking-wider">
@@ -124,7 +124,7 @@ function BestsellerProducts() {
               </div>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-6 bg-lightText pb-10">
             <img className="w-full" src={bestProduct8} />
             <div className="flex flex-col gap-6 items-start pl-6 ">
               <h4 className="text-textColor font-bold tracking-wider">

@@ -12,13 +12,22 @@ import React from "react";
 function Companies() {
   return (
     <div className="w-full  flex justify-center bg-lightText">
-      <div className="w-4/5  py-6 flex justify-between items-center  text-secondText">
-        <FontAwesomeIcon icon={faHooli} className="w-24 h-24" />
-        <FontAwesomeIcon icon={faLyft} className="w-24 h-24" />
-        <FontAwesomeIcon icon={faPiedPiperHat} className="w-24 h-24" />
-        <FontAwesomeIcon icon={faStripe} className="w-24 h-24" />
-        <FontAwesomeIcon icon={faAws} className="w-24 h-24" />
-        <FontAwesomeIcon icon={faRedditAlien} className="w-24 h-24" />
+      <div className="w-4/5 pb-8 py-6 xl:flex xl:flex-row xl:justify-between xl:items-center flex flex-col items-center text-secondText">
+        <FontAwesomeIcon icon={faHooli} className="xl:w-24 xl:h-24 w-32 h-40" />
+        <FontAwesomeIcon icon={faLyft} className="xl:w-24 xl:h-24 w-32 h-40" />
+        <FontAwesomeIcon
+          icon={faPiedPiperHat}
+          className="xl:w-24 xl:h-24 w-32 h-40"
+        />
+        <FontAwesomeIcon
+          icon={faStripe}
+          className="xl:w-24 xl:h-24 w-32 h-40"
+        />
+        <FontAwesomeIcon icon={faAws} className="xl:w-24 xl:h-24 w-32 h-40" />
+        <FontAwesomeIcon
+          icon={faRedditAlien}
+          className="xl:w-24 xl:h-24 w-32 h-40"
+        />
       </div>
     </div>
   );
