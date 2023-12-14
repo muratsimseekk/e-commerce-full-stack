@@ -72,7 +72,7 @@ function ContactContent() {
           </div>
         </div>
       </div>
-      <div className="xl:block hidden w-full  flex justify-center bg-lightGray pt-8">
+      <div className=" hidden xl:w-full  xl:flex xl:flex-row xl:justify-center bg-lightGray pt-8">
         <div className="w-4/5  py-6 flex justify-between items-center text-secondText">
           <FontAwesomeIcon icon={faHooli} className="w-24 h-24" />
           <FontAwesomeIcon icon={faLyft} className="w-24 h-24" />
