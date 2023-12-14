@@ -9,9 +9,9 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="w-full   flex flex-col">
-      <div className="bg-lightGray flex justify-center">
-        <div className="w-4/5  flex justify-between items-center py-16">
+    <div className="w-full flex flex-col">
+      <div className="bg-lightGray flex flex-row justify-center">
+        <div className="w-4/5  xl:flex xl:flex-row xl:justify-between xl:items-center xl:py-16 py-12 flex flex-col gap-8">
           <h2 className="text-3xl font-semibold ">Bandage</h2>
           <div className="flex gap-5 text-primaryColor">
             <FontAwesomeIcon icon={faFacebook} className="w-8 h-8" />
@@ -21,7 +21,7 @@ function Footer() {
         </div>
       </div>
       <div className=" flex justify-center">
-        <div className="w-4/5  py-10 flex justify-between">
+        <div className="w-4/5  xl:py-10 py-16 xl:flex xl:flex-row xl:justify-between flex flex-col gap-8 xl:font-normal font-semibold">
           <div className="flex flex-col gap-4">
             <div>
               <h3 className="capitalize font-semibold text-lg text-textColor">
@@ -99,8 +99,16 @@ function Footer() {
       </div>
       <div className=" bg-lightGray flex justify-center">
         <div className="w-4/5 py-10 ">
-          <p className="text-secondText">
-            Made With Love By Finland All Right Reserved
+          <p className="text-secondText xl:text-start text-center xl:font-normal font-semibold">
+            <span className="xl:block hidden">
+              {" "}
+              Made With Love By Finland All Right Reserved
+            </span>
+            <span className="xl:hidden block">
+              {" "}
+              Made With Love By
+              <br /> Finland All Right Reserved
+            </span>
           </p>
         </div>
       </div>
