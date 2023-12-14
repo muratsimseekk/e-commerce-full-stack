@@ -29,7 +29,7 @@ function CarouselBottom() {
           className="absolute xl:right-[10%] xl:bottom-0 bottom-0 right-0 xl:h-4/5  xl:w-[31.5%] w-full"
         />
         <div className="absolute  inset-0 grid h-full w-full xl:place-items-center ">
-          <div className="w-full flex absolute top-[215px] flex-col gap-10 xl:gap-10 xl:ml-8 xl:text-start text-center md:w-3/4">
+          <div className="w-full flex absolute top-[218px] flex-col gap-10 xl:gap-10 xl:ml-8 xl:text-start text-center md:w-3/4">
             <Typography
               variant="lead"
               color="white"
