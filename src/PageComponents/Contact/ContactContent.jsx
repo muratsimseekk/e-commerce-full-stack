@@ -27,37 +27,37 @@ function ContactContent() {
               We help small businesses <br /> with big ideas
             </p>
           </div>
-          <div className="flex justify-center gap-4">
-            <div className="w-[28%]  flex flex-col items-center gap-7 py-14">
+          <div className="xl:flex bg-lightGray xl:flex-row xl:justify-center flex flex-col gap-4">
+            <div className="xl:w-[28%] bg-white flex flex-col items-center gap-7 py-14">
               <LuPhone className="w-16 h-16 text-primaryColor" />
               <div className="text-textColor font-medium text-lg flex flex-col text-center">
                 <p>georgia.young@example.com</p>
                 <p>georgia.young@ple.com</p>
               </div>
               <p className="text-textColor font-bold text-lg">Get Support</p>
-              <Button className="w-1/2 font-montserrat font-bold capitalize tracking-wider text-xs px-6 py-5 bg-white border border-primaryColor text-primaryColor rounded-3xl">
+              <Button className="w-1/2 font-montserrat font-bold capitalize tracking-wider text-xs px-6 py-5 bg-white border border-primaryColor text-primaryColor rounded-md xl:rounded-3xl">
                 Submit Request
               </Button>
             </div>
-            <div className="w-[28%] bg-darkBg flex flex-col items-center gap-7 py-14 rounded-lg">
+            <div className="xl:w-[28%] bg-darkBg flex flex-col items-center gap-7 py-14 rounded-lg">
               <FaLocationDot className="w-16 h-16 text-primaryColor" />
               <div className="text-lightText font-medium text-lg flex flex-col text-center">
                 <p>georgia.young@example.com</p>
                 <p>georgia.young@ple.com</p>
               </div>
               <p className="text-lightText font-bold text-lg">Get Support</p>
-              <Button className="w-1/2 font-montserrat font-bold capitalize tracking-wider text-xs px-6 py-5 bg-darkBg border border-primaryColor text-primaryColor rounded-3xl">
+              <Button className="w-1/2 font-montserrat font-bold capitalize tracking-wider text-xs px-6 py-5 bg-darkBg border border-primaryColor text-primaryColor rounded-md xl:rounded-3xl">
                 Submit Request
               </Button>
             </div>
-            <div className="w-[28%]  flex flex-col items-center gap-7 py-14">
+            <div className="xl:w-[28%] bg-white flex flex-col items-center gap-7 py-14">
               <BsEnvelopeFill className="w-16 h-16 text-primaryColor" />
               <div className="text-textColor font-medium text-lg flex flex-col text-center">
                 <p>georgia.young@example.com</p>
                 <p>georgia.young@ple.com</p>
               </div>
               <p className="text-textColor font-bold text-lg">Get Support</p>
-              <Button className="w-1/2 font-montserrat font-bold capitalize tracking-wider text-xs px-6 py-5 bg-white border border-primaryColor text-primaryColor rounded-3xl">
+              <Button className="w-1/2 font-montserrat font-bold capitalize tracking-wider text-xs px-6 py-5 bg-white border border-primaryColor text-primaryColor rounded-md xl:rounded-3xl">
                 Submit Request
               </Button>
             </div>
@@ -66,13 +66,13 @@ function ContactContent() {
             <PiArrowBendRightDownLight className="h-20 w-20 text-primaryColor" />
             <p className="font-semibold text-lg">WE Can't WAIT TO MEET YOU</p>
             <p className="text-6xl font-bold tracking-wider">Let’s Talk</p>
-            <Button className="w-1/6 font-montserrat font-bold capitalize tracking-wider text-xs px-5 py-4 bg-primaryColor border border-primaryColor text-lightText rounded-md">
+            <Button className="xl:w-1/6 font-montserrat font-bold capitalize tracking-wider text-xs px-5 py-4 bg-primaryColor border border-primaryColor text-lightText rounded-md">
               Try it free now
             </Button>
           </div>
         </div>
       </div>
-      <div className="w-full  flex justify-center bg-lightGray pt-8">
+      <div className="xl:block hidden w-full  flex justify-center bg-lightGray pt-8">
         <div className="w-4/5  py-6 flex justify-between items-center text-secondText">
           <FontAwesomeIcon icon={faHooli} className="w-24 h-24" />
           <FontAwesomeIcon icon={faLyft} className="w-24 h-24" />
