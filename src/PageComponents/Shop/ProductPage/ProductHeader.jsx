@@ -18,15 +18,15 @@ function ProductHeader() {
   return (
     <div className="w-full flex justify-center bg-lightGray text-teal-50">
       <div className="w-4/5 flex flex-col ">
-        <div className="flex items-center gap-3  font-semibold py-8 text-lg">
+        <div className="xl:flex xl:flex-row flex justify-center items-center xl:items-center  gap-3  font-semibold py-8 text-lg">
           <Link to="/">
-            <h3 className="text-textColor">Home</h3>
+            <h3 className="text-textColor xl:text-lg text-base">Home</h3>
           </Link>
           <IoIosArrowForward className="h-5 w-5 text-mutedColor" />
-          <h3 className="text-mutedColor">Shop</h3>
+          <h3 className="text-mutedColor xl:text-lg text-base">Shop</h3>
         </div>
-        <div className="flex justify-between ">
-          <div className="w-[48%] flex flex-col gap-8">
+        <div className="xl:flex xl:flex-row xl:justify-between ">
+          <div className="xl:w-[48%] flex flex-col gap-8">
             <Carousel className="">
               <img className="w-full" src={product1} />
             </Carousel>
@@ -35,58 +35,69 @@ function ProductHeader() {
               <img src={small2} />
             </div>
           </div>
-          <div className="w-[48%]  flex-col  flex gap-6">
-            <h2 className="capitalize tracking-wider text-2xl text-textColor pt-4 font-medium ">
+          <div className="xl:w-[48%]  flex-col  flex gap-6">
+            <h2 className="capitalize tracking-wide xl:tracking-wider text-lg xl:text-2xl text-textColor pt-4 font-semibold xl:font-medium ">
               floating phone
             </h2>
-            <div className="flex items-center ">
+            <div className="flex items-center gap-4">
               <div className="flex gap-1">
                 <FontAwesomeIcon
                   icon={faStar}
-                  className="h-8 w-8 text-yellow "
+                  className="xl:h-8 xl:w-8 w-7 h-7 text-yellow "
                 />
                 <FontAwesomeIcon
                   icon={faStar}
-                  className="h-8 w-8 text-yellow "
+                  className="xl:h-8 xl:w-8 w-7 h-7 text-yellow "
                 />
                 <FontAwesomeIcon
                   icon={faStar}
-                  className="h-8 w-8 text-yellow "
+                  className="xl:h-8 xl:w-8 w-7 h-7 text-yellow "
                 />
                 <FontAwesomeIcon
                   icon={faStar}
-                  className="h-8 w-8 text-yellow "
+                  className="xl:h-8 xl:w-8 w-7 h-7 text-yellow "
                 />
-                <FaRegStar className="h-8 w-8 text-yellow " />
+                <FaRegStar className="xl:h-8 xl:w-8 w-7 h-7 text-yellow " />
               </div>
               <p className="text-secondText text-base">10 Reviews</p>
             </div>
-            <p className="text-textColor text-2xl font-bold tracking-wider ">
+            <p className="text-textColor xl:text-2xl text-xl font-bold tracking-wider ">
               $1,139.33
             </p>
             <div className="flex  items-center">
-              <p className="text-secondText text-lg font-semibold">
+              <p className="text-secondText xl:text-lg text-base font-semibold">
                 Availability &nbsp;&nbsp;&nbsp;:
               </p>
-              <p className="capitalize text-primaryColor text-lg font-semibold">
+              <p className="capitalize text-primaryColor xl:text-lg text-base font-semibold">
                 &nbsp; in stock
               </p>
             </div>
             <p className="text-base text-zinc ">
-              Met minim Mollie non desert Alamo est sit cliquey dolor <br />
-              do met sent. RELIT official consequent door ENIM RELIT Mollie.
-              <br />
-              Excitation venial consequent sent nostrum met.
+              <span className="xl:block hidden">
+                {" "}
+                Met minim Mollie non desert Alamo est sit cliquey dolor <br />
+                do met sent. RELIT official consequent door ENIM RELIT Mollie.
+                <br />
+                Excitation venial consequent sent nostrum met.
+              </span>
+              <span className="xl:hidden block">
+                {" "}
+                Met minim Mollie non desert
+                <br /> Alamo est sit cliquey dolor do
+                <br /> met sent. RELIT official consequent
+                <br /> door ENIM RELIT Mollie. Excitation <br />
+                venial consequent sent nostrum met.
+              </span>
             </p>
             <div className="w-[90%] h-[2px] bg-mutedColor"></div>
             <div className="flex  gap-3">
-              <div className="w-8 h-8 bg-primaryColor rounded-full"></div>
-              <div className="w-8 h-8 bg-successColor rounded-full"></div>
-              <div className="w-8 h-8 bg-alertColor rounded-full"></div>
-              <div className="w-8 h-8 bg-darkBg rounded-full"></div>
+              <div className="xl:w-8 xl:h-8 w-7 h-7 bg-primaryColor rounded-full"></div>
+              <div className="xl:w-8 xl:h-8 w-7 h-7 bg-successColor rounded-full"></div>
+              <div className="xl:w-8 xl:h-8 w-7 h-7 bg-alertColor rounded-full"></div>
+              <div className="xl:w-8 xl:h-8 w-7 h-7 bg-darkBg rounded-full"></div>
             </div>
-            <div className="flex  items-center gap-4 pt-7">
-              <Button className="font-semibold font-montserrat capitalize tracking-wider text-base bg-primaryColor text-lightText">
+            <div className="flex  items-center gap-2 xl:gap-4 pt-7">
+              <Button className="font-semibold font-montserrat capitalize tracking-tight xl:tracking-wider text-sm xl:text-base bg-primaryColor text-lightText">
                 Select Options
               </Button>
               <div className="h-11 w-11 border rounded-full flex justify-center items-center bg-white">

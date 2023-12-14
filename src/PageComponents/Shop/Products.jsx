@@ -30,7 +30,7 @@ function Products() {
   return (
     <div className="flex justify-center items-center  pt-8 ">
       <div className="flex flex-col w-full items-center gap-12">
-        <div className="w-11/12  flex justify-between items-center">
+        <div className="w-11/12 flex flex-col gap-10 items-center  xl:flex xl:flex-row xl:justify-between xl:items-center">
           <h2 className=" text-secondText text-base font-medium">
             Showing all 12 results
           </h2>
@@ -56,8 +56,8 @@ function Products() {
             </div>
           </div>
         </div>
-        <div className="flex w-11/12  flex-wrap justify-between gap-y-12">
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+        <div className="flex flex-col gap-16 xl:flex xl:flex-row w-11/12 xl:flex-wrap xl:justify-between xl:gap-y-12">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product1} alt="Product 1" />
             </Link>
@@ -65,7 +65,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -76,7 +76,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product2} />
             </Link>
@@ -84,7 +84,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -95,7 +95,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product3} />
             </Link>
@@ -103,7 +103,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -114,7 +114,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product4} />
             </Link>
@@ -122,7 +122,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -133,7 +133,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product5} />
             </Link>
@@ -141,7 +141,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -152,7 +152,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product6} />
             </Link>
@@ -160,7 +160,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -171,7 +171,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product7} />
             </Link>
@@ -179,7 +179,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -190,7 +190,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product8} />
             </Link>
@@ -198,7 +198,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -209,7 +209,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product9} />
             </Link>
@@ -217,7 +217,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -228,7 +228,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product10} />
             </Link>
@@ -236,7 +236,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -247,7 +247,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product11} />
             </Link>
@@ -255,7 +255,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -266,7 +266,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" w-[23%] flex flex-col text-center gap-4 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product12} />
             </Link>
@@ -274,7 +274,7 @@ function Products() {
               Graphic Design
             </h4>
             <p className="text-secondText font-medium">English Department</p>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-3 xl:gap-5 justify-center">
               <span className="text-mutedColor">$16.48</span>
               <span className="text-secondaryColorGreen font-bold">$6.48</span>
             </div>
@@ -304,13 +304,31 @@ function Products() {
           </button>
         </div>
         <div className="w-full  flex justify-center bg-lightGray">
-          <div className="w-[85%]  py-6 flex justify-between items-center  text-secondText">
-            <FontAwesomeIcon icon={faHooli} className="w-24 h-24" />
-            <FontAwesomeIcon icon={faLyft} className="w-24 h-24" />
-            <FontAwesomeIcon icon={faPiedPiperHat} className="w-24 h-24" />
-            <FontAwesomeIcon icon={faStripe} className="w-24 h-24" />
-            <FontAwesomeIcon icon={faAws} className="w-24 h-24" />
-            <FontAwesomeIcon icon={faRedditAlien} className="w-24 h-24" />
+          <div className="w-[85%] py-6 pb-8 flex flex-col items-center gap-8 xl:flex xl:flex-row xl:justify-between xl:items-center  text-secondText">
+            <FontAwesomeIcon
+              icon={faHooli}
+              className="xl:w-24 xl:h-24 w-32 h-40"
+            />
+            <FontAwesomeIcon
+              icon={faLyft}
+              className="xl:w-24 xl:h-24 w-32 h-40"
+            />
+            <FontAwesomeIcon
+              icon={faPiedPiperHat}
+              className="xl:w-24 xl:h-24 w-32 h-40"
+            />
+            <FontAwesomeIcon
+              icon={faStripe}
+              className="xl:w-24 xl:h-24 w-32 h-40"
+            />
+            <FontAwesomeIcon
+              icon={faAws}
+              className="xl:w-24 xl:h-24 w-32 h-40"
+            />
+            <FontAwesomeIcon
+              icon={faRedditAlien}
+              className="xl:w-24 xl:h-24 w-32 h-40"
+            />
           </div>
         </div>
       </div>

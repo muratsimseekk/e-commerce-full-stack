@@ -10,47 +10,46 @@ function Category() {
   return (
     <div className="w-full   flex justify-center ">
       <div className="w-[95%] h-full flex flex-col">
-        <div className="flex justify-between  py-8 px-8">
+        <div className="flex flex-col items-center gap-14  xl:flex xl:flex-row xl:justify-between bg-lightGray py-8 xl:px-8">
           <h2 className="bg- text-textColor text-xl font-semibold">Shop</h2>
-          <div className="flex items-center gap-3  font-semibold text-lg">
+          <div className="flex flex-row items-center gap-3  font-semibold text-lg">
             <Link to="/">
-              <h3 className="text-textColor">Home</h3>
+              <h3 className="text-textColor xl:text-lg text-base">Home</h3>
             </Link>
             <IoIosArrowForward className="h-5 w-5 text-mutedColor" />
-
-            <h3 className="text-mutedColor">Shop</h3>
+            <h3 className="text-mutedColor xl:text-lg text-base">Shop</h3>
           </div>
         </div>
-        <div className="w-full flex flex-wrap justify-between gap-y-4 pb-12">
-          <div className="w-[19%] bg-green-300 relative ">
+        <div className="w-full flex flex-col xl:flex xl:flex-row xl:flex-wrap bg-lightGray xl:justify-between gap-y-4 pb-12">
+          <div className="xl:w-[19%] bg-green-300 relative ">
             <img className="w-full opacity-90" src={card1} />
             <div className="flex flex-col gap-2 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lightText">
               <h2 className="font-semibold text-xl">CLOTHS</h2>
               <p className="text-center font-semibold text-lg">5 Items</p>
             </div>
           </div>
-          <div className="w-[19%] bg-green-300 relative">
+          <div className="xl:w-[19%] bg-green-300 relative">
             <img className="w-full opacity-90" src={card2} />
             <div className="flex flex-col gap-2 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lightText">
               <h2 className="font-semibold text-xl">CLOTHS</h2>
               <p className="text-center font-semibold text-lg">5 Items</p>
             </div>
           </div>
-          <div className="w-[19%] bg-green-300 relative">
+          <div className="xl:w-[19%] bg-green-300 relative">
             <img className="w-full opacity-90" src={card3} />
             <div className="flex flex-col gap-2 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lightText">
               <h2 className="font-semibold text-xl">CLOTHS</h2>
               <p className="text-center font-semibold text-lg">5 Items</p>
             </div>
           </div>
-          <div className="w-[19%] bg-green-300 relative">
+          <div className="xl:w-[19%] bg-green-300 relative">
             <img className="w-full opacity-90" src={card4} />
             <div className="flex flex-col gap-2 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lightText">
               <h2 className="font-semibold text-xl">CLOTHS</h2>
               <p className="text-center font-semibold text-lg">5 Items</p>
             </div>
           </div>
-          <div className="w-[19%] bg-green-300 relative">
+          <div className="xl:w-[19%] bg-green-300 relative">
             <img className="w-full opacity-90" src={card5} />
             <div className="flex flex-col gap-2 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lightText">
               <h2 className="font-semibold text-xl">CLOTHS</h2>

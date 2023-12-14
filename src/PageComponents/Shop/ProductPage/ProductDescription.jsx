@@ -4,11 +4,13 @@ import { IoIosArrowForward } from "react-icons/io";
 function ProductDescription() {
   return (
     <div className=" w-full flex flex-col items-center gap-14">
-      <div className="w-4/5 py-10  border-b-4 border-gray-200">
-        <ul className="flex justify-center items-center gap-10 text-secondText font-normal tracking-wider">
-          <li>Description</li>
+      <div className="w-11/12 xl:w-4/5 py-10  border-b-4 border-gray-200">
+        <ul className="flex justify-center items-center xl:gap-10 gap-4 xl:text-lg text-sm text-secondText font-bold xl:font-normal tracking-normal xl:tracking-wider">
+          <li className="xl:no-underline underline">Description</li>
           <li>Additional Information</li>
-          <li>Reviews (0)</li>
+          <li>
+            Reviews <span className="text-secondaryColorGreen">(0)</span>
+          </li>
         </ul>
       </div>
       <div className="w-4/5 ">
