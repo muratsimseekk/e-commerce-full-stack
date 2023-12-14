@@ -14,7 +14,7 @@ function ProductDescription() {
         </ul>
       </div>
       <div className="w-4/5 ">
-        <div className="xl:flex xl:flex-row w-full xl:justify-between flex flex-col gap-16 pb-16">
+        <div className="xl:flex xl:flex-row w-full xl:justify-between flex flex-col gap-4 pb-16">
           <div className="xl:w-[32%] relative">
             <img className="w-full h-full z-40 rounded-md" src={card1} />
             <div className="h-full w-full bg-stone absolute -right-3 -bottom-2 -z-30 rounded-md"></div>

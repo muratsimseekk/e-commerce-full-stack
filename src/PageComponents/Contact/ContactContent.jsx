@@ -62,7 +62,7 @@ function ContactContent() {
               </Button>
             </div>
           </div>
-          <div className="flex flex-col gap-12 items-center text-textColor">
+          <div className="flex flex-col gap-12 pb-10 items-center text-textColor">
             <PiArrowBendRightDownLight className="h-20 w-20 text-primaryColor" />
             <p className="font-semibold text-lg">WE Can't WAIT TO MEET YOU</p>
             <p className="text-6xl font-bold tracking-wider">Let’s Talk</p>

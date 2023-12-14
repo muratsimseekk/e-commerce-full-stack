@@ -23,12 +23,12 @@ export function CarouselWithContent() {
       )}
     >
       <div className="relative w-full h-full">
-        <img src={hero4} className="xl:h-full xl:w-full xl:block  hidden  " />
+        <img src={hero4} className="xl:h-full xl:w-full xl:block hidden  " />
         <img
           src={hero1Mobile}
           className="xl:h-full xl:w-full xl:hidden xl:object-cover h-full w-full "
         />
-        <div className="absolute  inset-0 grid h-full w-full place-items-center ">
+        <div className="absolute inset-0 grid h-full w-full place-items-center ">
           <div className="w-full  flex flex-col gap-10 ml-8 xl:text-start md:w-3/4">
             <Typography
               variant="lead"

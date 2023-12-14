@@ -56,8 +56,8 @@ function Products() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-16 xl:flex xl:flex-row w-11/12 xl:flex-wrap xl:justify-between xl:gap-y-12">
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+        <div className="flex flex-col gap-16 xl:gap-0 xl:flex xl:flex-row w-11/12 xl:flex-wrap xl:justify-between xl:gap-y-12">
+          <div className=" xl:w-[23%] flex flex-col text-center xl:gap-6 gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product1} alt="Product 1" />
             </Link>
@@ -76,7 +76,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center xl:gap-6 gap-8 ">
             <Link to="/shop/product">
               <img className="w-full" src={product2} />
             </Link>
@@ -95,7 +95,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product3} />
             </Link>
@@ -114,7 +114,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product4} />
             </Link>
@@ -133,7 +133,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product5} />
             </Link>
@@ -152,7 +152,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product6} />
             </Link>
@@ -171,7 +171,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product7} />
             </Link>
@@ -190,7 +190,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product8} />
             </Link>
@@ -209,7 +209,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product9} />
             </Link>
@@ -228,7 +228,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product10} />
             </Link>
@@ -247,7 +247,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product11} />
             </Link>
@@ -266,7 +266,7 @@ function Products() {
               <button className="h-5 w-5 bg-darkBg rounded-full"></button>
             </div>
           </div>
-          <div className=" xl:w-[23%] flex flex-col text-center gap-8 ">
+          <div className=" xl:w-[23%] flex flex-col text-center gap-8 xl:gap-6">
             <Link to="/shop/product">
               <img className="w-full" src={product12} />
             </Link>

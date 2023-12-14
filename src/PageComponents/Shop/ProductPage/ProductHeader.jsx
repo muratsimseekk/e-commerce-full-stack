@@ -18,7 +18,7 @@ function ProductHeader() {
   return (
     <div className="w-full flex justify-center bg-lightGray text-teal-50">
       <div className="w-4/5 flex flex-col ">
-        <div className="xl:flex xl:flex-row flex justify-center items-center xl:items-center  gap-3  font-semibold py-8 text-lg">
+        <div className="xl:flex xl:flex-row flex justify-center xl:justify-start items-center xl:items-center  gap-3  font-semibold py-8 text-lg">
           <Link to="/">
             <h3 className="text-textColor xl:text-lg text-base">Home</h3>
           </Link>

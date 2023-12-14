@@ -8,7 +8,7 @@ function CarouselBottom() {
   return (
     <Carousel
       transition={{ duration: 1 }}
-      className="xl:h-[100vh] h-[135vh] bg-secondaryColorGreen"
+      className="xl:h-[100vh] h-[150vh] bg-secondaryColorGreen"
       navigation={({ setActiveIndex, activeIndex, length }) => (
         <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
           {new Array(length).fill("").map((_, i) => (
@@ -26,10 +26,10 @@ function CarouselBottom() {
       <div className="relative h-full w-full">
         <img
           src={carousel1}
-          className="absolute xl:right-[10%] xl:bottom-0 bottom-0 right-0 xl:h-4/5  xl:w-[31.5%] w-full"
+          className="absolute xl:right-[10%] xl:bottom-0 bottom-0 right-0 xl:h-4/5  xl:w-[31.5%] h-2/5 w-full"
         />
-        <div className="absolute  inset-0 grid h-full w-full xl:place-items-center ">
-          <div className="w-full flex absolute top-[12%] flex-col gap-10 xl:gap-10 xl:ml-8 xl:text-start text-center md:w-3/4">
+        <div className="absolute  grid h-full w-full xl:place-items-center ">
+          <div className="w-full flex absolute xl:top-[20%] top-[16%] flex-col gap-10 xl:gap-10 xl:ml-8 xl:text-start text-center md:w-3/4">
             <Typography
               variant="lead"
               color="white"

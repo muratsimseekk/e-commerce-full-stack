@@ -8,9 +8,9 @@ import card5 from "../../assets/hero/shop-card/card5.png";
 import { Link } from "react-router-dom";
 function Category() {
   return (
-    <div className="w-full   flex justify-center ">
+    <div className="w-full bg-lightGray flex justify-center ">
       <div className="w-[95%] h-full flex flex-col">
-        <div className="flex flex-col items-center gap-14  xl:flex xl:flex-row xl:justify-between bg-lightGray py-8 xl:px-8">
+        <div className="flex flex-col items-center gap-14  xl:flex xl:flex-row xl:justify-between  py-8 xl:px-8">
           <h2 className="bg- text-textColor text-xl font-semibold">Shop</h2>
           <div className="flex flex-row items-center gap-3  font-semibold text-lg">
             <Link to="/">
