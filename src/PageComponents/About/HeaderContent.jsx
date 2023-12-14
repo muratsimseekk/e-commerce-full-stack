@@ -34,19 +34,32 @@ function HeaderContent() {
           <img src={women} className="absolute bottom-0 z-40 right-0" />
         </div>
       </div>
-      <div className=" py-20 w-3/4 flex gap-20">
+      <div className=" py-20 w-3/4 xl:flex xl:flex-row flex flex-col  gap-10 xl:gap-20">
         <div className=" flex flex-col gap-6">
-          <h5 className="capitalize text-sm text-red-500">problems trying</h5>
-          <p className="text-xl tracking-wider font-semibold">
+          <h5 className="capitalize text-base font-medium text-center xl:text-start xl:font-normal xl:text-sm text-red-500">
+            problems trying
+          </h5>
+          <p className="text-xl tracking-wider xl:block hidden font-semibold">
             Met minim Mollie non desert
             <br /> Alamo est sit cliquey dolor do
             <br /> met sent.
           </p>
+          <p className="text-2xl text-center tracking-wider xl:hidden block font-bold">
+            Met minim Mollie non
+            <br /> desert Alamo est sit
+            <br /> cliquey dolor do met
+            <br /> sent.
+          </p>
         </div>
-        <div className="  flex items-center text-secondText">
-          <p className="text-sm ">
+        <div className="flex items-center text-secondText">
+          <p className="text-sm xl:block hidden">
             Problems trying to resolve the conflict between the two major realms
             of <br /> Classical physics: Newtonian mechanics{" "}
+          </p>
+          <p className="text-sm  font-medium xl:hidden block">
+            Problems trying to resolve the conflict between the two major realms
+            of Classical physics:
+            <br /> Newtonian mechanics
           </p>
         </div>
       </div>

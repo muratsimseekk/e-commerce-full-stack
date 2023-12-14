@@ -4,21 +4,21 @@ import { FaPlay } from "react-icons/fa6";
 function VideoSection() {
   return (
     <div className=" w-full  py-8 flex flex-col gap-20 items-center">
-      <div className=" w-4/5 flex justify-around">
-        <div className="flex flex-col gap-6 items-center  w-[21%] ">
-          <h1 className="font-bold text-5xl">15K</h1>
+      <div className=" w-4/5 flex flex-col xl:gap-0 gap-14 items-center xl:flex xl:flex-row xl:justify-around xl:items-start">
+        <div className="flex flex-col gap-6 items-center  xl:w-[21%] ">
+          <h1 className="font-bold text-5xl text-textColor">15K</h1>
           <p className="capitalize text-secondText">happy customers</p>
         </div>
-        <div className="flex flex-col gap-6 items-center  w-[21%] ">
-          <h1 className="font-bold text-5xl">150K</h1>
+        <div className="flex flex-col gap-6 items-center  xl:w-[21%] ">
+          <h1 className="font-bold text-5xl text-textColor">150K</h1>
           <p className="capitalize text-secondText">monthly visitors</p>
         </div>
-        <div className="flex flex-col gap-6 items-center  w-[21%] ">
-          <h1 className="font-bold text-5xl">15</h1>
+        <div className="flex flex-col gap-6 items-center  xl:w-[21%] ">
+          <h1 className="font-bold text-5xl text-textColor">15</h1>
           <p className="capitalize text-secondText">countries worldwide</p>
         </div>
-        <div className="flex flex-col gap-6 items-center  w-[21%] ">
-          <h1 className="font-bold text-5xl">100+</h1>
+        <div className="flex flex-col gap-6 items-center  xl:w-[21%] ">
+          <h1 className="font-bold text-5xl text-textColor">100+</h1>
           <p className="capitalize text-secondText">top partners</p>
         </div>
       </div>
