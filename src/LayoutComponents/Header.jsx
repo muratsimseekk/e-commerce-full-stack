@@ -89,7 +89,9 @@ function Header() {
                 <p>Login</p>
               </div>
               <span>/</span>
-              <p>Register</p>
+              <Link to="/signup">
+                <p>Register</p>
+              </Link>
             </div>
             <div className="xl:text-primaryColor text-textColor flex xl:gap-3 gap-4 items-center">
               <FontAwesomeIcon
