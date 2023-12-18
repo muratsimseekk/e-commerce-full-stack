@@ -7,6 +7,7 @@ module.exports = withMT({
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
       },
+
       colors: {
         darkBg: "rgba(37, 43, 66, 1)",
         lightText: "rgba(255, 255, 255, 1)",

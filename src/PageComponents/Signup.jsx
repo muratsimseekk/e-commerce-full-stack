@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import bgImage from "../assets/hero/signup/pageBackground.jpg";
+import "../css/signup.css";
 function Signup() {
   const {
     register,
@@ -17,9 +19,9 @@ function Signup() {
   };
   console.log(watch("password"));
   return (
-    <div className="py-20 bg-red-100 border-orange-700 border flex justify-center">
-      <div className="w-1/2 border-black border py-12">
-        <form onSubmit={handleSubmit(submitHandler)}>
+    <div className="wrapper ">
+      <div className="container xl:w-2/5">
+        <form className="z-50" onSubmit={handleSubmit(submitHandler)}>
           <h3>Register</h3>
           <div>
             <label>
@@ -95,7 +97,6 @@ function Signup() {
             </label>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
-
           <div>
             <label>
               Confirm Password:{" "}
@@ -121,6 +122,9 @@ function Signup() {
             Sign Up
           </button>
         </form>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
   );
