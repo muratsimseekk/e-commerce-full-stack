@@ -5,6 +5,8 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "@material-tailwind/react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeName } from "../store/actions/userAction";
 
 function Signup() {
   const [selectedOption, setSelectedOption] = useState("customer");
@@ -14,6 +16,10 @@ function Signup() {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const isim = useSelector((state) => state.user.name);
 
   const {
     register,
@@ -29,6 +35,7 @@ function Signup() {
       await new Promise((resolve) => {
         setTimeout(() => {
           console.log("data gonderildi", data);
+          dispatch(changeName(data.name));
           navigate(-1);
         }, 2500);
       });
@@ -247,6 +254,11 @@ function Signup() {
                       })}
                     />
                   </div>
+                  {errors.store_name && (
+                    <p className="text-dangerRed">
+                      {errors.store_name.message} *
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col ">
                   <div className="flex gap-8 border-b-2 border-black pb-2 justify-between items-center">
@@ -261,9 +273,17 @@ function Signup() {
                         country={selectedPhone}
                         value={selectedPhone}
                         onChange={phoneHandler}
+                        {...register("phone_number", {
+                          required: "Phone number required",
+                        })}
                       />
                     </div>
                   </div>
+                  {errors.phone_numbers && (
+                    <p className="text-dangerRed">
+                      {errors.phone_numbers.message} *
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <div className="flex gap-4 border-b-2 border-black pb-2 justify-between">
