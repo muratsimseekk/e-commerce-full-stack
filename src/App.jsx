@@ -10,6 +10,7 @@ import Shop from "./PageComponents/Shop";
 import About from "./PageComponents/About";
 import Contact from "./PageComponents/Contact";
 import Signup from "./PageComponents/Signup";
+import { ToastContainer } from "react-toastify";
 //Shop/* verdim cunku alt componentler icin de path acildi
 function App() {
   return (
@@ -24,6 +25,17 @@ function App() {
         <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }
