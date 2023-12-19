@@ -8,10 +8,18 @@ export const changeName = (name) => {
   return { type: CHANGE_NAME, payload: name };
 };
 
-export const changeSurname = () => {};
+export const changeSurname = (surname) => {
+  return { type: CHANGE_SURNAME, payload: surname };
+};
 
-export const changeEmail = () => {};
+export const changeEmail = (mail) => {
+  return { type: CHANGE_EMAIL, payload: mail };
+};
 
-export const changePassword = () => {};
+export const changePassword = (password) => {
+  return { type: CHANGE_PASSWORD, payload: password };
+};
 
-export const changeRole = () => {};
+export const changeRole = (role) => {
+  return { type: CHANGE_ROLE, payload: role };
+};

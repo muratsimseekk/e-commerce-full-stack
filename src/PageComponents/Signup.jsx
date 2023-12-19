@@ -6,20 +6,35 @@ import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeName } from "../store/actions/userAction";
+import {
+  changeEmail,
+  changeName,
+  changePassword,
+  changeRole,
+  changeSurname,
+} from "../store/actions/userAction";
+import {
+  storeChangeEmail,
+  storeChangeName,
+  storeChangePassword,
+  storeChangeRole,
+  storeChangeStoreName,
+  storeChangeSurname,
+  storeIban,
+  storePhoneNumber,
+  storeTaxId,
+} from "../store/actions/storeAction";
 
 function Signup() {
   const [selectedOption, setSelectedOption] = useState("customer");
 
-  const [selectedPhone, setSelectedPhone] = useState("tr");
+  const [telNumber, setTelNumber] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
-  const isim = useSelector((state) => state.user.name);
 
   const {
     register,
@@ -35,7 +50,24 @@ function Signup() {
       await new Promise((resolve) => {
         setTimeout(() => {
           console.log("data gonderildi", data);
-          dispatch(changeName(data.name));
+          if (selectedOption == "customer") {
+            dispatch(changeName(data.name));
+            dispatch(changeSurname(data.surname));
+            dispatch(changeEmail(data.email));
+            dispatch(changePassword(data.password));
+            dispatch(changeRole(selectedOption));
+          } else if (selectedOption == "store") {
+            dispatch(storeChangeName(data.name));
+            dispatch(storeChangeSurname(data.surname));
+            dispatch(storeChangeEmail(data.email));
+            dispatch(storeChangePassword(data.password));
+            dispatch(storeChangeRole(selectedOption));
+            dispatch(storeChangeStoreName(data.store_name));
+            dispatch(storePhoneNumber(telNumber));
+            dispatch(storeTaxId(data.tax_id));
+            dispatch(storeIban(data.iban));
+          }
+
           navigate(-1);
         }, 2500);
       });
@@ -51,8 +83,8 @@ function Signup() {
     setSelectedOption(selection);
   };
 
-  const phoneHandler = (phone) => {
-    setSelectedPhone(phone);
+  const numberHandler = (value) => {
+    setTelNumber(value);
   };
   console.log(watch("password"));
   return (
@@ -270,20 +302,12 @@ function Signup() {
                     </label>
                     <div className="flex justify-end">
                       <PhoneInput
-                        country={selectedPhone}
-                        value={selectedPhone}
-                        onChange={phoneHandler}
-                        {...register("phone_number", {
-                          required: "Phone number required",
-                        })}
+                        country="tr"
+                        onChange={numberHandler}
+                        value={telNumber}
                       />
                     </div>
                   </div>
-                  {errors.phone_numbers && (
-                    <p className="text-dangerRed">
-                      {errors.phone_numbers.message} *
-                    </p>
-                  )}
                 </div>
                 <div className="flex flex-col">
                   <div className="flex gap-4 border-b-2 border-black pb-2 justify-between">

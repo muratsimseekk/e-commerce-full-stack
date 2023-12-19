@@ -20,7 +20,7 @@ const initialValues = {
 export const globalReducer = (state = initialValues, action) => {
   switch (action.type) {
     case CHANGE_ROLE:
-      return { ...state, languages: "en" };
+      return { ...state, roles: action.payload };
     default:
       return state; // Return the current state if no action type matches
   }
