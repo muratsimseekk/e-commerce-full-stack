@@ -50,7 +50,7 @@ function Signup() {
       await new Promise((resolve) => {
         setTimeout(() => {
           console.log("data gonderildi", data);
-          if (selectedOption == "customer") {
+          if (selectedOption == "customer" || selectedOption == "admin") {
             dispatch(changeName(data.name));
             dispatch(changeSurname(data.surname));
             dispatch(changeEmail(data.email));
@@ -259,6 +259,7 @@ function Signup() {
                 onChange={selectHandler}
               >
                 <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
                 <option value="store">Store</option>
               </select>
             </div>
