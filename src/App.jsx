@@ -11,6 +11,7 @@ import About from "./PageComponents/About";
 import Contact from "./PageComponents/Contact";
 import Signup from "./PageComponents/Signup";
 import { ToastContainer } from "react-toastify";
+import Login from "./PageComponents/Login";
 //Shop/* verdim cunku alt componentler icin de path acildi
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
       <ToastContainer

@@ -86,7 +86,9 @@ function Header() {
             <div className="text-primaryColor xl:flex xl:flex-row hidden xl:items-center xl:gap-3">
               <div className="flex items-center gap-1">
                 <FontAwesomeIcon className="text-primaryColor " icon={faUser} />
-                <p>Login</p>
+                <Link to="/login">
+                  <p>Login</p>
+                </Link>
               </div>
               <span>/</span>
               <Link to="/signup">
