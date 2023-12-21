@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "../css/login.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import {
+  localStorageMemory,
+  s12finalKey,
+} from "../store/reducers/globalReducer";
+import { logInChange } from "../store/actions/globalAction";
 function Login() {
-  const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
   const navigate = useNavigate();
@@ -15,42 +19,42 @@ function Login() {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
-  const user = useSelector((store) => store.user);
-  const storeCustomer = useSelector((store) => store.store);
+  const user = localStorageMemory(s12finalKey)?.roles;
+
+  const dispatch = useDispatch();
 
   const submitHandler = async (formData, e) => {
     try {
-      setIsLoading(true);
       e.preventDefault();
       await new Promise((resolve) => {
         setTimeout(() => {
           if (
-            (user.email == formData.email &&
-              user.password == formData.password) ||
-            (storeCustomer.email == formData.email &&
-              storeCustomer.password == formData.password)
+            user.email == formData.email &&
+            user.password == formData.password
           ) {
             setLoginSuccess(true);
-            setLoginError(false);
+
+            dispatch(logInChange());
+            console.log("Login data: ", formData);
+            navigate("/");
           } else {
             setLoginError(true);
+            setIsLoading(false);
           }
-          console.log("Login data: ", formData);
-          navigate("/");
         }, 2000);
       });
     } catch (error) {
       setLoginError(true);
       console.error("Login error: ", error);
     } finally {
-      setIsLoading(false);
+      setLoginSuccess(false);
     }
   };
   //   console.log("Reduxtan gelen user/admin bilgileri ", user);
   //   console.log("Reduxtan gelen store kullanicisinin bilgileri ", storeCustomer);
   return (
     <div className="wrapper">
-      {isLoading ? (
+      {loginSuccess ? (
         <div className="flex flex-col gap-8 pb-48 items-center">
           <p className="text-xl tracking-wider  text-dangerRed font-medium">
             {" "}

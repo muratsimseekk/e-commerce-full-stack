@@ -1,5 +1,10 @@
-import { LOGGED_IN } from "../actions/globalAction";
-import { STORE_CHANGE_NAME, STORE_CHANGE_ROLE } from "../actions/storeAction";
+import { LOGGED_IN, LOGGED_OUT } from "../actions/globalAction";
+import {
+  STORE_CHANGE_EMAIL,
+  STORE_CHANGE_NAME,
+  STORE_CHANGE_PASSWORD,
+  STORE_CHANGE_ROLE,
+} from "../actions/storeAction";
 import {
   CHANGE_EMAIL,
   CHANGE_NAME,
@@ -83,15 +88,52 @@ export const globalReducer = (state = initialValues, action) => {
       };
       localStorageWrite(s12finalKey, newPass);
       return newPass;
+
     case LOGGED_IN:
       const logged = { ...state, roles: { ...state.roles, loggedIn: true } };
       localStorageWrite(s12finalKey, logged);
       return logged;
+
+    case LOGGED_OUT:
+      const loggedOut = {
+        ...state,
+        roles: { ...state.roles, loggedIn: false },
+      };
+      localStorageWrite(s12finalKey, loggedOut);
+      return loggedOut;
+
     case STORE_CHANGE_ROLE:
-      return { ...state, roles: { ...state.roles, role: action.payload } };
+      const storeRole = {
+        ...state,
+        roles: { ...state.roles, role: action.payload },
+      };
+      localStorageWrite(s12finalKey, storeRole);
+
+      return storeRole;
 
     case STORE_CHANGE_NAME:
-      return { ...state, roles: { ...state.roles, role: action.payload } };
+      const storeName = {
+        ...state,
+        roles: { ...state.roles, name: action.payload },
+      };
+      localStorageWrite(s12finalKey, storeName);
+      return storeName;
+
+    case STORE_CHANGE_EMAIL:
+      const storeMail = {
+        ...state,
+        roles: { ...state.roles, email: action.payload },
+      };
+      localStorageWrite(s12finalKey, storeMail);
+      return storeMail;
+
+    case STORE_CHANGE_PASSWORD:
+      const storePass = {
+        ...state,
+        roles: { ...state.roles, password: action.payload },
+      };
+      localStorageWrite(s12finalKey, storePass);
+      return storePass;
     default:
       return state;
   }

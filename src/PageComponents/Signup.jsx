@@ -47,9 +47,9 @@ function Signup() {
   const submitHandler = async (data) => {
     try {
       setIsLoading(true);
-      dispatch(logInChange());
+
       await new Promise((resolve) => {
-        setTimeout(() => {
+        setTimeout(async () => {
           console.log("data gonderildi", data);
           if (selectedOption == "customer" || selectedOption == "admin") {
             dispatch(changeName(data.name));
@@ -57,6 +57,7 @@ function Signup() {
             dispatch(changeEmail(data.email));
             dispatch(changePassword(data.password));
             dispatch(changeRole(selectedOption));
+            dispatch(logInChange());
           } else if (selectedOption == "store") {
             dispatch(storeChangeName(data.name));
             dispatch(storeChangeSurname(data.surname));
@@ -67,6 +68,7 @@ function Signup() {
             dispatch(storePhoneNumber(telNumber));
             dispatch(storeTaxId(data.tax_id));
             dispatch(storeIban(data.iban));
+            dispatch(logInChange());
           }
 
           navigate(-1);

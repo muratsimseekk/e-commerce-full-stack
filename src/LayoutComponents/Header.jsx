@@ -24,21 +24,29 @@ import {
   localStorageMemory,
   s12finalKey,
 } from "../store/reducers/globalReducer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutChange } from "../store/actions/globalAction";
 function Header() {
-  const [loggedIn, setLoggedIn] = useState(() => {
-    const initialData = localStorageMemory(s12finalKey);
-    const loggedIn = initialData?.roles.loggedIn;
-    return loggedIn || false;
-  });
+  const [userNav, setUserNav] = useState(
+    localStorageMemory(s12finalKey)?.roles
+  );
+  const [loggedIn, setLoggedIn] = useState(
+    localStorageMemory(s12finalKey)?.roles.loggedIn || false
+  );
 
   const changingLoggedIn = useSelector((state) => state.general.roles.loggedIn);
+  const changingRoles = useSelector((state) => state.general.roles);
+  const dispatch = useDispatch();
 
+  const logOutHandler = (e) => {
+    e.preventDefault();
+    dispatch(logOutChange());
+  };
   useEffect(() => {
     setLoggedIn(localStorageMemory(s12finalKey).roles.loggedIn);
-  }, [changingLoggedIn]);
-  // console.log(changingLoggedIn, "changing loggedIn");
-  // console.log(loggedIn, "login durumu var mi global?");
+    setUserNav(localStorageMemory(s12finalKey).roles);
+  }, [changingRoles, changingLoggedIn]);
+
   return (
     <div className="w-full h-[40vh] xl:h-full xl:block flex flex-col justify-around">
       <div className=" xl:w-full xl:py-5 xl:bg-darkBg hidden xl:text-lightText xl:flex  xl:justify-center ">
@@ -102,7 +110,19 @@ function Header() {
           </div>
           <div className="flex flex-row gap-5 justify-end">
             {loggedIn == true ? (
-              <p>Giris yapildi</p>
+              <div className="flex items-center gap-3">
+                <img src={userNav.photo} className="rounded-full w-10 h-10" />
+                <p className="text-lg text-darkBg font-medium">
+                  {userNav.name}
+                </p>
+                <button
+                  type="button"
+                  onClick={logOutHandler}
+                  className="border bg-primaryColor text-lightText h-full rounded-xl px-4 hover:bg-lightText hover:border-primaryColor hover:text-darkBg"
+                >
+                  Log Out
+                </button>
+              </div>
             ) : (
               <div className="text-primaryColor xl:flex xl:flex-row hidden xl:items-center xl:gap-3">
                 <div className="flex items-center gap-1">
