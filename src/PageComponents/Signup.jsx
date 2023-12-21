@@ -24,7 +24,6 @@ import {
   storePhoneNumber,
   storeTaxId,
 } from "../store/actions/storeAction";
-import { s12finalKey } from "../store/reducers/globalReducer";
 import { logInChange } from "../store/actions/globalAction";
 
 function Signup() {
@@ -48,7 +47,7 @@ function Signup() {
   const submitHandler = async (data) => {
     try {
       setIsLoading(true);
-
+      dispatch(logInChange());
       await new Promise((resolve) => {
         setTimeout(() => {
           console.log("data gonderildi", data);
@@ -58,7 +57,6 @@ function Signup() {
             dispatch(changeEmail(data.email));
             dispatch(changePassword(data.password));
             dispatch(changeRole(selectedOption));
-            dispatch(logInChange());
           } else if (selectedOption == "store") {
             dispatch(storeChangeName(data.name));
             dispatch(storeChangeSurname(data.surname));
@@ -69,7 +67,6 @@ function Signup() {
             dispatch(storePhoneNumber(telNumber));
             dispatch(storeTaxId(data.tax_id));
             dispatch(storeIban(data.iban));
-            dispatch(logInChange());
           }
 
           navigate(-1);

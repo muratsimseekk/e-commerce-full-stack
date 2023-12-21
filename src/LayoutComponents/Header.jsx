@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import vector from "../assets/vector.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +20,25 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { TbMenuDeep } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import {
+  localStorageMemory,
+  s12finalKey,
+} from "../store/reducers/globalReducer";
+import { useSelector } from "react-redux";
 function Header() {
+  const [loggedIn, setLoggedIn] = useState(() => {
+    const initialData = localStorageMemory(s12finalKey);
+    const loggedIn = initialData?.roles.loggedIn;
+    return loggedIn || false;
+  });
+
+  const changingLoggedIn = useSelector((state) => state.general.roles.loggedIn);
+
+  useEffect(() => {
+    setLoggedIn(localStorageMemory(s12finalKey).roles.loggedIn);
+  }, [changingLoggedIn]);
+  // console.log(changingLoggedIn, "changing loggedIn");
+  // console.log(loggedIn, "login durumu var mi global?");
   return (
     <div className="w-full h-[40vh] xl:h-full xl:block flex flex-col justify-around">
       <div className=" xl:w-full xl:py-5 xl:bg-darkBg hidden xl:text-lightText xl:flex  xl:justify-center ">
@@ -83,18 +101,26 @@ function Header() {
             </div>
           </div>
           <div className="flex flex-row gap-5 justify-end">
-            <div className="text-primaryColor xl:flex xl:flex-row hidden xl:items-center xl:gap-3">
-              <div className="flex items-center gap-1">
-                <FontAwesomeIcon className="text-primaryColor " icon={faUser} />
-                <Link to="/login">
-                  <p>Login</p>
+            {loggedIn == true ? (
+              <p>Giris yapildi</p>
+            ) : (
+              <div className="text-primaryColor xl:flex xl:flex-row hidden xl:items-center xl:gap-3">
+                <div className="flex items-center gap-1">
+                  <FontAwesomeIcon
+                    className="text-primaryColor "
+                    icon={faUser}
+                  />
+                  <Link to="/login">
+                    <p>Login</p>
+                  </Link>
+                </div>
+                <span>/</span>
+                <Link to="/signup">
+                  <p>Register</p>
                 </Link>
               </div>
-              <span>/</span>
-              <Link to="/signup">
-                <p>Register</p>
-              </Link>
-            </div>
+            )}
+
             <div className="xl:text-primaryColor text-textColor flex xl:gap-3 gap-4 items-center">
               <FontAwesomeIcon
                 className="xl:h-4 xl:w-4 h-5 w-5"
