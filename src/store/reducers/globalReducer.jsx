@@ -1,4 +1,13 @@
-import { CHANGE_ROLE } from "../actions/userAction";
+import { LOGGED_IN } from "../actions/globalAction";
+import { STORE_CHANGE_NAME, STORE_CHANGE_ROLE } from "../actions/storeAction";
+import {
+  CHANGE_EMAIL,
+  CHANGE_NAME,
+  CHANGE_PASSWORD,
+  CHANGE_ROLE,
+} from "../actions/userAction";
+
+export const s12finalKey = "s12final";
 
 const languages = [
   { name: "Türkçe", value: "tr" },
@@ -9,7 +18,14 @@ const browserLang = Intl.DateTimeFormat().resolvedOptions().locale;
 const selectedLang = languages.find((lan) => browserLang.includes(lan.value));
 
 const initialValues = {
-  roles: "",
+  roles: {
+    loggedIn: false,
+    role: "",
+    name: "",
+    email: "",
+    password: "",
+    photo: "https://gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+  },
   categories: "",
   theme: window.matchMedia("(prefers-color-scheme: dark)").matches
     ? true
@@ -17,11 +33,66 @@ const initialValues = {
   language: selectedLang ? selectedLang.value : "tr",
 };
 
+function localStorageWrite(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function localStorageRead(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+
+export function localStorageMemory(key) {
+  const lastState = localStorageRead(key);
+  if (lastState) {
+    return localStorageRead(key);
+  } else {
+    return initialValues;
+  }
+}
+
 export const globalReducer = (state = initialValues, action) => {
   switch (action.type) {
     case CHANGE_ROLE:
-      return { ...state, roles: action.payload };
+      const newRole = {
+        ...state,
+        roles: { ...state.roles, role: action.payload },
+      };
+      localStorageWrite(s12finalKey, newRole);
+      return newRole;
+
+    case CHANGE_NAME:
+      const newName = {
+        ...state,
+        roles: { ...state.roles, name: action.payload },
+      };
+      localStorageWrite(s12finalKey, newName);
+      return newName;
+
+    case CHANGE_EMAIL:
+      const newMail = {
+        ...state,
+        roles: { ...state.roles, email: action.payload },
+      };
+      localStorageWrite(s12finalKey, newMail);
+      return newMail;
+
+    case CHANGE_PASSWORD:
+      const newPass = {
+        ...state,
+        roles: { ...state.roles, password: action.payload },
+      };
+      localStorageWrite(s12finalKey, newPass);
+      return newPass;
+    case LOGGED_IN:
+      const logged = { ...state, roles: { ...state.roles, loggedIn: true } };
+      localStorageWrite(s12finalKey, logged);
+      return logged;
+    case STORE_CHANGE_ROLE:
+      return { ...state, roles: { ...state.roles, role: action.payload } };
+
+    case STORE_CHANGE_NAME:
+      return { ...state, roles: { ...state.roles, role: action.payload } };
     default:
-      return state; // Return the current state if no action type matches
+      return state;
   }
 };

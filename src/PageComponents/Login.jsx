@@ -3,10 +3,12 @@ import { useForm } from "react-hook-form";
 import "../css/login.css";
 import { useSelector } from "react-redux";
 import { Spinner } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,19 +16,29 @@ function Login() {
   } = useForm({ mode: "all" });
 
   const user = useSelector((store) => store.user);
+  const storeCustomer = useSelector((store) => store.store);
 
   const submitHandler = async (formData, e) => {
     try {
-      e.preventDefault();
       setIsLoading(true);
-      if (user.email == formData.email && user.password == formData.password) {
-        setLoginSuccess(true);
-        setLoginError(false);
-      } else {
-        setLoginError(true);
-      }
-
-      console.log("Login data: ", formData);
+      e.preventDefault();
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          if (
+            (user.email == formData.email &&
+              user.password == formData.password) ||
+            (storeCustomer.email == formData.email &&
+              storeCustomer.password == formData.password)
+          ) {
+            setLoginSuccess(true);
+            setLoginError(false);
+          } else {
+            setLoginError(true);
+          }
+          console.log("Login data: ", formData);
+          navigate("/");
+        }, 2000);
+      });
     } catch (error) {
       setLoginError(true);
       console.error("Login error: ", error);
@@ -34,15 +46,15 @@ function Login() {
       setIsLoading(false);
     }
   };
-  console.log(user);
-
+  //   console.log("Reduxtan gelen user/admin bilgileri ", user);
+  //   console.log("Reduxtan gelen store kullanicisinin bilgileri ", storeCustomer);
   return (
     <div className="wrapper">
-      {loginSuccess ? (
+      {isLoading ? (
         <div className="flex flex-col gap-8 pb-48 items-center">
           <p className="text-xl tracking-wider  text-dangerRed font-medium">
             {" "}
-            Hello Again {user.name} !
+            Hello Again {user ? user.name : storeCustomer.name} !
           </p>
           <p className="text-xl tracking-wider font-medium">
             {" "}

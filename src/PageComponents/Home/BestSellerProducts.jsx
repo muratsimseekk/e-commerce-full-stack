@@ -10,7 +10,7 @@ import foto8 from "../../assets/hero/bestSellerProducts/product8.png";
 function BestSellerProducts() {
   return (
     <div className=" w-full py-16  flex justify-center items-center">
-      <div className="bg-blue-gray-600 w-4/5 h-4/5 flex flex-col gap-8">
+      <div className=" w-4/5 h-4/5 flex flex-col gap-8">
         <div className="text-center  flex flex-col gap-4">
           <p className="text-secondText text-xl xl:tracking-wider tracking-wide xl:font-normal font-medium">
             Featured Products
