@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import "../css/login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   localStorageMemory,
   s12finalKey,
@@ -33,7 +33,6 @@ function Login() {
             user.password == formData.password
           ) {
             setLoginSuccess(true);
-
             dispatch(logInChange());
             console.log("Login data: ", formData);
             navigate("/");
@@ -41,20 +40,20 @@ function Login() {
             setLoginError(true);
             setIsLoading(false);
           }
-        }, 2000);
+        }, 100);
       });
     } catch (error) {
       setLoginError(true);
       console.error("Login error: ", error);
     } finally {
-      setLoginSuccess(false);
+      // setLoginSuccess(false);
     }
   };
   //   console.log("Reduxtan gelen user/admin bilgileri ", user);
   //   console.log("Reduxtan gelen store kullanicisinin bilgileri ", storeCustomer);
   return (
     <div className="wrapper">
-      {loginSuccess ? (
+      {loginSuccess == true ? (
         <div className="flex flex-col gap-8 pb-48 items-center">
           <p className="text-xl tracking-wider  text-dangerRed font-medium">
             {" "}
@@ -67,7 +66,7 @@ function Login() {
           <Spinner color="blue" className="w-24 h-24 pb-8" />
         </div>
       ) : (
-        <div className="container xl:w-max xl:h-min">
+        <div className="container xl:w-max xl:h-min w-4/5">
           <form
             onSubmit={handleSubmit(submitHandler)}
             className="z-50 px-12 pt-12 pb-14 flex flex-col gap-4"
@@ -130,6 +129,10 @@ function Login() {
                 <p className="text-dangerRed ">{errors.password.message} *</p>
               )}
             </div>
+            <div>
+              <p className="text-sm">Forgot Password ?</p>
+            </div>
+
             <button
               className={`border-2 w-1/3 mx-auto py-2 rounded-xl  font-semibold tracking-wider ${
                 isValid
@@ -141,6 +144,14 @@ function Login() {
             >
               Log in
             </button>
+            <div>
+              <p className="text-center text-sm">Not a member ?</p>
+              <Link to="/signup">
+                <p className="text-center text-dangerRed hover:opacity-80 hover:underline">
+                  Create an Account
+                </p>
+              </Link>
+            </div>
           </form>
           <span></span>
           <span></span>

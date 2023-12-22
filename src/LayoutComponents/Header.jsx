@@ -34,6 +34,7 @@ function Header() {
     localStorageMemory(s12finalKey)?.roles.loggedIn || false
   );
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const changingLoggedIn = useSelector((state) => state.general.roles.loggedIn);
   const changingRoles = useSelector((state) => state.general.roles);
   const dispatch = useDispatch();
@@ -46,6 +47,11 @@ function Header() {
     setLoggedIn(localStorageMemory(s12finalKey).roles.loggedIn);
     setUserNav(localStorageMemory(s12finalKey).roles);
   }, [changingRoles, changingLoggedIn]);
+
+  const handleMenu = (e) => {
+    e.preventDefault();
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className="w-full h-[40vh] xl:h-full xl:block flex flex-col justify-around">
@@ -108,40 +114,14 @@ function Header() {
               </ul>
             </div>
           </div>
-          <div className="flex flex-row gap-5 justify-end">
-            {loggedIn == true ? (
-              <div className="flex items-center gap-3">
-                <img src={userNav.photo} className="rounded-full w-10 h-10" />
-                <p className="text-lg text-darkBg font-medium">
-                  {userNav.name}
-                </p>
-                <button
-                  type="button"
-                  onClick={logOutHandler}
-                  className="border bg-primaryColor text-lightText h-full rounded-xl px-4 hover:bg-lightText hover:border-primaryColor hover:text-darkBg"
-                >
-                  Log Out
-                </button>
-              </div>
-            ) : (
-              <div className="text-primaryColor xl:flex xl:flex-row hidden xl:items-center xl:gap-3">
-                <div className="flex items-center gap-1">
-                  <FontAwesomeIcon
-                    className="text-primaryColor "
-                    icon={faUser}
-                  />
-                  <Link to="/login">
-                    <p>Login</p>
-                  </Link>
-                </div>
-                <span>/</span>
-                <Link to="/signup">
-                  <p>Register</p>
-                </Link>
-              </div>
-            )}
-
-            <div className="xl:text-primaryColor text-textColor flex xl:gap-3 gap-4 items-center">
+          <div className="xl:flex xl:flex-row xl:gap-5 xl:justify-end relative">
+            <div className="xl:text-primaryColor text-textColor flex xl:gap-3 gap-4 items-center justify-end">
+              {loggedIn && !isMenuOpen && (
+                <img
+                  src={userNav.photo}
+                  className="rounded-full block xl:hidden w-10 h-10"
+                />
+              )}
               <FontAwesomeIcon
                 className="xl:h-4 xl:w-4 h-5 w-5"
                 icon={faMagnifyingGlass}
@@ -158,10 +138,91 @@ function Header() {
                   className="xl:h-4 xl:w-4 h-5 w-5 xl:block hidden"
                   icon={faHeart}
                 />
-                <TbMenuDeep className="xl:hidden block h-6 w-6 " />
+                <TbMenuDeep
+                  onClick={handleMenu}
+                  className="xl:hidden block h-6 w-6"
+                />
                 <p className="xl:block hidden">1</p>
               </div>
             </div>
+            {isMenuOpen && (
+              <>
+                {loggedIn === true ? (
+                  <div className="xl:hidden  absolute bg-gray-100 xl:border-none border border-primaryColor rounded-lg flex flex-col gap-2 px-10 py-10 items-center right-2 top-8">
+                    <img
+                      src={userNav.photo}
+                      className="rounded-full w-10 h-10"
+                    />
+                    <p className="text-lg text-darkBg font-medium">
+                      {userNav.name}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={logOutHandler}
+                      className="border bg-primaryColor text-lightText xl:h-8 px-2 py-1 rounded-xl xl:px-3  hover:bg-lightText hover:border-primaryColor hover:text-darkBg"
+                    >
+                      LogOut
+                    </button>
+                  </div>
+                ) : (
+                  <div className="text-primaryColor xl:hidden absolute bg-gray-100 xl:border-none border border-primaryColor rounded-lg w-full flex flex-col py-10 px-16 gap-8 right-2 top-8 items-center">
+                    <div className="flex items-center gap-1">
+                      <FontAwesomeIcon
+                        className="xl:text-primaryColor text-darkBg"
+                        icon={faUser}
+                      />
+                      <Link to="/login">
+                        <p className="text-xl xl:text-bas xl:text-primaryColor text-darkBg">
+                          Login
+                        </p>
+                      </Link>
+                    </div>
+                    <span className="xl:block hidden">/</span>
+                    <Link to="/signup">
+                      <p className="text-xl xl:text-base xl:text-primaryColor text-darkBg ">
+                        Register
+                      </p>
+                    </Link>
+                  </div>
+                )}
+              </>
+            )}
+            {loggedIn === true ? (
+              <div className="xl:flex xl:flex-row xl:items-center xl:gap-3  hidden">
+                <img src={userNav.photo} className="rounded-full w-10 h-10" />
+
+                <p className="text-lg text-darkBg font-medium">
+                  {userNav.name}
+                </p>
+                <button
+                  type="button"
+                  onClick={logOutHandler}
+                  className="border bg-primaryColor text-lightText xl:h-8   rounded-xl xl:px-3  hover:bg-lightText hover:border-primaryColor hover:text-darkBg"
+                >
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <div className="text-primaryColor xl:flex xl:flex-row  xl:items-center xl:gap-3 hidden">
+                <div className="flex items-center gap-1">
+                  <FontAwesomeIcon
+                    className="xl:text-primaryColor text-darkBg"
+                    icon={faUser}
+                  />
+                  <Link to="/login">
+                    <p className="text-xl xl:text-base xl:text-primaryColor text-darkBg">
+                      Login
+                    </p>
+                  </Link>
+                </div>
+                <span className="xl:block hidden">/</span>
+                <Link to="/signup">
+                  <p className="text-xl xl:text-base xl:text-primaryColor text-darkBg ">
+                    Register
+                  </p>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
