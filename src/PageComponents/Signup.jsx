@@ -100,7 +100,7 @@ function Signup() {
           <Spinner color="blue" className="w-36 h-36 pb-8" />
         </div>
       ) : (
-        <div className="container xl:w-max xl:h-min ">
+        <div className="container xl:w-max xl:h-min w-[95%]">
           <form
             className="z-50 px-12 pt-12 pb-14 flex flex-col gap-4"
             onSubmit={handleSubmit(submitHandler)}

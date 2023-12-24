@@ -24,6 +24,8 @@ import {
   localStorageMemory,
   s12finalKey,
 } from "../store/reducers/globalReducer";
+import { CgClose } from "react-icons/cg";
+
 import { useDispatch, useSelector } from "react-redux";
 import { logOutChange } from "../store/actions/globalAction";
 
@@ -139,10 +141,17 @@ function Header() {
                   className="xl:h-4 xl:w-4 h-5 w-5 xl:block hidden"
                   icon={faHeart}
                 />
-                <TbMenuDeep
-                  onClick={handleMenu}
-                  className="xl:hidden block h-6 w-6"
-                />
+                {!isMenuOpen && (
+                  <TbMenuDeep
+                    onClick={handleMenu}
+                    className="xl:hidden block h-6 w-6"
+                  />
+                )}
+
+                {isMenuOpen && (
+                  <CgClose className="w-6 h-6" onClick={handleMenu} />
+                )}
+
                 <p className="xl:block hidden">1</p>
               </div>
             </div>
