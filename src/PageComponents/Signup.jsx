@@ -25,6 +25,8 @@ import {
   storeTaxId,
 } from "../store/actions/storeAction";
 import { logInChange } from "../store/actions/globalAction";
+import { AxiosInstance, createAxiosInstance } from "../api/api";
+import { toast } from "react-toastify";
 
 function Signup() {
   const [selectedOption, setSelectedOption] = useState("customer");
@@ -46,41 +48,84 @@ function Signup() {
 
   const submitHandler = async (data) => {
     try {
-      setIsLoading(true);
+      const formData = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        role_id: selectedOption,
+      };
+      // { name, email, password, role_id, store: { name, phone, tax_no, bank_account } }
+      if (selectedOption === "store") {
+        formData.role_id = 2;
+        formData.store = {
+          name: data.store_name,
+          phone: telNumber,
+          tax_no: data.tax_id,
+          bank_account: data.iban,
+        };
+      } else if (selectedOption == "admin") {
+        formData.role_id = 1;
+      } else {
+        formData.role_id = 3;
+      }
 
-      await new Promise((resolve) => {
-        setTimeout(async () => {
-          console.log("data gonderildi", data);
-          if (selectedOption == "customer" || selectedOption == "admin") {
-            dispatch(changeName(data.name));
-            dispatch(changeSurname(data.surname));
-            dispatch(changeEmail(data.email));
-            dispatch(changePassword(data.password));
-            dispatch(changeRole(selectedOption));
-            dispatch(logInChange());
-          } else if (selectedOption == "store") {
-            dispatch(storeChangeName(data.name));
-            dispatch(storeChangeSurname(data.surname));
-            dispatch(storeChangeEmail(data.email));
-            dispatch(storeChangePassword(data.password));
-            dispatch(storeChangeRole(selectedOption));
-            dispatch(storeChangeStoreName(data.store_name));
-            dispatch(storePhoneNumber(telNumber));
-            dispatch(storeTaxId(data.tax_id));
-            dispatch(storeIban(data.iban));
-            dispatch(logInChange());
-          }
-
+      await AxiosInstance.post("/signup", formData)
+        .then((res) => {
+          console.log("Signup post islemi ", res.data);
+          toast.success("Signup Basarili");
           navigate(-1);
-        }, 2500);
-      });
-    } catch {
-      console.log("Data Gonderilirken Hata Olustu", data);
-    } finally {
-      setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log("Signup hatasi", err);
+          // Add logic to handle signup error
+        });
+
+      AxiosInstance.get("/roles")
+        .then((resp) => console.log("Roles Get islemi", resp.data))
+        .catch((err) => console.log(err));
+
+      console.log("formdata", formData);
+    } catch (err) {
+      console.log("Signup hatasi", err);
+      // Handle any other errors here
     }
   };
 
+  // try {
+  //   setIsLoading(true);
+
+  //   await new Promise((resolve) => {
+  //     setTimeout(async () => {
+  //       console.log("data gonderildi", data);
+  //       if (selectedOption == "customer" || selectedOption == "admin") {
+  //         dispatch(changeName(data.nam__e));
+  //         dispatch(changeSurname(data.surname));
+  //         dispatch(changeEmail(data.email));
+  //         dispatch(changePassword(data.password));
+  //         dispatch(changeRole(selectedOption));
+  //         dispatch(logInChange());
+  //       } else if (selectedOption == "store") {
+  //         dispatch(storeChangeName(data.name));
+  //         dispatch(storeChangeSurname(data.surname));
+  //         dispatch(storeChangeEmail(data.email));
+  //         dispatch(storeChangePassword(data.password));
+  //         dispatch(storeChangeRole(selectedOption));
+  //         dispatch(storeChangeStoreName(data.store_name));
+  //         dispatch(storePhoneNumber(telNumber));
+  //         dispatch(storeTaxId(data.tax_id));
+  //         dispatch(storeIban(data.iban));
+  //         dispatch(logInChange());
+  //       }
+
+  //       navigate(-1);
+  //     }, 2500);
+  //   });
+
+  // } catch {
+  //   console.log("Data Gonderilirken Hata Olustu", data);
+  // } finally {
+  //   setIsLoading(false);
+  // }
   const selectHandler = (e) => {
     const selection = e.target.value;
     setSelectedOption(selection);
@@ -260,9 +305,15 @@ function Signup() {
                 value={selectedOption}
                 onChange={selectHandler}
               >
-                <option value="customer">Customer</option>
-                <option value="admin">Admin</option>
-                <option value="store">Store</option>
+                <option value="customer" id="3">
+                  Customer
+                </option>
+                <option value="admin" id="1">
+                  Admin
+                </option>
+                <option value="store" id="2">
+                  Store
+                </option>
               </select>
             </div>
             {selectedOption == "store" && (

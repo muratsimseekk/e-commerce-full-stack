@@ -11,6 +11,7 @@ import About from "./PageComponents/About";
 import Contact from "./PageComponents/Contact";
 import Signup from "./PageComponents/Signup";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./PageComponents/Login";
 //Shop/* verdim cunku alt componentler icin de path acildi
 function App() {
