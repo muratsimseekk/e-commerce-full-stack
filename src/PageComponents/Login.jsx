@@ -6,9 +6,13 @@ import { Spinner } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   localStorageMemory,
+  localStorageWrite,
   s12finalKey,
 } from "../store/reducers/globalReducer";
-import { logInChange } from "../store/actions/globalAction";
+import { logInChange, loginData } from "../store/actions/globalAction";
+import { AxiosInstance } from "../api/api";
+import md5 from "md5";
+import { BsActivity } from "react-icons/bs";
 function Login() {
   const [loginError, setLoginError] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -19,34 +23,40 @@ function Login() {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
-  const user = localStorageMemory(s12finalKey)?.roles;
+  const getGravatar = (email) => {
+    const emailHash = md5(email.trim().toLowerCase());
+    //https://gravatar.com/avatar/HASH
+    return `https://gravatar.com/avatar/${emailHash}`;
+  };
+  const user = useSelector((store) => store.general.roles);
 
   const dispatch = useDispatch();
 
-  const submitHandler = async (formData, e) => {
+  const submitHandler = async (data, e) => {
     try {
       e.preventDefault();
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          if (
-            user.email == formData.email &&
-            user.password == formData.password
-          ) {
-            setLoginSuccess(true);
-            dispatch(logInChange());
-            console.log("Login data: ", formData);
-            navigate("/");
-          } else {
-            setLoginError(true);
-            setIsLoading(false);
-          }
-        }, 100);
+      await AxiosInstance.post("/login", data).then((res) => {
+        console.log("Login olunan data ", res.data);
+        setLoginSuccess(true);
+
+        localStorageWrite("token", res.data.token);
+
+        const gravatar = getGravatar(res.data.email);
+        dispatch(
+          loginData({
+            name: res.data.name,
+            email: res.data.email,
+            role: res.data.role_id,
+            loggedIn: true,
+            photo: gravatar,
+          })
+        );
       });
+      navigate("/");
     } catch (error) {
       setLoginError(true);
-      console.error("Login error: ", error);
+      console.error("Login error:", error);
     } finally {
-      // setLoginSuccess(false);
     }
   };
   //   console.log("Reduxtan gelen user/admin bilgileri ", user);

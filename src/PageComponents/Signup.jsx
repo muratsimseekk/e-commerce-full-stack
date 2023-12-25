@@ -30,6 +30,10 @@ import { toast } from "react-toastify";
 
 function Signup() {
   const [selectedOption, setSelectedOption] = useState("customer");
+  // "customer" ||
+  //   AxiosInstance.get("/roles")
+  //     .then((resp) => console.log("Roles Get islemi", resp.data))
+  //     .catch((err) => console.log(err))
 
   const [telNumber, setTelNumber] = useState("");
 
@@ -47,6 +51,7 @@ function Signup() {
   } = useForm({ mode: "all" });
 
   const submitHandler = async (data) => {
+    setIsLoading(true);
     try {
       const formData = {
         name: data.name,
@@ -54,7 +59,6 @@ function Signup() {
         password: data.password,
         role_id: selectedOption,
       };
-      // { name, email, password, role_id, store: { name, phone, tax_no, bank_account } }
       if (selectedOption === "store") {
         formData.role_id = 2;
         formData.store = {
@@ -71,24 +75,19 @@ function Signup() {
 
       await AxiosInstance.post("/signup", formData)
         .then((res) => {
-          console.log("Signup post islemi ", res.data);
           toast.success("Signup successfully completed.");
           navigate(-1);
         })
         .catch((err) => {
           toast.error("An error occurs on Signup process.");
-          console.log("Signup hatasi", err);
-          // Add logic to handle signup error
         });
-
-      AxiosInstance.get("/roles")
-        .then((resp) => console.log("Roles Get islemi", resp.data))
-        .catch((err) => console.log(err));
 
       console.log("formdata", formData);
     } catch (err) {
       console.log("Signup hatasi", err);
       // Handle any other errors here
+    } finally {
+      setIsLoading(false);
     }
   };
 

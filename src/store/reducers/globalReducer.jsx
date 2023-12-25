@@ -1,4 +1,4 @@
-import { LOGGED_IN, LOGGED_OUT } from "../actions/globalAction";
+import { LOGGED_IN, LOGGED_OUT, LOGIN_DATA } from "../actions/globalAction";
 import {
   STORE_CHANGE_EMAIL,
   STORE_CHANGE_NAME,
@@ -29,7 +29,7 @@ const initialValues = {
     name: "",
     email: "",
     password: "",
-    photo: "https://gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+    photo: "",
   },
   categories: "",
   theme: window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -38,7 +38,7 @@ const initialValues = {
   language: selectedLang ? selectedLang.value : "tr",
 };
 
-function localStorageWrite(key, data) {
+export function localStorageWrite(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
@@ -57,6 +57,19 @@ export function localStorageMemory(key) {
 
 export const globalReducer = (state = initialValues, action) => {
   switch (action.type) {
+    case LOGIN_DATA:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          name: action.payload.name,
+          email: action.payload.email,
+          role: action.payload.role,
+          loggedIn: true,
+          photo: action.payload.photo,
+        },
+      };
+
     case CHANGE_ROLE:
       const newRole = {
         ...state,
@@ -134,6 +147,7 @@ export const globalReducer = (state = initialValues, action) => {
       };
       localStorageWrite(s12finalKey, storePass);
       return storePass;
+
     default:
       return state;
   }
