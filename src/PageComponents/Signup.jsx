@@ -72,10 +72,11 @@ function Signup() {
       await AxiosInstance.post("/signup", formData)
         .then((res) => {
           console.log("Signup post islemi ", res.data);
-          toast.success("Signup Basarili");
+          toast.success("Signup successfully completed.");
           navigate(-1);
         })
         .catch((err) => {
+          toast.error("An error occurs on Signup process.");
           console.log("Signup hatasi", err);
           // Add logic to handle signup error
         });
