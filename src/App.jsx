@@ -17,6 +17,7 @@ import { AxiosInstance } from "./api/api";
 import md5 from "md5";
 import { useDispatch } from "react-redux";
 import { loginData } from "./store/actions/globalAction";
+import gravatar from "gravatar";
 //Shop/* verdim cunku alt componentler icin de path acildi
 function App() {
   const dispatch = useDispatch();
@@ -25,9 +26,7 @@ function App() {
 
   // console.log("localde token var mi ?", hasToken);
   const getGravatar = (email) => {
-    const emailHash = md5(email.trim().toLowerCase());
-    //https://gravatar.com/avatar/HASH
-    return `https://gravatar.com/avatar/${emailHash}`;
+    return gravatar.url(email, { s: "100", r: "x", d: "monsterid" }, true);
   };
 
   const verifyHandler = async () => {

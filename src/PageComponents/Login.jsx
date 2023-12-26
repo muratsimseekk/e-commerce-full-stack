@@ -7,8 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { localStorageWrite } from "../store/reducers/globalReducer";
 import { loginData } from "../store/actions/globalAction";
 import { AxiosInstance } from "../api/api";
-import md5 from "md5";
 import { toast } from "react-toastify";
+import gravatar from "gravatar";
 function Login() {
   const [loginError, setLoginError] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -20,9 +20,7 @@ function Login() {
   } = useForm({ mode: "all" });
 
   const getGravatar = (email) => {
-    const emailHash = md5(email.trim().toLowerCase());
-    //https://gravatar.com/avatar/HASH
-    return `https://gravatar.com/avatar/${emailHash}`;
+    return gravatar.url(email, { s: "100", r: "x", d: "monsterid" }, true);
   };
 
   const user = useSelector((store) => store.general.roles);
