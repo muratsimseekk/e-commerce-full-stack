@@ -10,7 +10,7 @@ import Shop from "./PageComponents/Shop";
 import About from "./PageComponents/About";
 import Contact from "./PageComponents/Contact";
 import Signup from "./PageComponents/Signup";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./PageComponents/Login";
 import { AxiosInstance } from "./api/api";
@@ -36,7 +36,7 @@ function App() {
         .then((res) => {
           console.log("res data", res.data);
           const gravatar = getGravatar(res.data.email);
-
+          toast.success("Succesfully Logged In !");
           dispatch(
             loginData({
               name: res.data.name,

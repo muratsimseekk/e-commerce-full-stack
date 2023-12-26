@@ -8,6 +8,7 @@ import { localStorageWrite } from "../store/reducers/globalReducer";
 import { loginData } from "../store/actions/globalAction";
 import { AxiosInstance } from "../api/api";
 import md5 from "md5";
+import { toast } from "react-toastify";
 function Login() {
   const [loginError, setLoginError] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -33,7 +34,7 @@ function Login() {
       await AxiosInstance.post("/login", data).then((res) => {
         console.log("Login olunan data ", res.data);
         setLoginSuccess(true);
-
+        toast.success("Succesfully Logged In !");
         localStorageWrite("token", res.data.token);
         const gravatar = getGravatar(res.data.email);
         dispatch(
@@ -50,7 +51,7 @@ function Login() {
       navigate("/");
     } catch (error) {
       setLoginError(true);
-
+      toast.error("Invalid User Informations");
       console.error("Login error:", error);
     } finally {
     }

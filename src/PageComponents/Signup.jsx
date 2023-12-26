@@ -11,10 +11,6 @@ import { toast } from "react-toastify";
 
 function Signup() {
   const [selectedOption, setSelectedOption] = useState("customer");
-  // "customer" ||
-  //   AxiosInstance.get("/roles")
-  //     .then((resp) => console.log("Roles Get islemi", resp.data))
-  //     .catch((err) => console.log(err))
 
   const [telNumber, setTelNumber] = useState("");
 
@@ -57,6 +53,9 @@ function Signup() {
       await AxiosInstance.post("/signup", formData)
         .then((res) => {
           toast.success("Signup successfully completed.");
+          toast.warning(
+            "You need to click link in email to activate your account!”"
+          );
           navigate(-1);
         })
         .catch((err) => {
@@ -72,41 +71,6 @@ function Signup() {
     }
   };
 
-  // try {
-  //   setIsLoading(true);
-
-  //   await new Promise((resolve) => {
-  //     setTimeout(async () => {
-  //       console.log("data gonderildi", data);
-  //       if (selectedOption == "customer" || selectedOption == "admin") {
-  //         dispatch(changeName(data.nam__e));
-  //         dispatch(changeSurname(data.surname));
-  //         dispatch(changeEmail(data.email));
-  //         dispatch(changePassword(data.password));
-  //         dispatch(changeRole(selectedOption));
-  //         dispatch(logInChange());
-  //       } else if (selectedOption == "store") {
-  //         dispatch(storeChangeName(data.name));
-  //         dispatch(storeChangeSurname(data.surname));
-  //         dispatch(storeChangeEmail(data.email));
-  //         dispatch(storeChangePassword(data.password));
-  //         dispatch(storeChangeRole(selectedOption));
-  //         dispatch(storeChangeStoreName(data.store_name));
-  //         dispatch(storePhoneNumber(telNumber));
-  //         dispatch(storeTaxId(data.tax_id));
-  //         dispatch(storeIban(data.iban));
-  //         dispatch(logInChange());
-  //       }
-
-  //       navigate(-1);
-  //     }, 2500);
-  //   });
-
-  // } catch {
-  //   console.log("Data Gonderilirken Hata Olustu", data);
-  // } finally {
-  //   setIsLoading(false);
-  // }
   const selectHandler = (e) => {
     const selection = e.target.value;
     setSelectedOption(selection);

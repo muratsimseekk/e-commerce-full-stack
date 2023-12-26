@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import vector from "../assets/vector.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,14 +20,11 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import { TbMenuDeep } from "react-icons/tb";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CgClose } from "react-icons/cg";
 
 import { useDispatch, useSelector } from "react-redux";
-import { logOutChange, loginData } from "../store/actions/globalAction";
-import { AxiosInstance } from "../api/api";
-import { localStorageWrite } from "../store/reducers/globalReducer";
-import md5 from "md5";
+import { logOutChange } from "../store/actions/globalAction";
 
 function Header() {
   const userNavLog = useSelector((state) => state.general.roles.loggedIn);
