@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import card1 from "../../assets/hero/shop-card/card1.png";
-import card2 from "../../assets/hero/shop-card/card2.png";
-import card3 from "../../assets/hero/shop-card/card3.png";
-import card4 from "../../assets/hero/shop-card/card4.png";
-import card5 from "../../assets/hero/shop-card/card5.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { categFetch } from "../../store/actions/thunkAction";
 import { AxiosInstance } from "../../api/api";
 
 function Category() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const fetchProcess = async () => {
     try {
       await AxiosInstance.get("/categories").then((res) => {
@@ -32,7 +27,7 @@ function Category() {
   const sorted = categories.sort((a, b) => b.rating - a.rating);
 
   const firstFive = sorted.slice(0, 5);
-  console.log("categories ratings", firstFive);
+  console.log("categories ratings", firstFive[0]?.code.replace(":", "/"));
 
   return (
     <div className="w-full bg-lightGray flex justify-center ">
@@ -54,6 +49,9 @@ function Category() {
               className="xl:w-[17%] relative bg-black hover:cursor-pointer"
               key={item.id}
               id={item.id}
+              onClick={() => {
+                navigate(item.code.replace(":", "/"));
+              }}
             >
               <img
                 className="w-full h-full object-cover  opacity-70 hover:opacity-90"
