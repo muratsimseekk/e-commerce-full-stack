@@ -31,7 +31,10 @@ function HeaderContent() {
           <div className="absolute w-6 h-6 bg-violet rounded-full left-[6%] xl:left-[12%] bottom-[35%]"></div>
           <div className="absolute w-16 h-16 bg-roseBg rounded-full left-[5%] top-[10%]"></div>
           <div className="absolute w-7 h-7 bg-roseBg rounded-full right-[1%] top-[40%]"></div>
-          <img src={women} className="absolute bottom-0 z-40 right-0" />
+          <img
+            src={women}
+            className="absolute bottom-0 z-40 right-0 h-[100%]"
+          />
         </div>
       </div>
       <div className=" py-20 w-3/4 xl:flex xl:flex-row flex flex-col  gap-10 xl:gap-20">

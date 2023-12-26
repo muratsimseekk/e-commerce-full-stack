@@ -5,27 +5,8 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "@material-tailwind/react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  changeEmail,
-  changeName,
-  changePassword,
-  changeRole,
-  changeSurname,
-} from "../store/actions/userAction";
-import {
-  storeChangeEmail,
-  storeChangeName,
-  storeChangePassword,
-  storeChangeRole,
-  storeChangeStoreName,
-  storeChangeSurname,
-  storeIban,
-  storePhoneNumber,
-  storeTaxId,
-} from "../store/actions/storeAction";
-import { logInChange } from "../store/actions/globalAction";
-import { AxiosInstance, createAxiosInstance } from "../api/api";
+import { useDispatch } from "react-redux";
+import { AxiosInstance } from "../api/api";
 import { toast } from "react-toastify";
 
 function Signup() {

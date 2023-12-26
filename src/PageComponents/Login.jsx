@@ -4,15 +4,10 @@ import "../css/login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  localStorageMemory,
-  localStorageWrite,
-  s12finalKey,
-} from "../store/reducers/globalReducer";
-import { logInChange, loginData } from "../store/actions/globalAction";
+import { localStorageWrite } from "../store/reducers/globalReducer";
+import { loginData } from "../store/actions/globalAction";
 import { AxiosInstance } from "../api/api";
 import md5 from "md5";
-import { BsActivity } from "react-icons/bs";
 function Login() {
   const [loginError, setLoginError] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -28,19 +23,18 @@ function Login() {
     //https://gravatar.com/avatar/HASH
     return `https://gravatar.com/avatar/${emailHash}`;
   };
+
   const user = useSelector((store) => store.general.roles);
 
   const dispatch = useDispatch();
 
-  const submitHandler = async (data, e) => {
+  const submitHandler = async (data) => {
     try {
-      e.preventDefault();
       await AxiosInstance.post("/login", data).then((res) => {
         console.log("Login olunan data ", res.data);
         setLoginSuccess(true);
 
         localStorageWrite("token", res.data.token);
-
         const gravatar = getGravatar(res.data.email);
         dispatch(
           loginData({
@@ -49,12 +43,14 @@ function Login() {
             role: res.data.role_id,
             loggedIn: true,
             photo: gravatar,
+            token: res.data.token,
           })
         );
       });
       navigate("/");
     } catch (error) {
       setLoginError(true);
+
       console.error("Login error:", error);
     } finally {
     }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const createAxiosInstance = () => {
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
 
   return token
     ? axios.create({

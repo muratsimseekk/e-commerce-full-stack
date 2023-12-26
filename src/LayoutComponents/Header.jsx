@@ -18,38 +18,32 @@ import {
   faTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+
 import { TbMenuDeep } from "react-icons/tb";
-import { Link } from "react-router-dom";
-import {
-  localStorageMemory,
-  s12finalKey,
-} from "../store/reducers/globalReducer";
+import { Link, useNavigate } from "react-router-dom";
 import { CgClose } from "react-icons/cg";
 
 import { useDispatch, useSelector } from "react-redux";
-import { logOutChange } from "../store/actions/globalAction";
+import { logOutChange, loginData } from "../store/actions/globalAction";
+import { AxiosInstance } from "../api/api";
+import { localStorageWrite } from "../store/reducers/globalReducer";
+import md5 from "md5";
 
 function Header() {
-  const [userNav, setUserNav] = useState(
-    localStorageMemory(s12finalKey)?.roles
-  );
-  const [loggedIn, setLoggedIn] = useState(
-    localStorageMemory(s12finalKey)?.roles.loggedIn || false
-  );
+  const userNavLog = useSelector((state) => state.general.roles.loggedIn);
+
+  const userGravatar = useSelector((state) => state.general.roles.photo);
+  console.log("Login durumu", userNavLog);
+  const dispatch = useDispatch();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const changingLoggedIn = useSelector((state) => state.general.roles.loggedIn);
-  const changingRoles = useSelector((state) => state.general.roles);
-  const dispatch = useDispatch();
+
+  const userNav = useSelector((state) => state.general.roles);
 
   const logOutHandler = (e) => {
     e.preventDefault();
     dispatch(logOutChange());
   };
-  useEffect(() => {
-    setLoggedIn(localStorageMemory(s12finalKey).roles.loggedIn);
-    setUserNav(localStorageMemory(s12finalKey).roles);
-  }, [changingRoles, changingLoggedIn]);
 
   const handleMenu = (e) => {
     e.preventDefault();
@@ -119,9 +113,9 @@ function Header() {
           </div>
           <div className="xl:flex xl:flex-row xl:gap-5 xl:justify-end relative">
             <div className="xl:text-primaryColor text-textColor flex xl:gap-3 gap-4 items-center justify-end">
-              {loggedIn && !isMenuOpen && (
+              {userNavLog && !isMenuOpen && (
                 <img
-                  src={userNav.photo}
+                  src={userGravatar}
                   className="rounded-full block xl:hidden w-10 h-10"
                 />
               )}
@@ -157,10 +151,10 @@ function Header() {
             </div>
             {isMenuOpen && (
               <>
-                {loggedIn === true ? (
+                {userNavLog === true ? (
                   <div className="xl:hidden  absolute bg-gray-100 xl:border-none border border-primaryColor rounded-lg flex flex-col gap-2 px-10 py-10 items-center right-2 top-8">
                     <img
-                      src={userNav.photo}
+                      src={userGravatar}
                       className="rounded-full w-10 h-10"
                     />
                     <p className="text-lg text-darkBg font-medium">
@@ -197,9 +191,9 @@ function Header() {
                 )}
               </>
             )}
-            {loggedIn === true ? (
+            {userNavLog === true ? (
               <div className="xl:flex xl:flex-row xl:items-center xl:gap-3  hidden">
-                <img src={userNav.photo} className="rounded-full w-10 h-10" />
+                <img src={userGravatar} className="rounded-full w-10 h-10" />
 
                 <p className="text-lg text-darkBg font-medium">
                   {userNav.name}
