@@ -29,7 +29,10 @@ function Category() {
 
   const categories = useSelector((state) => state.general.categories);
 
-  console.log("categories", categories);
+  const sorted = categories.sort((a, b) => b.rating - a.rating);
+
+  const firstFive = sorted.slice(0, 5);
+  console.log("categories ratings", firstFive);
 
   return (
     <div className="w-full bg-lightGray flex justify-center ">
@@ -46,10 +49,14 @@ function Category() {
         </div>
 
         <div className="w-full flex flex-col xl:flex xl:flex-row xl:flex-wrap bg-lightGray xl:justify-between gap-y-4 pb-12">
-          {categories?.map((item) => (
-            <div className="xl:w-[19%] relative ">
+          {firstFive?.map((item) => (
+            <div
+              className="xl:w-[17%] relative bg-black hover:cursor-pointer"
+              key={item.id}
+              id={item.id}
+            >
               <img
-                className="w-full h-[80%] object-cover opacity-90"
+                className="w-full h-full object-cover  opacity-70 hover:opacity-90"
                 src={item.img}
               />
               <div className="flex flex-col gap-2 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lightText">
