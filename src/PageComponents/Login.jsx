@@ -30,7 +30,6 @@ function Login() {
   const submitHandler = async (data) => {
     try {
       await AxiosInstance.post("/login", data).then((res) => {
-        console.log("Login olunan data ", res.data);
         setLoginSuccess(true);
         toast.success("Succesfully Logged In !");
         localStorageWrite("token", res.data.token);
@@ -50,12 +49,10 @@ function Login() {
     } catch (error) {
       setLoginError(true);
       toast.error("Invalid User Informations");
-      console.error("Login error:", error);
     } finally {
     }
   };
-  //   console.log("Reduxtan gelen user/admin bilgileri ", user);
-  //   console.log("Reduxtan gelen store kullanicisinin bilgileri ", storeCustomer);
+
   return (
     <div className="wrapper">
       {loginSuccess == true ? (

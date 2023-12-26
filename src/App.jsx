@@ -33,7 +33,6 @@ function App() {
     try {
       await AxiosInstance.get("/verify")
         .then((res) => {
-          console.log("res data", res.data);
           const gravatar = getGravatar(res.data.email);
           toast.success("Succesfully Logged In !");
           dispatch(
@@ -48,7 +47,7 @@ function App() {
           );
         })
         .catch((err) => {
-          console.log("Hata olustu", err);
+          toast.error("An error occurs on verify process");
           localStorage.removeItem("token");
         });
     } catch {}

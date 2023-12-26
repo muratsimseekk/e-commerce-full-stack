@@ -30,7 +30,7 @@ function Header() {
   const userNavLog = useSelector((state) => state.general.roles.loggedIn);
 
   const userGravatar = useSelector((state) => state.general.roles.photo);
-  console.log("Login durumu", userNavLog);
+
   const dispatch = useDispatch();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);

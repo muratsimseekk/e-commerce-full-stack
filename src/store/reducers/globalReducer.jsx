@@ -1,4 +1,5 @@
 import { LOGGED_OUT, LOGIN_DATA } from "../actions/globalAction";
+import { CATEG_FETCH } from "../actions/thunkAction";
 
 const languages = [
   { name: "Türkçe", value: "tr" },
@@ -16,7 +17,7 @@ const initialValues = {
     email: "",
     photo: "",
   },
-  categories: "",
+  categories: [],
   theme: window.matchMedia("(prefers-color-scheme: dark)").matches
     ? true
     : false,
@@ -63,6 +64,8 @@ export const globalReducer = (state = initialValues, action) => {
       };
       return loggedOut;
 
+    case CATEG_FETCH:
+      return { ...state, categories: action.payload };
     default:
       return state;
   }
