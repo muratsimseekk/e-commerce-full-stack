@@ -1,3 +1,5 @@
+import { PRODUCT_FETCH } from "../actions/thunkAction";
+
 const initialProductValues = {
   productList: [],
   totalProductCount: 0,
@@ -8,6 +10,8 @@ const initialProductValues = {
 
 export const productReducer = (state = initialProductValues, action) => {
   switch (action.type) {
+    case PRODUCT_FETCH:
+      return { ...state, productList: action.payload };
     default:
       return state;
   }
