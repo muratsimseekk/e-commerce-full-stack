@@ -1,5 +1,5 @@
-import { Button, Option, Select } from "@material-tailwind/react";
-import React, { useEffect } from "react";
+import { Button, Option, Select, Spinner } from "@material-tailwind/react";
+import React, { useEffect, useState } from "react";
 import { BsFillGridFill } from "react-icons/bs";
 import { VscChecklist } from "react-icons/vsc";
 
@@ -19,8 +19,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 function Products() {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const fetchingProducts = async () => {
+    setLoading(true);
     try {
       await AxiosInstance.get("/products").then((res) => {
         // console.log("product data ", res.data.products);
@@ -29,6 +31,7 @@ function Products() {
     } catch (err) {
       toast.error("An error occurs while fetching products");
     } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -38,7 +41,11 @@ function Products() {
   const products = useSelector((state) => state.product.productList);
   console.log(products);
 
-  return (
+  return loading ? (
+    <div className="flex justify-center">
+      <Spinner color="blue" className="w-36 h-36 pb-8" />
+    </div>
+  ) : (
     <div className="flex justify-center items-center  pt-8 ">
       <div className="flex flex-col w-full items-center gap-12">
         <div className="w-11/12 flex flex-col gap-10 items-center  xl:flex xl:flex-row xl:justify-between xl:items-center">
