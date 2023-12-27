@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-import vector from "../assets/vector.svg";
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Button,
+} from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartShopping,
@@ -133,8 +139,15 @@ function Header() {
                           }}
                         />
                         <div className="absolute z-50 left-10 top-10 border py-2 px-4">
-                          <div className="relative flex items-center gap-1 ">
-                            <h2>Kadin</h2>
+                          <div className="relative flex items-center justify-between gap-1 ">
+                            {womanMenu == true ? (
+                              <h2 className=" px-2 py-1 rounded-md bg-primaryColor text-white">
+                                Woman
+                              </h2>
+                            ) : (
+                              <h2 className="px-2 py-1">Woman</h2>
+                            )}
+
                             {womanMenu == false ? (
                               <IoIosArrowForward
                                 onClick={() => {
@@ -144,6 +157,7 @@ function Header() {
                               />
                             ) : (
                               <IoIosArrowDown
+                                className="w-7 h-5 text-primaryColor"
                                 onClick={() => {
                                   setWomenMenu(false);
                                 }}
@@ -151,7 +165,7 @@ function Header() {
                             )}
 
                             {womanMenu == true && (
-                              <ul className="absolute left-[83px] flex gap-2 top-2 border py-5 px-3 w-72 flex-wrap bg-gray-100">
+                              <ul className="absolute left-[128px] flex gap-2 top-2 border border-primaryColor py-5 px-3 w-72 flex-wrap bg-gray-50">
                                 {arrKadin.map((item, i) => (
                                   <li
                                     key={i}
@@ -163,8 +177,15 @@ function Header() {
                               </ul>
                             )}
                           </div>
-                          <div className="relative flex items-center gap-1 ">
-                            <h2>Erkek</h2>
+                          <div className="relative flex items-center  justify-between gap-1 ">
+                            {manMenu == true ? (
+                              <h2 className=" px-2 py-1 rounded-md bg-primaryColor text-white">
+                                Erkek
+                              </h2>
+                            ) : (
+                              <h2 className="px-2 py-1">Erkek</h2>
+                            )}
+
                             {manMenu == false ? (
                               <IoIosArrowForward
                                 onClick={() => {
@@ -174,6 +195,7 @@ function Header() {
                               />
                             ) : (
                               <IoIosArrowDown
+                                className="w-7 h-5 text-primaryColor"
                                 onClick={() => {
                                   setManMenu(false);
                                 }}
@@ -181,7 +203,7 @@ function Header() {
                             )}
 
                             {manMenu == true && (
-                              <ul className="absolute left-[83px] flex gap-2 top-2 border py-5 px-3 w-72 flex-wrap bg-gray-100">
+                              <ul className="absolute left-[117px] flex gap-2 top-2 border border-primaryColor py-5 px-3 w-72 flex-wrap bg-gray-50">
                                 {arrErkek.map((item, i) => (
                                   <li
                                     key={i}
