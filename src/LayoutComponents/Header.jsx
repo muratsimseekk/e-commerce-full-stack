@@ -22,6 +22,8 @@ import {
 import { TbMenuDeep } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { CgClose } from "react-icons/cg";
+import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 
 import { useDispatch, useSelector } from "react-redux";
 import { logOutChange } from "../store/actions/globalAction";
@@ -33,8 +35,11 @@ function Header() {
 
   const dispatch = useDispatch();
 
+  const categories = useSelector((state) => state.general.categories);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const [shopMenu, setShopMenu] = useState(false);
   const userNav = useSelector((state) => state.general.roles);
 
   const logOutHandler = (e) => {
@@ -46,7 +51,19 @@ function Header() {
     e.preventDefault();
     setIsMenuOpen(!isMenuOpen);
   };
+  let arrKadin = [];
+  let arrErkek = [];
+  for (let i = 0; i < categories.length; i++) {
+    const gender = categories[i].code[0].split(":");
 
+    if (gender == "k") {
+      arrKadin.push(categories[i]);
+    } else if (gender == "e") {
+      arrErkek.push(categories[i]);
+    }
+  }
+  console.log(categories);
+  console.log(arrKadin, arrErkek);
   return (
     <div className="w-full h-[40vh] xl:h-full xl:block flex flex-col justify-around">
       <div className=" xl:w-full xl:py-5 xl:bg-darkBg hidden xl:text-lightText xl:flex  xl:justify-center ">
@@ -91,8 +108,25 @@ function Header() {
                   <li>Home</li>
                 </Link>
                 <Link to="/shop">
-                  <li className="flex gap-2 text-textColor">
-                    <p>Shop</p> <img src={vector} />
+                  <li className="flex gap-2 items-center text-textColor relative">
+                    <p>Shop</p>{" "}
+                    {shopMenu == false && (
+                      <IoIosArrowDown
+                        onClick={() => {
+                          setShopMenu(true);
+                        }}
+                      />
+                    )}
+                    {shopMenu == true && (
+                      <>
+                        <IoIosArrowUp
+                          onClick={() => {
+                            setShopMenu(false);
+                          }}
+                        />
+                        <div className="absolute left-10 top-10 ">Acik</div>
+                      </>
+                    )}
                   </li>
                 </Link>
                 <Link to="/about">
