@@ -27,7 +27,6 @@ function Category() {
   const sorted = categories.sort((a, b) => b.rating - a.rating);
 
   const firstFive = sorted.slice(0, 5);
-  console.log("categories ratings", firstFive[0]?.code.replace(":", "/"));
 
   return (
     <div className="w-full bg-lightGray flex justify-center ">

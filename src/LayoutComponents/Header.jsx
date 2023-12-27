@@ -24,7 +24,7 @@ import { Link } from "react-router-dom";
 import { CgClose } from "react-icons/cg";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-
+import { IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutChange } from "../store/actions/globalAction";
 
@@ -40,6 +40,9 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [shopMenu, setShopMenu] = useState(false);
+  const [womanMenu, setWomenMenu] = useState(false);
+  const [manMenu, setManMenu] = useState(false);
+
   const userNav = useSelector((state) => state.general.roles);
 
   const logOutHandler = (e) => {
@@ -54,16 +57,20 @@ function Header() {
   let arrKadin = [];
   let arrErkek = [];
   for (let i = 0; i < categories.length; i++) {
-    const gender = categories[i].code[0].split(":");
+    const gender = categories[i].code.split(":")[0];
 
+    const category = categories[i].title;
+
+    // console.log(" category", category);
     if (gender == "k") {
-      arrKadin.push(categories[i]);
+      arrKadin.push(category);
     } else if (gender == "e") {
-      arrErkek.push(categories[i]);
+      arrErkek.push(category);
     }
   }
-  console.log(categories);
-  console.log(arrKadin, arrErkek);
+
+  console.log("Kadin kategorileri", arrKadin, "Erkek Kategorileri", arrErkek);
+
   return (
     <div className="w-full h-[40vh] xl:h-full xl:block flex flex-col justify-around">
       <div className=" xl:w-full xl:py-5 xl:bg-darkBg hidden xl:text-lightText xl:flex  xl:justify-center ">
@@ -122,9 +129,71 @@ function Header() {
                         <IoIosArrowUp
                           onClick={() => {
                             setShopMenu(false);
+                            setWomenMenu(false);
                           }}
                         />
-                        <div className="absolute left-10 top-10 ">Acik</div>
+                        <div className="absolute z-50 left-10 top-10 border py-2 px-4">
+                          <div className="relative flex items-center gap-1 ">
+                            <h2>Kadin</h2>
+                            {womanMenu == false ? (
+                              <IoIosArrowForward
+                                onClick={() => {
+                                  setWomenMenu(true);
+                                  setManMenu(false);
+                                }}
+                              />
+                            ) : (
+                              <IoIosArrowDown
+                                onClick={() => {
+                                  setWomenMenu(false);
+                                }}
+                              />
+                            )}
+
+                            {womanMenu == true && (
+                              <ul className="absolute left-[83px] flex gap-2 top-2 border py-5 px-3 w-72 flex-wrap bg-gray-100">
+                                {arrKadin.map((item, i) => (
+                                  <li
+                                    key={i}
+                                    className="z-40 w-[30%] hover:underline text-base  hover:cursor-pointer"
+                                  >
+                                    {item}
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                          <div className="relative flex items-center gap-1 ">
+                            <h2>Erkek</h2>
+                            {manMenu == false ? (
+                              <IoIosArrowForward
+                                onClick={() => {
+                                  setManMenu(true);
+                                  setWomenMenu(false);
+                                }}
+                              />
+                            ) : (
+                              <IoIosArrowDown
+                                onClick={() => {
+                                  setManMenu(false);
+                                }}
+                              />
+                            )}
+
+                            {manMenu == true && (
+                              <ul className="absolute left-[83px] flex gap-2 top-2 border py-5 px-3 w-72 flex-wrap bg-gray-100">
+                                {arrErkek.map((item, i) => (
+                                  <li
+                                    key={i}
+                                    className="z-40 w-[30%] hover:underline text-base hover:cursor-pointer"
+                                  >
+                                    {item}
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        </div>
                       </>
                     )}
                   </li>
