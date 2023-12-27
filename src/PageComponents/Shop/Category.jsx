@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { categFetch } from "../../store/actions/thunkAction";
 import { AxiosInstance } from "../../api/api";
@@ -8,6 +8,8 @@ import { AxiosInstance } from "../../api/api";
 function Category() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let { gender, category } = useParams();
+  console.log(gender, category);
   const fetchProcess = async () => {
     try {
       await AxiosInstance.get("/categories").then((res) => {

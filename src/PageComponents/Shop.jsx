@@ -9,10 +9,10 @@ function Shop() {
     <>
       <Routes>
         <Route
-          path="/"
+          path="/*"
           element={
             <>
-              <Category />
+              <Category path="/:gender/:category" />
               <Products />
             </>
           }
@@ -24,3 +24,5 @@ function Shop() {
 }
 
 export default Shop;
+
+// path="/:gender/:category"

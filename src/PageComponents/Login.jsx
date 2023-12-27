@@ -28,6 +28,7 @@ function Login() {
   const dispatch = useDispatch();
 
   const submitHandler = async (data) => {
+    console.log("tiklandi");
     try {
       await AxiosInstance.post("/login", data).then((res) => {
         setLoginSuccess(true);

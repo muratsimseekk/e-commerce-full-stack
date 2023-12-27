@@ -136,6 +136,7 @@ function Header() {
                           onClick={() => {
                             setShopMenu(false);
                             setWomenMenu(false);
+                            setManMenu(false);
                           }}
                         />
                         <div className="absolute z-50 left-10 top-10 border py-2 px-4">
@@ -177,6 +178,7 @@ function Header() {
                               </ul>
                             )}
                           </div>
+
                           <div className="relative flex items-center  justify-between gap-1 ">
                             {manMenu == true ? (
                               <h2 className=" px-2 py-1 rounded-md bg-primaryColor text-white">
