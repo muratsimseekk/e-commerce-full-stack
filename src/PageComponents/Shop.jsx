@@ -12,7 +12,7 @@ function Shop() {
           path="/*"
           element={
             <>
-              <Category path="/:gender/:category" />
+              <Category />
               <Products />
             </>
           }

@@ -8,8 +8,9 @@ import { AxiosInstance } from "../../api/api";
 function Category() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let { gender, category } = useParams();
-  console.log(gender, category);
+  // let { gender, category } = useParams();
+  // console.log(gender, category);
+
   const fetchProcess = async () => {
     try {
       await AxiosInstance.get("/categories").then((res) => {

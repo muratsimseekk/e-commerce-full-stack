@@ -1,12 +1,5 @@
 import React, { useState } from "react";
 
-import {
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-  Button,
-} from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartShopping,
@@ -26,7 +19,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import { TbMenuDeep } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CgClose } from "react-icons/cg";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
@@ -49,6 +42,8 @@ function Header() {
   const [womanMenu, setWomenMenu] = useState(false);
   const [manMenu, setManMenu] = useState(false);
 
+  const navigate = useNavigate();
+
   const userNav = useSelector((state) => state.general.roles);
 
   const logOutHandler = (e) => {
@@ -63,11 +58,11 @@ function Header() {
   let arrKadin = [];
   let arrErkek = [];
   for (let i = 0; i < categories.length; i++) {
+    // console.log("Categories", categories[i].code);
     const gender = categories[i].code.split(":")[0];
 
-    const category = categories[i].title;
+    const category = categories[i];
 
-    // console.log(" category", category);
     if (gender == "k") {
       arrKadin.push(category);
     } else if (gender == "e") {
@@ -75,7 +70,7 @@ function Header() {
     }
   }
 
-  console.log("Kadin kategorileri", arrKadin, "Erkek Kategorileri", arrErkek);
+  // console.log("Kadin kategorileri", arrKadin, "Erkek Kategorileri", arrErkek);
 
   return (
     <div className="w-full h-[40vh] xl:h-full xl:block flex flex-col justify-around">
@@ -172,7 +167,11 @@ function Header() {
                                     key={i}
                                     className="z-40 w-[30%] hover:underline text-base  hover:cursor-pointer"
                                   >
-                                    {item}
+                                    <Link
+                                      to={`shop/${item.code.replace(":", "/")}`}
+                                    >
+                                      {item.title}
+                                    </Link>
                                   </li>
                                 ))}
                               </ul>
@@ -204,14 +203,18 @@ function Header() {
                               />
                             )}
 
-                            {manMenu == true && (
+                            {manMenu === true && (
                               <ul className="absolute left-[117px] flex gap-2 top-2 border border-primaryColor py-5 px-3 w-72 flex-wrap bg-gray-50">
                                 {arrErkek.map((item, i) => (
                                   <li
-                                    key={i}
                                     className="z-40 w-[30%] hover:underline text-base hover:cursor-pointer"
+                                    key={i}
                                   >
-                                    {item}
+                                    <Link
+                                      to={`shop/${item.code.replace(":", "/")}`}
+                                    >
+                                      {item.title}
+                                    </Link>
                                   </li>
                                 ))}
                               </ul>
