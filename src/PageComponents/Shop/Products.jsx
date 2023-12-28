@@ -20,12 +20,15 @@ import { toast } from "react-toastify";
 
 function Products() {
   const [loading, setLoading] = useState(false);
+
+  const [selectedSort, setSelectedSort] = useState("popular");
+
   const dispatch = useDispatch();
+
   const fetchingProducts = async () => {
     setLoading(true);
     try {
       await AxiosInstance.get("/products").then((res) => {
-        // console.log("product data ", res.data.products);
         dispatch(productFetch(res.data.products));
       });
     } catch (err) {
@@ -39,7 +42,25 @@ function Products() {
   }, []);
 
   const products = useSelector((state) => state.product.productList);
-  console.log(products);
+
+  const [sortedProducts, setSortedProducts] = useState(products);
+  console.log("Sorted Products", sortedProducts);
+  const filterHandler = () => {
+    if (selectedSort == "popular") {
+      setSortedProducts(products);
+    } else if (selectedSort == "new") {
+      const newSort = [...products].sort((a, b) => a.sell_count - b.sell_count);
+
+      setSortedProducts(newSort);
+    } else if (selectedSort == "low") {
+      const lowSort = [...products].sort((a, b) => a.price - b.price);
+
+      setSortedProducts(lowSort);
+    } else if (selectedSort == "high") {
+      const highSort = [...products].sort((a, b) => b.price - a.price);
+      setSortedProducts(highSort);
+    }
+  };
 
   return loading ? (
     <div className="flex justify-center">
@@ -59,13 +80,28 @@ function Products() {
           </div>
           <div className="flex gap-2 items-center">
             <Select label="Sort By" size="lg">
-              <Option>Popularity</Option>
-              <Option>Newest</Option>
-              <Option>Price Low-High</Option>
-              <Option>Price High-Low</Option>
+              <Option onClick={() => setSelectedSort("popular")}>
+                Popularity
+              </Option>
+              <Option
+                onClick={() => {
+                  setSelectedSort("new");
+                }}
+              >
+                Newest
+              </Option>
+              <Option onClick={() => setSelectedSort("low")}>
+                Price Low-High
+              </Option>
+              <Option onClick={() => setSelectedSort("high")}>
+                Price High-Low
+              </Option>
             </Select>
             <div>
               <Button
+                onClick={() => {
+                  filterHandler();
+                }}
                 size="lg"
                 className="capitalize tracking-wider bg-primaryColor text-lightText "
               >
@@ -75,8 +111,11 @@ function Products() {
           </div>
         </div>
         <div className="flex flex-col gap-16 xl:gap-0 xl:flex xl:flex-row w-11/12 xl:flex-wrap xl:justify-between xl:gap-y-12">
-          {products?.map((item) => (
-            <div className=" xl:w-[23%] flex flex-col text-center justify-between xl:gap-6 gap-8 ">
+          {sortedProducts?.map((item, i) => (
+            <div
+              key={i}
+              className=" xl:w-[23%] flex flex-col text-center justify-between xl:gap-6 gap-8 "
+            >
               <Link to="/shop/product">
                 <img
                   className="w-[100%]"
