@@ -1,4 +1,10 @@
-import { Button, Option, Select, Spinner } from "@material-tailwind/react";
+import {
+  Button,
+  Input,
+  Option,
+  Select,
+  Spinner,
+} from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { BsFillGridFill } from "react-icons/bs";
 import { VscChecklist } from "react-icons/vsc";
@@ -23,6 +29,8 @@ function Products() {
 
   const [selectedSort, setSelectedSort] = useState("popular");
 
+  const [searchValue, setSearchValue] = useState("");
+  console.log("aranan filtre degeri", searchValue);
   const dispatch = useDispatch();
 
   const fetchingProducts = async () => {
@@ -45,7 +53,7 @@ function Products() {
 
   const [sortedProducts, setSortedProducts] = useState(products);
   console.log("Sorted Products", sortedProducts);
-  const filterHandler = () => {
+  const sortHandler = () => {
     if (selectedSort == "popular") {
       setSortedProducts(products);
     } else if (selectedSort == "new") {
@@ -59,6 +67,11 @@ function Products() {
     } else if (selectedSort == "high") {
       const highSort = [...products].sort((a, b) => b.price - a.price);
       setSortedProducts(highSort);
+    } else if (searchValue) {
+      const searchSort = [...products].filter((item) =>
+        item.description.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setSortedProducts(searchSort);
     }
   };
 
@@ -75,10 +88,17 @@ function Products() {
           </h2>
           <div className="flex items-center gap-7  font-semibold text-lg p-2">
             <h3 className="text-secondText">Views :</h3>
-            <BsFillGridFill className="h-5 w-5 text-textColor" />
-            <VscChecklist className="h-5 w-5 text-secondText" />
+            <BsFillGridFill className="h-6 w-6 text-textColor hover:cursor-pointer" />
+            <VscChecklist className="h-6 w-6 text-secondText hover:cursor-pointer" />
           </div>
           <div className="flex gap-2 items-center">
+            <Input
+              placeholder="Enter an item name .."
+              size="lg"
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+            />
             <Select label="Sort By" size="lg">
               <Option onClick={() => setSelectedSort("popular")}>
                 Popularity
@@ -100,7 +120,7 @@ function Products() {
             <div>
               <Button
                 onClick={() => {
-                  filterHandler();
+                  sortHandler();
                 }}
                 size="lg"
                 className="capitalize tracking-wider bg-primaryColor text-lightText "
@@ -110,7 +130,7 @@ function Products() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-16 xl:gap-0 xl:flex xl:flex-row w-11/12 xl:flex-wrap xl:justify-between xl:gap-y-12">
+        <div className="flex flex-col gap-16 xl:gap-0 xl:flex xl:flex-row w-11/12 xl:flex-wrap xl:pt-5 xl:justify-between xl:gap-y-12">
           {sortedProducts?.map((item, i) => (
             <div
               key={i}
@@ -118,7 +138,7 @@ function Products() {
             >
               <Link to="/shop/product">
                 <img
-                  className="w-[100%]"
+                  className="w-[100%] "
                   src={item.images[0].url}
                   alt="Product 1"
                 />

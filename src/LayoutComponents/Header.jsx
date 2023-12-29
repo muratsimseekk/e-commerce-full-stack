@@ -58,7 +58,6 @@ function Header() {
   let arrKadin = [];
   let arrErkek = [];
   for (let i = 0; i < categories.length; i++) {
-    // console.log("Categories", categories[i].code);
     const gender = categories[i].code.split(":")[0];
 
     const category = categories[i];
@@ -246,8 +245,9 @@ function Header() {
                   className="rounded-full block xl:hidden w-10 h-10"
                 />
               )}
+
               <FontAwesomeIcon
-                className="xl:h-4 xl:w-4 h-5 w-5"
+                className="xl:h-4 xl:w-4 h-5 w-5 "
                 icon={faMagnifyingGlass}
               />
               <div className="flex gap-1 items-center">
