@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderContent from "./About/headerContent";
+import HeaderContent from "./About/HeaderContent";
 import VideoSection from "./About/VideoSection";
 import TeamSection from "./About/TeamSection";
 import Companies from "./About/Companies";
