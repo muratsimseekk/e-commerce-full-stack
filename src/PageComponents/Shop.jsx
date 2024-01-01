@@ -9,19 +9,6 @@ import { toast } from "react-toastify";
 import { AxiosInstance } from "../api/api";
 
 function Shop() {
-  const dispatch = useDispatch();
-  const fetchingProducts = async () => {
-    try {
-      const response = await AxiosInstance.get("/products");
-      dispatch(productFetch(response.data.products));
-    } catch (err) {
-      toast.error("An error occurred while fetching products");
-    }
-  };
-
-  useEffect(() => {
-    fetchingProducts();
-  }, []);
   return (
     <>
       <Routes>

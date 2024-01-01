@@ -25,74 +25,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 function Products() {
-  const [loading, setLoading] = useState(false);
-
-  const [selectedSort, setSelectedSort] = useState("popular");
-
-  const url = useParams();
-
-  const ace = url["*"].replace("/", ":");
-  console.log("ace", ace);
-
-  const [categorySort, setCategorySort] = useState("");
-
-  console.log("category id ", categorySort?.id);
-
-  const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState();
+  const [searchValue, setSearchValue] = useState();
+  const [sorted, setSorted] = useState("");
 
-  const categories = useSelector((state) => state.general.categories);
-  const products = useSelector((state) => state.product.productList);
-  console.log("products state redux", products);
-  const [sortedProducts, setSortedProducts] = useState(products);
-  console.log("sorted Products", sortedProducts);
-
-  useEffect(() => {
-    const categoryID = categories.find((item) => item.code === ace);
-    setCategorySort(categoryID);
-  }, [ace]);
-
-  useEffect(() => {
-    AxiosInstance.get(`products/?category=${categorySort?.id}`).then((res) =>
-      setSortedProducts(res.data.products)
-    );
-  }, [categorySort]);
-
-  console.log("filtre search", searchValue);
-  const sortHandler = async () => {
-    if (selectedSort === "popular") {
-      await AxiosInstance.get("/products").then((reps) => {
-        dispatch(productFetch(reps.data.products));
-      });
-    } else if (selectedSort === "highRating") {
-      AxiosInstance.get("/products/?sort=rating:desc").then((res) => {
-        dispatch(productFetch(res.data.products));
-      });
-    } else if (selectedSort === "lowRating") {
-      AxiosInstance.get("/products/?sort=rating:asc").then((resp) => {
-        dispatch(productFetch(resp.data.products));
-      });
-    } else if (selectedSort === "low") {
-      AxiosInstance.get("/products/?sort=price:asc").then((res) => {
-        dispatch(productFetch(res.data.products));
-      });
-    } else if (selectedSort === "high") {
-      AxiosInstance.get("/products/?sort=price:desc").then((resp) => {
-        dispatch(productFetch(resp.data.products));
-      });
-    }
-    console.log("searchValue:", searchValue);
-    console.log("trimmed searchValue:", searchValue.trim());
-
-    if (searchValue.trim() !== "") {
-      console.log("tiklandi");
-      AxiosInstance.get(`/products/?filter=${searchValue}`).then((resp) => {
-        dispatch(productFetch(resp.data.products));
-      });
-    } else {
-      console.log("Condition not met");
+  const fetchingProducts = async () => {
+    setLoading(true);
+    try {
+      const response = await AxiosInstance.get(`/products`);
+      dispatch(productFetch());
+    } catch (err) {
+      toast.error("An error occurred while fetching products");
+    } finally {
+      setLoading(false);
     }
   };
+  useEffect(() => {
+    fetchingProducts();
+  }, []);
+
+  //SORT Codes
+  const sortHandler = (e) => {
+    setSorted(e);
+  };
+
+  const sendSort = () => {
+    dispatch(productFetch({ sort: sorted, filter: searchValue }));
+  };
+
+  const products = useSelector((state) => state.product.productList);
 
   return loading ? (
     <div className="flex justify-center">
@@ -119,35 +81,16 @@ function Products() {
                 setSearchValue(e.target.value);
               }}
             />
-            <Select label="Sort By" size="lg">
-              <Option onClick={() => setSelectedSort("popular")}>
-                Popularity
-              </Option>
-              <Option
-                onClick={() => {
-                  setSelectedSort("lowRating");
-                }}
-              >
-                Rating Low-High
-              </Option>
-              <Option
-                onClick={() => {
-                  setSelectedSort("highRating");
-                }}
-              >
-                Rating High-Low
-              </Option>
-              <Option onClick={() => setSelectedSort("low")}>
-                Price Low-High
-              </Option>
-              <Option onClick={() => setSelectedSort("high")}>
-                Price High-Low
-              </Option>
+            <Select label="Sort By" size="lg" onChange={sortHandler}>
+              <Option value="rating:asc">Popularity Low-High</Option>
+              <Option value="rating:desc">Popularity High-Low</Option>
+              <Option value="price:asc">Price Low-High</Option>
+              <Option value="price:desc">Price High-Low</Option>
             </Select>
             <div>
               <Button
                 onClick={() => {
-                  sortHandler();
+                  sendSort();
                 }}
                 size="lg"
                 className="capitalize tracking-wider bg-primaryColor text-lightText "

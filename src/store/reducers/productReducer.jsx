@@ -1,4 +1,4 @@
-import { PRODUCT_FETCH } from "../actions/thunkAction";
+import { PRODUCT_FETCH, SET_PRODUCT_LIST } from "../actions/thunkAction";
 
 const initialProductValues = {
   productList: [],
@@ -11,6 +11,8 @@ const initialProductValues = {
 export const productReducer = (state = initialProductValues, action) => {
   switch (action.type) {
     case PRODUCT_FETCH:
+      return { ...state, productList: action.payload };
+    case SET_PRODUCT_LIST:
       return { ...state, productList: action.payload };
     default:
       return state;
