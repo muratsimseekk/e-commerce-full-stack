@@ -14,10 +14,8 @@ export const setProductList = (products) => {
 
 export const productFetch = (params = {}) => {
   return (dispatch) => {
-    console.log("Dispatching productFetch action");
     AxiosInstance.get("/products", { params: params })
       .then((res) => {
-        console.log("API response:", res);
         dispatch(setProductList(res.data.products));
       })
       .catch((err) => {

@@ -26,14 +26,40 @@ import { toast } from "react-toastify";
 
 function Products() {
   const dispatch = useDispatch();
+  const productList = useSelector((state) => state.product.productList);
+  const categories = useSelector((state) => state.general.categories);
+  console.log(productList);
   const [loading, setLoading] = useState();
   const [searchValue, setSearchValue] = useState();
   const [sorted, setSorted] = useState("");
 
+  const urlParam = useParams();
+  const parametre = urlParam["*"].replace("/", ":");
+
+  // const ace = url["*"].replace("/", ":");
+  // console.log("ace", ace);
+
+  // const [categorySort, setCategorySort] = useState("");
+
+  // console.log("category id ", categorySort?.id);
+  // const categories = useSelector((state) => state.general.categories);
+  // useEffect(() => {
+  //   const categoryID = categories.find((item) => item.code === ace);
+  //   setCategorySort(categoryID);
+  //   AxiosInstance.get(`products/?category=${categorySort?.id}`).then((res) =>
+  //     dispatch(productFetch(res.data.products))
+  //   );
+  // }, [ace]);
+  console.log("urlParam", parametre);
+
+  useEffect(() => {
+    const categoryID = categories.find((item) => item.code === parametre);
+    dispatch(productFetch({ category: categoryID?.id }));
+  }, [parametre]);
+
   const fetchingProducts = async () => {
     setLoading(true);
     try {
-      const response = await AxiosInstance.get(`/products`);
       dispatch(productFetch());
     } catch (err) {
       toast.error("An error occurred while fetching products");
@@ -51,7 +77,15 @@ function Products() {
   };
 
   const sendSort = () => {
-    dispatch(productFetch({ sort: sorted, filter: searchValue }));
+    const categoryID = categories.find((item) => item.code === parametre);
+
+    dispatch(
+      productFetch({
+        sort: sorted,
+        filter: searchValue,
+        category: categoryID?.id,
+      })
+    );
   };
 
   const products = useSelector((state) => state.product.productList);
