@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Category from "./Shop/Category";
 import Products from "./Shop/Products";
 import { Route, Routes } from "react-router-dom";
 import ProductPage from "./Shop/ProductPage";
-import { productFetch } from "../store/actions/thunkAction";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { AxiosInstance } from "../api/api";
 
 function Shop() {
   return (
@@ -21,7 +17,7 @@ function Shop() {
             </>
           }
         />
-        <Route path="/product" element={<ProductPage />} />
+        <Route path="/category/*" element={<ProductPage />} />
       </Routes>
     </>
   );

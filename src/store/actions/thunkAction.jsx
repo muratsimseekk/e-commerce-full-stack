@@ -13,10 +13,17 @@ export const setProductList = (products) => {
 };
 
 export const productFetch = (params = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     AxiosInstance.get("/products", { params: params })
       .then((res) => {
-        dispatch(setProductList(res.data.products));
+        if (params.sort || params.filter || params.category) {
+          dispatch(setProductList(res.data.products));
+        } else {
+          const currentProductList = getState().product.productList;
+          const newProductList = res.data.products;
+          const updatedProductList = [...currentProductList, ...newProductList];
+          dispatch(setProductList(updatedProductList));
+        }
       })
       .catch((err) => {
         console.error("Error occurs while fetching:", err);

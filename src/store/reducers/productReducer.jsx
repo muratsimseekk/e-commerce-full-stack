@@ -3,7 +3,7 @@ import { PRODUCT_FETCH, SET_PRODUCT_LIST } from "../actions/thunkAction";
 const initialProductValues = {
   productList: [],
   totalProductCount: 0,
-  pageCoount: 0,
+  pageCount: 0,
   activePage: 0,
   fetchState: "NOT_FETCHED",
 };

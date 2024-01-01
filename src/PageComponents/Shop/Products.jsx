@@ -26,50 +26,52 @@ import { toast } from "react-toastify";
 
 function Products() {
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.product.productList);
   const categories = useSelector((state) => state.general.categories);
-  console.log(productList);
   const [loading, setLoading] = useState();
   const [searchValue, setSearchValue] = useState();
   const [sorted, setSorted] = useState("");
 
+  const [page, setPage] = useState(0);
   const urlParam = useParams();
   const parametre = urlParam["*"].replace("/", ":");
-
-  // const ace = url["*"].replace("/", ":");
-  // console.log("ace", ace);
-
-  // const [categorySort, setCategorySort] = useState("");
-
-  // console.log("category id ", categorySort?.id);
-  // const categories = useSelector((state) => state.general.categories);
-  // useEffect(() => {
-  //   const categoryID = categories.find((item) => item.code === ace);
-  //   setCategorySort(categoryID);
-  //   AxiosInstance.get(`products/?category=${categorySort?.id}`).then((res) =>
-  //     dispatch(productFetch(res.data.products))
-  //   );
-  // }, [ace]);
-  console.log("urlParam", parametre);
 
   useEffect(() => {
     const categoryID = categories.find((item) => item.code === parametre);
     dispatch(productFetch({ category: categoryID?.id }));
   }, [parametre]);
 
-  const fetchingProducts = async () => {
-    setLoading(true);
-    try {
-      dispatch(productFetch());
-    } catch (err) {
-      toast.error("An error occurred while fetching products");
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
-    fetchingProducts();
-  }, []);
+    const fetchingProducts = async () => {
+      setLoading(true);
+      try {
+        dispatch(productFetch({ offset: page * 25 }));
+      } catch (err) {
+        toast.error("An error occurred while fetching products");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (page > 0) {
+      fetchingProducts();
+    }
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    const handleScroll = (e) => {
+      const scrollHeight = e.target.documentElement.scrollHeight;
+      const currentHeight =
+        e.target.documentElement.scrollTop + window.innerHeight;
+      if (currentHeight + 1 >= scrollHeight) {
+        setPage((prev) => prev + 1);
+
+        dispatch(productFetch({ offset: page * 25, sort: sorted }));
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [page]);
 
   //SORT Codes
   const sortHandler = (e) => {
@@ -78,7 +80,6 @@ function Products() {
 
   const sendSort = () => {
     const categoryID = categories.find((item) => item.code === parametre);
-
     dispatch(
       productFetch({
         sort: sorted,
@@ -140,7 +141,7 @@ function Products() {
               key={i}
               className=" xl:w-[23%] flex flex-col text-center justify-between xl:gap-6 gap-8 "
             >
-              <Link to="/shop/product">
+              <Link to={`/shop/category/${item.id}/${item.name}`}>
                 <img
                   className="w-[100%] "
                   src={item.images[0].url}
@@ -167,23 +168,7 @@ function Products() {
             </div>
           ))}
         </div>
-        <div className=" bg-white border border-zinc rounded-md mt-8">
-          <button className="text-sm border border-zinc bg-zinc100 py-6 px-6 text-mutedColor hover:cursor-pointer rounded-l-md ">
-            First
-          </button>
-          <button className="text-sm border border-zinc text-primaryColor py-6 px-6  hover:cursor-pointer  ">
-            1
-          </button>
-          <button className="text-sm border border-zinc py-6 px-6 text-lightText bg-primaryColor hover:cursor-pointer  ">
-            2
-          </button>
-          <button className="text-sm border border-zinc py-6 px-6 text-primaryColor hover:cursor-pointer  ">
-            3
-          </button>
-          <button className="text-sm border border-zinc py-6 px-6 text-primaryColor hover:cursor-pointer rounded-r-md ">
-            Next
-          </button>
-        </div>
+
         <div className="w-full  flex justify-center bg-lightGray">
           <div className="w-[85%] py-6 pb-8 flex flex-col items-center gap-8 xl:flex xl:flex-row xl:justify-between xl:items-center  text-secondText">
             <FontAwesomeIcon
