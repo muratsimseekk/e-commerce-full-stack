@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +8,6 @@ import { AxiosInstance } from "../../api/api";
 function Category() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // let { gender, category } = useParams();
-  // console.log(gender, category);
 
   const fetchProcess = async () => {
     try {
@@ -24,7 +22,6 @@ function Category() {
   useEffect(() => {
     fetchProcess();
   }, []);
-
   const categories = useSelector((state) => state.general.categories);
 
   const sorted = categories.sort((a, b) => b.rating - a.rating);

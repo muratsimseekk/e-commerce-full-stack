@@ -18,7 +18,7 @@ import {
   faRedditAlien,
   faStripe,
 } from "@fortawesome/free-brands-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../api/api";
 import { productFetch } from "../../store/actions/thunkAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,8 +29,16 @@ function Products() {
 
   const [selectedSort, setSelectedSort] = useState("popular");
 
+  const url = useParams();
+
+  const ace = url["*"].replace("/", ":");
+  console.log("ace", ace);
+
+  const [categorySort, setCategorySort] = useState("");
+
+  console.log("category id ", categorySort?.id);
+
   const [searchValue, setSearchValue] = useState("");
-  console.log("aranan filtre degeri", searchValue);
   const dispatch = useDispatch();
 
   const fetchingProducts = async () => {
@@ -51,27 +59,48 @@ function Products() {
 
   const products = useSelector((state) => state.product.productList);
 
+  const categories = useSelector((state) => state.general.categories);
+
+  useEffect(() => {
+    const categoryID = categories.find((item) => item.code === ace);
+    setCategorySort(categoryID);
+  }, [ace]);
+
   const [sortedProducts, setSortedProducts] = useState(products);
-  console.log("Sorted Products", sortedProducts);
-  const sortHandler = () => {
-    if (selectedSort == "popular") {
-      setSortedProducts(products);
-    } else if (selectedSort == "new") {
-      const newSort = [...products].sort((a, b) => a.sell_count - b.sell_count);
+  console.log("filtre search", searchValue);
+  const sortHandler = async () => {
+    if (selectedSort === "popular") {
+      AxiosInstance.get("/products").then((reps) => {
+        setSortedProducts(reps.data.products);
+      });
+    } else if (selectedSort === "highRating") {
+      AxiosInstance.get("/products/?sort=rating:desc").then((res) => {
+        setSortedProducts(res.data.products);
+      });
+    } else if (selectedSort === "lowRating") {
+      AxiosInstance.get("/products/?sort=rating:asc").then((resp) => {
+        setSortedProducts(resp.data.products);
+      });
+    } else if (selectedSort === "low") {
+      AxiosInstance.get("/products/?sort=price:asc").then((res) => {
+        setSortedProducts(res.data.products);
+      });
+    } else if (selectedSort === "high") {
+      AxiosInstance.get("/products/?sort=price:desc").then((resp) => {
+        setSortedProducts(resp.data.products);
+      });
+    }
+    console.log("searchValue:", searchValue);
+    console.log("trimmed searchValue:", searchValue.trim());
 
-      setSortedProducts(newSort);
-    } else if (selectedSort == "low") {
-      const lowSort = [...products].sort((a, b) => a.price - b.price);
-
-      setSortedProducts(lowSort);
-    } else if (selectedSort == "high") {
-      const highSort = [...products].sort((a, b) => b.price - a.price);
-      setSortedProducts(highSort);
-    } else if (searchValue) {
-      const searchSort = [...products].filter((item) =>
-        item.description.toLowerCase().includes(searchValue.toLowerCase())
-      );
-      setSortedProducts(searchSort);
+    if (searchValue.trim() !== "") {
+      console.log("tiklandi");
+      AxiosInstance.get(`/products/?filter=${searchValue}`).then((resp) => {
+        setSortedProducts(resp.data.products);
+      });
+      // Rest of the code...
+    } else {
+      console.log("Condition not met");
     }
   };
 
@@ -84,7 +113,8 @@ function Products() {
       <div className="flex flex-col w-full items-center gap-12">
         <div className="w-11/12 flex flex-col gap-10 items-center  xl:flex xl:flex-row xl:justify-between xl:items-center">
           <h2 className=" text-secondText text-base font-medium">
-            Showing all 12 results
+            Showing all <span className="font-semibold">{products.length}</span>{" "}
+            results
           </h2>
           <div className="flex items-center gap-7  font-semibold text-lg p-2">
             <h3 className="text-secondText">Views :</h3>
@@ -105,10 +135,17 @@ function Products() {
               </Option>
               <Option
                 onClick={() => {
-                  setSelectedSort("new");
+                  setSelectedSort("lowRating");
                 }}
               >
-                Newest
+                Rating Low-High
+              </Option>
+              <Option
+                onClick={() => {
+                  setSelectedSort("highRating");
+                }}
+              >
+                Rating High-Low
               </Option>
               <Option onClick={() => setSelectedSort("low")}>
                 Price Low-High

@@ -25,4 +25,4 @@ function Shop() {
 
 export default Shop;
 
-// path="/:gender/:category"
+// path = "/:gender/:category";
