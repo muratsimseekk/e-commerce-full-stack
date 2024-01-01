@@ -41,53 +41,44 @@ function Products() {
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
 
-  const fetchingProducts = async () => {
-    setLoading(true);
-    try {
-      await AxiosInstance.get("/products").then((res) => {
-        dispatch(productFetch(res.data.products));
-      });
-    } catch (err) {
-      toast.error("An error occurs while fetching products");
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    fetchingProducts();
-  }, []);
-
-  const products = useSelector((state) => state.product.productList);
-
   const categories = useSelector((state) => state.general.categories);
+  const products = useSelector((state) => state.product.productList);
+  console.log("products state redux", products);
+  const [sortedProducts, setSortedProducts] = useState(products);
+  console.log("sorted Products", sortedProducts);
 
   useEffect(() => {
     const categoryID = categories.find((item) => item.code === ace);
     setCategorySort(categoryID);
   }, [ace]);
 
-  const [sortedProducts, setSortedProducts] = useState(products);
+  useEffect(() => {
+    AxiosInstance.get(`products/?category=${categorySort?.id}`).then((res) =>
+      setSortedProducts(res.data.products)
+    );
+  }, [categorySort]);
+
   console.log("filtre search", searchValue);
   const sortHandler = async () => {
     if (selectedSort === "popular") {
-      AxiosInstance.get("/products").then((reps) => {
-        setSortedProducts(reps.data.products);
+      await AxiosInstance.get("/products").then((reps) => {
+        dispatch(productFetch(reps.data.products));
       });
     } else if (selectedSort === "highRating") {
       AxiosInstance.get("/products/?sort=rating:desc").then((res) => {
-        setSortedProducts(res.data.products);
+        dispatch(productFetch(res.data.products));
       });
     } else if (selectedSort === "lowRating") {
       AxiosInstance.get("/products/?sort=rating:asc").then((resp) => {
-        setSortedProducts(resp.data.products);
+        dispatch(productFetch(resp.data.products));
       });
     } else if (selectedSort === "low") {
       AxiosInstance.get("/products/?sort=price:asc").then((res) => {
-        setSortedProducts(res.data.products);
+        dispatch(productFetch(res.data.products));
       });
     } else if (selectedSort === "high") {
       AxiosInstance.get("/products/?sort=price:desc").then((resp) => {
-        setSortedProducts(resp.data.products);
+        dispatch(productFetch(resp.data.products));
       });
     }
     console.log("searchValue:", searchValue);
@@ -96,9 +87,8 @@ function Products() {
     if (searchValue.trim() !== "") {
       console.log("tiklandi");
       AxiosInstance.get(`/products/?filter=${searchValue}`).then((resp) => {
-        setSortedProducts(resp.data.products);
+        dispatch(productFetch(resp.data.products));
       });
-      // Rest of the code...
     } else {
       console.log("Condition not met");
     }
@@ -113,8 +103,8 @@ function Products() {
       <div className="flex flex-col w-full items-center gap-12">
         <div className="w-11/12 flex flex-col gap-10 items-center  xl:flex xl:flex-row xl:justify-between xl:items-center">
           <h2 className=" text-secondText text-base font-medium">
-            Showing all <span className="font-semibold">{products.length}</span>{" "}
-            results
+            Showing all{" "}
+            <span className="font-semibold">{products?.length}</span> results
           </h2>
           <div className="flex items-center gap-7  font-semibold text-lg p-2">
             <h3 className="text-secondText">Views :</h3>
@@ -168,7 +158,7 @@ function Products() {
           </div>
         </div>
         <div className="flex flex-col gap-16 xl:gap-0 xl:flex xl:flex-row w-11/12 xl:flex-wrap xl:pt-5 xl:justify-between xl:gap-y-12">
-          {sortedProducts?.map((item, i) => (
+          {products?.map((item, i) => (
             <div
               key={i}
               className=" xl:w-[23%] flex flex-col text-center justify-between xl:gap-6 gap-8 "
