@@ -13,13 +13,16 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import { FaRegStar } from "react-icons/fa6";
 import { Button, Carousel } from "@material-tailwind/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addShoppingCard } from "../../../store/actions/shoppingAction";
 function ProductHeader() {
   const param = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const paramID = param["*"].split("/")[0];
   console.log("param", paramID);
+
   const products = useSelector((state) => state.product.productList);
 
   const pageProduct = products.filter((item) => item.id == paramID)[0];
@@ -31,6 +34,11 @@ function ProductHeader() {
   const backHandler = () => {
     navigate(-1);
   };
+
+  const addCartHandler = () => {
+    dispatch(addShoppingCard(pageProduct));
+  };
+
   return (
     <div className="w-full flex justify-center  text-teal-50">
       <div className="w-4/5 flex max-h-max flex-col ">
@@ -134,10 +142,13 @@ function ProductHeader() {
                 Select Options
               </Button>
               <div className="h-11 w-11 border rounded-full flex justify-center items-center bg-white">
-                <IoIosHeartEmpty className="h-6 w-6 text-textColor" />
+                <IoIosHeartEmpty className="h-6 w-6 text-textColor " />
               </div>
               <div className="h-11 w-11 border rounded-full flex justify-center items-center bg-white">
-                <AiOutlineShoppingCart className="h-6 w-6 text-textColor" />
+                <AiOutlineShoppingCart
+                  onClick={() => addCartHandler()}
+                  className="h-6 w-6 text-textColor  hover:cursor-pointer"
+                />
               </div>
               <div className="h-11 w-11 border rounded-full flex justify-center items-center bg-white">
                 <IoEye className="h-6 w-6 text-textColor" />

@@ -42,10 +42,10 @@ function Category() {
           </div>
         </div>
 
-        <div className="w-full flex flex-col xl:flex xl:flex-row xl:flex-wrap bg-lightGray xl:justify-between gap-y-4 pb-12">
+        <div className="w-full flex flex-col xl:flex  xl:flex-row xl:flex-wrap bg-lightGray xl:justify-between gap-y-4 pb-12">
           {firstFive?.map((item) => (
             <div
-              className="xl:w-[17%] relative bg-black hover:cursor-pointer"
+              className="xl:w-[17%]  relative bg-black hover:cursor-pointer"
               key={item.id}
               id={item.id}
               onClick={() => {
@@ -53,7 +53,7 @@ function Category() {
               }}
             >
               <img
-                className="w-full h-full object-cover  opacity-70 hover:opacity-90"
+                className="w-full h-full object-cover  z-20 opacity-70 hover:opacity-90"
                 src={item.img}
               />
               <div className="flex flex-col gap-2 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lightText">

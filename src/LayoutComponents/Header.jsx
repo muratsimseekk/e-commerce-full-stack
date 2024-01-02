@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -28,6 +28,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOutChange } from "../store/actions/globalAction";
 
 function Header() {
+  const [cartProducts, setCartProducts] = useState([]);
+  const navigate = useNavigate();
   const userNavLog = useSelector((state) => state.general.roles.loggedIn);
 
   const userGravatar = useSelector((state) => state.general.roles.photo);
@@ -42,7 +44,37 @@ function Header() {
   const [womanMenu, setWomenMenu] = useState(false);
   const [manMenu, setManMenu] = useState(false);
 
-  const navigate = useNavigate();
+  const [cartMenu, setCartMenu] = useState(false);
+
+  const shopCardProducts = useSelector((state) => state.shopping.cart);
+
+  console.log("shopping card items", shopCardProducts);
+
+  const productList = useSelector((state) => state.product.productList);
+
+  // let totalProduct = 0;
+  // shopCardProducts.forEach((item) => item.count + totalProduct);
+  // console.log("total product", totalProduct);
+
+  useEffect(() => {
+    const updatedCartProducts = shopCardProducts.map((cartItem) => {
+      const matchingProduct = productList.find(
+        (product) => product.id === cartItem.product.id
+      );
+
+      if (matchingProduct) {
+        return {
+          ...cartItem,
+          product: matchingProduct,
+        };
+      }
+      return cartItem;
+    });
+
+    setCartProducts(updatedCartProducts);
+  }, [shopCardProducts, productList]);
+
+  console.log("Updated cartProducts", cartProducts);
 
   const userNav = useSelector((state) => state.general.roles);
 
@@ -68,8 +100,6 @@ function Header() {
       arrErkek.push(category);
     }
   }
-
-  // console.log("Kadin kategorileri", arrKadin, "Erkek Kategorileri", arrErkek);
 
   return (
     <div className="w-full h-[40vh] xl:h-full xl:block flex flex-col justify-around">
@@ -250,13 +280,70 @@ function Header() {
                 className="xl:h-4 xl:w-4 h-5 w-5 "
                 icon={faMagnifyingGlass}
               />
-              <div className="flex gap-1 items-center">
-                <FontAwesomeIcon
-                  className="xl:h-4 xl:w-4 h-5 w-5"
-                  icon={faCartShopping}
-                />
-                <p className="xl:block hidden">1</p>
-              </div>
+              {!cartMenu && (
+                <div className="flex gap-1 items-center">
+                  <FontAwesomeIcon
+                    className="xl:h-4 xl:w-4 h-5 w-5 hover:cursor-pointer"
+                    icon={faCartShopping}
+                    onClick={() => setCartMenu(true)}
+                  />
+                  <p className="xl:block hidden">{shopCardProducts.length}</p>
+                </div>
+              )}
+              {cartMenu && (
+                <div className="flex gap-1 items-center">
+                  <FontAwesomeIcon
+                    className="xl:h-6 xl:w-6 text-orange-200  h-5 w-5  hover:cursor-pointer"
+                    icon={faCartShopping}
+                    onClick={() => setCartMenu(false)}
+                  />
+                  <p className="xl:block hidden  xl:font-bold">
+                    {shopCardProducts.length}
+                  </p>
+                </div>
+              )}
+
+              {cartMenu && (
+                <div className="absolute bg-orange-400 h-[300px] flex flex-col gap-2 justify-between rounded-lg z-50 w-11/12 right-0 top-10">
+                  <div className="flex gap-2 py-2 pl-3 bg-red-100 h-[40px] text-darkBg">
+                    <h2 className="font-medium">Sepetim</h2>
+                    <p className="font-medium">(2 urun)</p>
+                  </div>
+                  <div>
+                    <div className="h-[220px] overflow-auto">
+                      {cartProducts.map((item) => {
+                        return (
+                          <div className="mb-2 ">
+                            <div className="flex ">
+                              <div className="h-24 w-24">
+                                <img
+                                  src={item.product.images[0].url}
+                                  className="w-full h-full object-contain"
+                                />
+                              </div>
+                              <div className="flex flex-col justify-between">
+                                <h2 className="text-darkBg">
+                                  {item.product.name}
+                                </h2>
+                                <div className="flex text-mutedColor font-normal">
+                                  <h3>Adet:</h3>
+                                  <p>{item.count}</p>
+                                </div>
+                                <p>$ {item.product.price}</p>
+                                <div></div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex gap-2 py-2 pl-3 h-[40px] bg-red-100  text-darkBg">
+                    <h2 className="font-medium">Sepetim</h2>
+                    <p className="font-medium">(2 urun)</p>
+                  </div>
+                </div>
+              )}
               <div className="flex gap-1 items-center">
                 <FontAwesomeIcon
                   className="xl:h-4 xl:w-4 h-5 w-5 xl:block hidden"
@@ -320,9 +407,9 @@ function Header() {
             )}
             {userNavLog === true ? (
               <div className="xl:flex xl:flex-row xl:items-center xl:gap-3  hidden">
-                <img src={userGravatar} className="rounded-full w-10 h-10" />
+                <img src={userGravatar} className="rounded-full w-8 h-8" />
 
-                <p className="text-lg text-darkBg font-medium">
+                <p className="text-base text-darkBg font-medium">
                   {userNav.name}
                 </p>
                 <button

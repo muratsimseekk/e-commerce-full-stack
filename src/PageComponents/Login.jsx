@@ -32,6 +32,7 @@ function Login() {
     try {
       await AxiosInstance.post("/login", data).then((res) => {
         setLoginSuccess(true);
+        console.log("res data", res.data);
         toast.success("Succesfully Logged In !");
         localStorageWrite("token", res.data.token);
         const gravatar = getGravatar(res.data.email);
