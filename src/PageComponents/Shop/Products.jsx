@@ -62,7 +62,6 @@ function Products() {
       const scrollHeight = e.target.documentElement.scrollHeight;
       const currentHeight =
         e.target.documentElement.scrollTop + window.innerHeight;
-      console.log(scrollHeight, currentHeight);
       if (currentHeight + 1 >= scrollHeight) {
         setPage((prev) => prev + 1);
         dispatch(productFetch({ offset: page * 25, sort: sorted }));

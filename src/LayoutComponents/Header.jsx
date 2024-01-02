@@ -26,9 +26,11 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutChange } from "../store/actions/globalAction";
+import { Button } from "@material-tailwind/react";
 
 function Header() {
   const [cartProducts, setCartProducts] = useState([]);
+  const [totalProduct, setTotalProduct] = useState(0);
   const navigate = useNavigate();
   const userNavLog = useSelector((state) => state.general.roles.loggedIn);
 
@@ -52,9 +54,10 @@ function Header() {
 
   const productList = useSelector((state) => state.product.productList);
 
-  // let totalProduct = 0;
-  // shopCardProducts.forEach((item) => item.count + totalProduct);
-  // console.log("total product", totalProduct);
+  // for (let i = 0; i < shopCardProducts.length; i++) {
+  //   setTotalProduct(shopCardProducts[i].count + totalProduct);
+  //   console.log("count", shopCardProducts[i].count);
+  // }
 
   useEffect(() => {
     const updatedCartProducts = shopCardProducts.map((cartItem) => {
@@ -70,12 +73,15 @@ function Header() {
       }
       return cartItem;
     });
+    setTotalProduct((prev) =>
+      shopCardProducts.reduce((total, item) => total + item.count, 0)
+    );
 
     setCartProducts(updatedCartProducts);
   }, [shopCardProducts, productList]);
 
   console.log("Updated cartProducts", cartProducts);
-
+  console.log("total product", totalProduct);
   const userNav = useSelector((state) => state.general.roles);
 
   const logOutHandler = (e) => {
@@ -287,27 +293,29 @@ function Header() {
                     icon={faCartShopping}
                     onClick={() => setCartMenu(true)}
                   />
-                  <p className="xl:block hidden">{shopCardProducts.length}</p>
+                  <p className="xl:block hidden">{totalProduct}</p>
                 </div>
               )}
               {cartMenu && (
                 <div className="flex gap-1 items-center">
                   <FontAwesomeIcon
-                    className="xl:h-6 xl:w-6 text-orange-200  h-5 w-5  hover:cursor-pointer"
+                    className="xl:h-6 xl:w-6 text-[#424D76]  h-5 w-5  hover:cursor-pointer"
                     icon={faCartShopping}
                     onClick={() => setCartMenu(false)}
                   />
                   <p className="xl:block hidden  xl:font-bold">
-                    {shopCardProducts.length}
+                    {totalProduct}
                   </p>
                 </div>
               )}
 
               {cartMenu && (
-                <div className="absolute bg-orange-400 h-[300px] flex flex-col gap-2 justify-between rounded-lg z-50 w-11/12 right-0 top-10">
-                  <div className="flex gap-2 py-2 pl-3 bg-red-100 h-[40px] text-darkBg">
-                    <h2 className="font-medium">Sepetim</h2>
-                    <p className="font-medium">(2 urun)</p>
+                <div className="absolute bg-[#D8DCE9] h-[330px] flex flex-col gap-2 justify-between rounded-lg z-50 w-11/12 right-0 top-10">
+                  <div className="flex gap-2 py-2 pl-3 bg-[#424D76] h-[40px] text-darkBg">
+                    <h2 className="font-medium text-white">Sepetim</h2>
+                    <p className="font-medium text-white">
+                      ({totalProduct} urun)
+                    </p>
                   </div>
                   <div>
                     <div className="h-[220px] overflow-auto">
@@ -338,9 +346,13 @@ function Header() {
                       })}
                     </div>
                   </div>
-                  <div className="flex gap-2 py-2 pl-3 h-[40px] bg-red-100  text-darkBg">
-                    <h2 className="font-medium">Sepetim</h2>
-                    <p className="font-medium">(2 urun)</p>
+                  <div className="flex gap-2 py-2 pl-3 h-[70px] bg-[#424D76]  text-darkBg">
+                    <Button className="bg-primaryColor text-white">
+                      Sepete Git
+                    </Button>
+                    <Button className="bg-primaryColor text-white">
+                      Siparisi Tamamla
+                    </Button>
                   </div>
                 </div>
               )}
