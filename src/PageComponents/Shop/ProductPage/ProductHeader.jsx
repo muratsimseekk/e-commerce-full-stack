@@ -21,7 +21,6 @@ function ProductHeader() {
   const dispatch = useDispatch();
 
   const paramID = param["*"].split("/")[0];
-  console.log("param", paramID);
 
   const products = useSelector((state) => state.product.productList);
 

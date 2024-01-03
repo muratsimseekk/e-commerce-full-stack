@@ -64,6 +64,7 @@ function Products() {
         e.target.documentElement.scrollTop + window.innerHeight;
       if (currentHeight + 1 >= scrollHeight) {
         setPage((prev) => prev + 1);
+
         dispatch(productFetch({ offset: page * 25, sort: sorted }));
       }
     };
@@ -141,11 +142,7 @@ function Products() {
               className=" xl:w-[23%] flex flex-col text-center justify-between xl:gap-6 gap-8 "
             >
               <Link to={`/shop/category/${item.id}/${item.name}`}>
-                <img
-                  className="w-[100%] "
-                  src={item.images[0].url}
-                  alt="Product 1"
-                />
+                <img className="w-[100%] " src={item.images[0].url} />
               </Link>
               <h4 className="text-textColor font-bold tracking-wider">
                 {item.name}

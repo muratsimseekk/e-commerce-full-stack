@@ -24,7 +24,6 @@ function App() {
   const navigate = useNavigate();
   const hasToken = localStorage.getItem("token");
 
-  // console.log("localde token var mi ?", hasToken);
   const getGravatar = (email) => {
     return gravatar.url(email, { s: "100", r: "x", d: "monsterid" }, true);
   };
