@@ -140,13 +140,13 @@ function ProductHeader() {
               <Button className="font-semibold font-montserrat capitalize tracking-tight xl:tracking-wider text-sm xl:text-base bg-primaryColor text-lightText">
                 Select Options
               </Button>
-              <div className="h-11 w-11 border rounded-full flex justify-center items-center bg-white">
-                <IoIosHeartEmpty className="h-6 w-6 text-textColor " />
+              <div className="h-11 w-11 border rounded-full flex justify-center hover:bg-primaryColor hover:text-white hover:cursor-pointer items-center bg-white">
+                <IoIosHeartEmpty className="h-6 w-6 text-textColor hover:text-white" />
               </div>
-              <div className="h-11 w-11 border rounded-full flex justify-center items-center bg-white">
+              <div className="h-11 w-11 border rounded-full hover:bg-primaryColor hover:text-white hover:cursor-pointer  flex justify-center items-center bg-white">
                 <AiOutlineShoppingCart
                   onClick={() => addCartHandler()}
-                  className="h-6 w-6 text-textColor  hover:cursor-pointer"
+                  className="h-6 w-6 text-textColor  hover:text-white"
                 />
               </div>
               <div className="h-11 w-11 border rounded-full flex justify-center items-center bg-white">

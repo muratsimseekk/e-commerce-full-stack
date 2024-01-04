@@ -65,7 +65,9 @@ function ShoppingCart() {
     <div className="w-full flex justify-center   py-20">
       <div className="w-[73%]  flex flex-col gap-5">
         <div className="py-3 ">
-          <h2 className="text-lg font-medium">Sepetim (2 Urun)</h2>
+          <h2 className="text-lg font-medium">
+            Sepetim ({cartProducts.length} Ürün)
+          </h2>
         </div>
         {cartProducts?.map((item, index) => {
           return (
@@ -171,7 +173,7 @@ function ShoppingCart() {
                 {totalPrice.toFixed(2) >= 150 && (
                   <div className="flex justify-between">
                     <h3>
-                      150 TL ve Uzeri <br />
+                      $ 150 ve Uzeri <br />
                       Kargo Bedava{" "}
                     </h3>
                     <p className="text-primaryColor">-$ 29.99</p>
@@ -190,7 +192,7 @@ function ShoppingCart() {
                 <div className="flex justify-between items-center">
                   <h3>Toplam</h3>
                   <p className="font-semibold text-xl text-primaryColor">
-                    $ {Number(totalPrice.toFixed(2)) + Number(29, 99)}
+                    $ {Number(Number(totalPrice) + Number(29, 99)).toFixed(2)}
                   </p>
                 </div>
               )}
@@ -205,7 +207,11 @@ function ShoppingCart() {
             </div>
           </div>
           <div className="flex justify-center">
-            <Button className="w-11/12 bg-primaryColor">Siparisi Onayla</Button>
+            <Link to="/order">
+              <Button className="w-11/12 bg-primaryColor">
+                Siparisi Onayla
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

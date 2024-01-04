@@ -355,9 +355,11 @@ function Header() {
                         Sepete Git
                       </Button>
                     </Link>
-                    <Button className="bg-[#8994BD] text-white">
-                      Siparisi Tamamla
-                    </Button>
+                    <Link to="/order">
+                      <Button className="bg-[#8994BD] text-white">
+                        Siparisi Tamamla
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               )}
