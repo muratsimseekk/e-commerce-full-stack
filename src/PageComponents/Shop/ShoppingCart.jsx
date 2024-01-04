@@ -7,7 +7,11 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 import { Button } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteShoppingCard } from "../../store/actions/shoppingAction";
+import {
+  decrementProduct,
+  deleteShoppingCard,
+  increaseProduct,
+} from "../../store/actions/shoppingAction";
 function ShoppingCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
@@ -87,6 +91,9 @@ function ShoppingCart() {
                     <Button
                       size="sm"
                       className="h-2/5 bg-[#8994BD] text-white rounded-sm"
+                      onClick={() =>
+                        dispatch(decrementProduct(item.product.id))
+                      }
                     >
                       {" "}
                       -{" "}
@@ -98,6 +105,7 @@ function ShoppingCart() {
                     <Button
                       size="sm"
                       className="h-2/5 bg-[#8994BD] text-white rounded-sm"
+                      onClick={() => dispatch(increaseProduct(item.product.id))}
                     >
                       {" "}
                       +{" "}

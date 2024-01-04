@@ -1,6 +1,8 @@
 import {
   ADD_SHOPPING_CARD,
+  DECREMENT_BUTTON,
   DELETE_SHOPPING_CARD,
+  INCREMENT_BUTTON,
 } from "../actions/shoppingAction";
 
 const initialCardValues = {
@@ -44,6 +46,28 @@ export const shopingCardReducer = (state = initialCardValues, action) => {
       return {
         ...state,
         cart: state.cart.filter((item) => item.product.id !== action.payload),
+      };
+    case INCREMENT_BUTTON:
+      return {
+        ...state,
+        cart: state.cart.map((item) => {
+          if (item.product.id === action.payload) {
+            return { ...item, count: item.count + 1 };
+          }
+        }),
+      };
+    case DECREMENT_BUTTON:
+      return {
+        ...state,
+        cart: state.cart.map((item) => {
+          if (item.product.id === action.payload) {
+            if (item.count === 1) {
+              return { ...item, count: 1 };
+            } else {
+              return { ...item, count: item.count - 1 };
+            }
+          }
+        }),
       };
     default:
       return state;
