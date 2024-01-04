@@ -330,27 +330,32 @@ function Header() {
                                 />
                               </div>
                               <div className="flex flex-col justify-between">
-                                <h2 className="text-darkBg">
+                                <h2 className="text-darkBg font-medium tracking-wide">
                                   {item.product.name}
                                 </h2>
-                                <div className="flex text-mutedColor font-normal">
-                                  <h3>Adet:</h3>
+                                <div className="flex text-[#6F7DAE] font-medium">
+                                  <h3 className="tracking-wider">
+                                    Adet:&nbsp;
+                                  </h3>
                                   <p>{item.count}</p>
                                 </div>
-                                <p>$ {item.product.price}</p>
+                                <p className="font-semibold tracking-wider">
+                                  $ {item.product.price}
+                                </p>
                                 <div></div>
                               </div>
                             </div>
+                            <hr className="border mt-2 border-[#424D76]" />
                           </div>
                         );
                       })}
                     </div>
                   </div>
                   <div className="flex gap-2 py-2 pl-3 h-[70px] bg-[#424D76]  text-darkBg">
-                    <Button className="bg-primaryColor text-white">
+                    <Button className="bg-[#0E88CD] text-white">
                       Sepete Git
                     </Button>
-                    <Button className="bg-primaryColor text-white">
+                    <Button className="bg-[#8994BD] text-white">
                       Siparisi Tamamla
                     </Button>
                   </div>
