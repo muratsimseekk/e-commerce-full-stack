@@ -36,33 +36,35 @@ function Products() {
   const urlParam = useParams();
   const parametre = urlParam["*"].replace("/", ":");
 
+  const fetchData = () => {
+    setLoading(true);
+    try {
+      dispatch(
+        productFetch({
+          sort: sorted,
+          filter: searchValue,
+          category: categoryID?.id,
+          offset: page * 25,
+        })
+      );
+      console.log("calisti fetch data");
+    } catch (err) {
+      toast.error("An error occurred while fetching products");
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchData = () => {
-      setLoading(true);
-      try {
-        const categoryID = categories.find((item) => item.code === parametre);
-        dispatch(
-          productFetch({
-            sort: sorted,
-            filter: searchValue,
-            category: categoryID?.id,
-            offset: page * 25,
-          })
-        );
-        console.log("calisti fetch data");
-      } catch (err) {
-        toast.error("An error occurred while fetching products");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // Fetch data only on the initial render
     if (page === 0) {
       fetchData();
     }
-  }, [page]);
+  }, []);
 
+  useEffect(() => {
+    fetchData();
+  }, [parametre]);
+
+  const categoryID = categories.find((item) => item.code === parametre);
   const fetchMoreData = () => {
     setPage((prevPage) => prevPage + 1);
     dispatch(
@@ -79,8 +81,6 @@ function Products() {
     setSorted(e);
   };
 
-  const categoryID = categories.find((item) => item.code === parametre);
-
   const sendSort = () => {
     dispatch(
       productFetch({
@@ -92,7 +92,7 @@ function Products() {
   };
 
   const products = useSelector((state) => state.product.productList);
-
+  console.log("current products", products);
   return loading ? (
     <div className="flex justify-center">
       <Spinner color="blue" className="w-36 h-36 pb-8" />
@@ -141,7 +141,6 @@ function Products() {
           dataLength={products?.length}
           next={fetchMoreData}
           hasMore={true}
-          loader={<h4>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>Yay! You have seen it all</b>

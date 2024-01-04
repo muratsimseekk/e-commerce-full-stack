@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { AxiosInstance } from "../../api/api";
 
 export const CATEG_FETCH = "CATEG_FETCH";
@@ -16,13 +17,13 @@ export const productFetch = (params = {}) => {
   return (dispatch, getState) => {
     AxiosInstance.get("/products", { params: params })
       .then((res) => {
-        if (params.sort || params.filter || params.category) {
-          dispatch(setProductList(res.data.products));
-        } else {
+        if (params.offset) {
           const currentProductList = getState().product.productList;
           const newProductList = res.data.products;
           const updatedProductList = [...currentProductList, ...newProductList];
           dispatch(setProductList(updatedProductList));
+        } else {
+          dispatch(setProductList(res.data.products));
         }
       })
       .catch((err) => {
