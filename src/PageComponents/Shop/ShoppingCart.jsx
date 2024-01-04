@@ -24,18 +24,24 @@ function ShoppingCart() {
   console.log("cart products ", cartProducts);
   useEffect(() => {
     const updatedCartProducts = shopCardProducts.map((cartItem) => {
-      const matchingProduct = productList.find(
-        (product) => product.id === cartItem.product.id
-      );
+      if (cartItem.product) {
+        const matchingProduct = productList.find(
+          (product) => product.id === cartItem.product.id
+        );
 
-      if (matchingProduct) {
-        return {
-          ...cartItem,
-          product: matchingProduct,
-        };
+        if (matchingProduct) {
+          return {
+            ...cartItem,
+            product: matchingProduct,
+          };
+        } else {
+          return cartItem;
+        }
+      } else {
+        return cartItem;
       }
-      return cartItem;
     });
+
     setTotalProduct((prev) =>
       shopCardProducts.reduce((total, item) => total + item.count, 0)
     );
@@ -49,7 +55,7 @@ function ShoppingCart() {
         <div className="py-3 bg-green-200">
           <h2 className="text-lg font-medium">Sepetim (2 Urun)</h2>
         </div>
-        {cartProducts.map((item, index) => {
+        {cartProducts?.map((item, index) => {
           return (
             <div key={index} className="w-full bg-blue-gray-400 rounded-lg">
               {/* <div className="border-b-2"></div> Buraya satici kismi gelecek  */}

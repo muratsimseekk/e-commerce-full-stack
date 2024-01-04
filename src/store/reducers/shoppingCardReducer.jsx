@@ -53,6 +53,8 @@ export const shopingCardReducer = (state = initialCardValues, action) => {
         cart: state.cart.map((item) => {
           if (item.product.id === action.payload) {
             return { ...item, count: item.count + 1 };
+          } else {
+            return item;
           }
         }),
       };
@@ -66,6 +68,8 @@ export const shopingCardReducer = (state = initialCardValues, action) => {
             } else {
               return { ...item, count: item.count - 1 };
             }
+          } else {
+            return item;
           }
         }),
       };

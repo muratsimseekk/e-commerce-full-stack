@@ -59,18 +59,25 @@ function Header() {
 
   useEffect(() => {
     const updatedCartProducts = shopCardProducts.map((cartItem) => {
-      const matchingProduct = productList.find(
-        (product) => product.id === cartItem.product.id
-      );
+      if (cartItem.product) {
+        // Check if cartItem.product is defined
+        const matchingProduct = productList.find(
+          (product) => product.id === cartItem.product.id
+        );
 
-      if (matchingProduct) {
-        return {
-          ...cartItem,
-          product: matchingProduct,
-        };
+        if (matchingProduct) {
+          return {
+            ...cartItem,
+            product: matchingProduct,
+          };
+        } else {
+          return cartItem;
+        }
+      } else {
+        return cartItem;
       }
-      return cartItem;
     });
+
     setTotalProduct((prev) =>
       shopCardProducts.reduce((total, item) => total + item.count, 0)
     );
@@ -317,7 +324,7 @@ function Header() {
                   </div>
                   <div>
                     <div className="h-[220px] overflow-auto">
-                      {cartProducts.map((item) => {
+                      {cartProducts?.map((item) => {
                         return (
                           <div className="mb-2 ">
                             <div className="flex ">
