@@ -12,6 +12,7 @@ import {
   deleteShoppingCard,
   increaseProduct,
 } from "../../store/actions/shoppingAction";
+import { Link, useNavigate } from "react-router-dom";
 function ShoppingCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
@@ -20,7 +21,10 @@ function ShoppingCart() {
 
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
+  const loginState = useSelector((state) => state.general.roles.loggedIn);
+  console.log("login state", loginState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // console.log("shopping card items", shopCardProducts);
 
   const productList = useSelector((state) => state.product.productList);
@@ -60,6 +64,13 @@ function ShoppingCart() {
       )
     );
   }, [totalProduct]);
+  const navigateHandler = () => {
+    if (loginState) {
+      navigate("/order");
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="w-full flex justify-center   py-20">
@@ -206,12 +217,13 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center">
-            <Link to="/order">
-              <Button className="w-11/12 bg-primaryColor">
-                Siparisi Onayla
-              </Button>
-            </Link>
+          <div className="flex justify-center w-full">
+            <Button
+              onClick={() => navigateHandler()}
+              className="w-11/12 bg-primaryColor"
+            >
+              Siparisi Onayla
+            </Button>
           </div>
         </div>
       </div>

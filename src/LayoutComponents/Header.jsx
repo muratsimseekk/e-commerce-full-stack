@@ -308,7 +308,7 @@ function Header() {
               )}
 
               {cartMenu && (
-                <div className="absolute bg-[#D8DCE9] h-[330px] flex flex-col gap-2 justify-between rounded-lg z-50 w-11/12 right-0 top-10">
+                <div className="absolute bg-[#D8DCE9] h-[330px] flex flex-col gap-2 justify-between rounded-lg z-50 w-[320px] right-0 top-10">
                   <div className="flex gap-2 py-2 pl-3 bg-[#424D76] h-[40px] text-darkBg">
                     <h2 className="font-medium text-white">Sepetim</h2>
                     <p className="font-medium text-white">
