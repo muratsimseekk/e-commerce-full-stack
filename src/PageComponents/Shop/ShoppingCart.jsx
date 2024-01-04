@@ -137,9 +137,9 @@ function ShoppingCart() {
       <div className="w-[22%] bg-red-300 flex justify-center">
         <div className="w-5/6 bg-blue-gray-600 h-max py-2 flex flex-col gap-3">
           <div className="flex justify-center">
-            <div className="w-11/12 flex flex-col gap-4 py-2">
+            <div className="w-11/12 flex flex-col gap-4 py-2 border px-2">
               <h2>Siparis Ozeti</h2>
-              <div className="bg-yellow text-sm">
+              <div className="bg-yellow text-sm flex flex-col gap-3 py-2">
                 <div className="flex justify-between">
                   <h3>Urunun Toplami</h3>
                   <p>8.448,99 TL</p>
@@ -163,13 +163,17 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-          <div className="border border-mutedColor rounded-md py-1">
-            <div className="flex items-center justify-center gap-2 hover:cursor-pointer">
-              <AiOutlinePlus className="" />
-              <p className="text-sm tracking-tight">INDIRIM KODU GIR</p>
+          <div className="flex justify-center ">
+            <div className="border border-mutedColor rounded-md py-1 w-11/12">
+              <div className="flex items-center justify-center gap-2 hover:cursor-pointer w-full">
+                <AiOutlinePlus className="" />
+                <p className="text-sm tracking-tight">INDIRIM KODU GIR</p>
+              </div>
             </div>
           </div>
-          <Button className="w-full">Siparisi Onayla</Button>
+          <div className="flex justify-center">
+            <Button className="w-11/12">Siparisi Onayla</Button>
+          </div>
         </div>
       </div>
     </div>
