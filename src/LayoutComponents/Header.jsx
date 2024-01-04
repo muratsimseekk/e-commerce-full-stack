@@ -52,11 +52,6 @@ function Header() {
 
   const productList = useSelector((state) => state.product.productList);
 
-  // for (let i = 0; i < shopCardProducts.length; i++) {
-  //   setTotalProduct(shopCardProducts[i].count + totalProduct);
-  //   console.log("count", shopCardProducts[i].count);
-  // }
-
   useEffect(() => {
     const updatedCartProducts = shopCardProducts.map((cartItem) => {
       if (cartItem.product) {
@@ -85,8 +80,6 @@ function Header() {
     setCartProducts(updatedCartProducts);
   }, [shopCardProducts, productList]);
 
-  console.log("Updated cartProducts", cartProducts);
-  console.log("total product", totalProduct);
   const userNav = useSelector((state) => state.general.roles);
 
   const logOutHandler = (e) => {

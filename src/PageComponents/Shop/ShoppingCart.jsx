@@ -15,13 +15,16 @@ import {
 function ShoppingCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
+
+  const [totalPrice, setTotalPrice] = useState(0);
+
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
   const dispatch = useDispatch();
-  console.log("shopping card items", shopCardProducts);
+  // console.log("shopping card items", shopCardProducts);
 
   const productList = useSelector((state) => state.product.productList);
-  console.log("cart products ", cartProducts);
+  // console.log("cart products ", cartProducts);
   useEffect(() => {
     const updatedCartProducts = shopCardProducts.map((cartItem) => {
       if (cartItem.product) {
@@ -49,25 +52,40 @@ function ShoppingCart() {
     setCartProducts(updatedCartProducts);
   }, [shopCardProducts, productList]);
 
+  useEffect(() => {
+    setTotalPrice(
+      cartProducts.reduce(
+        (total, item) => total + item.product.price * item.count,
+        0
+      )
+    );
+  }, [totalProduct]);
+
   return (
-    <div className="w-full flex justify-center  bg-roseBg py-20">
-      <div className="w-[73%] bg-green-50 flex flex-col gap-5">
-        <div className="py-3 bg-green-200">
+    <div className="w-full flex justify-center   py-20">
+      <div className="w-[73%]  flex flex-col gap-5">
+        <div className="py-3 ">
           <h2 className="text-lg font-medium">Sepetim (2 Urun)</h2>
         </div>
         {cartProducts?.map((item, index) => {
           return (
-            <div key={index} className="w-full bg-blue-gray-400 rounded-lg">
+            <div
+              key={index}
+              className="w-full rounded-lg border border-mutedColor "
+            >
               {/* <div className="border-b-2"></div> Buraya satici kismi gelecek  */}
-              <div className="border-b-2 flex items-center justify-center gap-2 bg-green-100 py-2">
-                <HiOutlineCube className="text-green-600 h-7 w-7" />
-                <p className="text-black font-medium">Kargo Bedava !</p>
-              </div>
+              {item.product.price * item.count >= 150 && (
+                <div className="border-b-2 flex items-center justify-center gap-2 bg-[#E2F3FD] rounded-lg py-2">
+                  <HiOutlineCube className="text-primaryColor h-7 w-7" />
+
+                  <p className="text-black font-medium">Kargo Bedava !</p>
+                </div>
+              )}
               <div className="border-b-2 py-5 w-full flex justify-center">
-                <div className="w-11/12  flex bg-blue-200 justify-between">
-                  <div className="flex bg-brown-200 w-3/5 items-center gap-2">
+                <div className="w-11/12  flex justify-between">
+                  <div className="flex  w-3/5 items-center gap-2">
                     <div className="flex flex-col justify-center">
-                      <FaSquareCheck className="h-7 w-7 " />
+                      <FaSquareCheck className="h-7 w-7 text-primaryColor" />
                     </div>
                     <div className="h-24 w-24">
                       <img
@@ -93,16 +111,15 @@ function ShoppingCart() {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-red-300 flex items-center ">
+                  <div className=" flex items-center ">
                     <Button
                       size="sm"
-                      className="h-2/5 bg-[#8994BD] text-white rounded-sm"
+                      className="h-2/5 flex justify-center items-center bg-[#E2F3FD] text-white rounded-none"
                       onClick={() =>
                         dispatch(decrementProduct(item.product.id))
                       }
                     >
-                      {" "}
-                      -{" "}
+                      <span className="font-bold text-3xl text-darkBg">-</span>
                     </Button>
                     <div className="border h-2/5 w-12 flex justify-center items-center text-lg font-medium">
                       <p>{item.count}</p>
@@ -110,24 +127,23 @@ function ShoppingCart() {
 
                     <Button
                       size="sm"
-                      className="h-2/5 bg-[#8994BD] text-white rounded-sm"
+                      className="h-2/5 flex justify-center items-center bg-[#E2F3FD] text-white rounded-none"
                       onClick={() => dispatch(increaseProduct(item.product.id))}
                     >
-                      {" "}
-                      +{" "}
+                      <span className="font-bold text-xl text-darkBg">+</span>
                     </Button>
                   </div>
-                  <div className="bg-orange-300 flex justify-center items-center">
-                    <p className="text-lg">
-                      $ {item.product.price * item.count}
+                  <div className=" flex justify-center items-center">
+                    <p className="text-lg font-semibold text-primaryColor">
+                      $ {item.product.price}
                     </p>
                   </div>
-                  <div className="bg-deep-orange-500 flex justify-center items-center hover:cursor-pointer">
+                  <div className=" flex justify-center items-center hover:cursor-pointer">
                     <RiDeleteBin5Line
                       onClick={() =>
                         dispatch(deleteShoppingCard(item.product.id))
                       }
-                      className="w-7 h-6"
+                      className="w-7 h-6 text-darkBg"
                     />
                   </div>
                 </div>
@@ -136,45 +152,60 @@ function ShoppingCart() {
           );
         })}
       </div>
-      <div className="w-[22%] bg-red-300 flex justify-center">
-        <div className="w-5/6 bg-blue-gray-600 h-max py-2 flex flex-col gap-3">
+      <div className="w-[22%]  flex justify-center">
+        <div className="w-5/6  h-max py-2 flex flex-col gap-3">
           <div className="flex justify-center">
-            <div className="w-11/12 flex flex-col gap-4 py-2 border px-2">
-              <h2>Siparis Ozeti</h2>
-              <div className="bg-yellow text-sm flex flex-col gap-3 py-2">
+            <div className="w-11/12 flex flex-col gap-4 py-2 border rounded-lg border-[#6CB9D8] px-2 shadow-md">
+              <h2 className="text-xl">Sipariş Özeti</h2>
+              <div className="text-sm flex flex-col gap-3 py-2">
                 <div className="flex justify-between">
-                  <h3>Urunun Toplami</h3>
-                  <p>8.448,99 TL</p>
+                  <h3>Ürünler Toplamı</h3>
+                  <p className="font-semibold text-darkBg">
+                    $ {totalPrice.toFixed(2)}
+                  </p>
                 </div>
                 <div className="flex justify-between">
-                  <h3>Kargo Toplami</h3>
-                  <p>29,99 TL</p>
+                  <h3>Kargo Toplamı</h3>
+                  <p>$ 29,99 </p>
                 </div>
-                <div className="flex justify-between">
-                  <h3>
-                    150 TL ve Uzeri <br />
-                    Kargo Bedava{" "}
-                  </h3>
-                  <p>-29.99 TL</p>
-                </div>
+                {totalPrice.toFixed(2) >= 150 && (
+                  <div className="flex justify-between">
+                    <h3>
+                      150 TL ve Uzeri <br />
+                      Kargo Bedava{" "}
+                    </h3>
+                    <p className="text-primaryColor">-$ 29.99</p>
+                  </div>
+                )}
               </div>
-              <hr />
-              <div className="flex justify-between">
-                <h3>Toplam</h3>
-                <p>8.448,99 TL</p>
-              </div>
+              <hr className="border border-primaryColor" />
+              {totalPrice.toFixed(2) >= 150 ? (
+                <div className="flex justify-between items-center">
+                  <h3>Toplam</h3>
+                  <p className="font-semibold text-xl text-primaryColor">
+                    $ {totalPrice.toFixed(2)}
+                  </p>
+                </div>
+              ) : (
+                <div className="flex justify-between items-center">
+                  <h3>Toplam</h3>
+                  <p className="font-semibold text-xl text-primaryColor">
+                    $ {Number(totalPrice.toFixed(2)) + Number(29, 99)}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
           <div className="flex justify-center ">
-            <div className="border border-mutedColor rounded-md py-1 w-11/12">
+            <div className="border border-[#6CB9D8] rounded-md py-1 w-11/12">
               <div className="flex items-center justify-center gap-2 hover:cursor-pointer w-full">
-                <AiOutlinePlus className="" />
-                <p className="text-sm tracking-tight">INDIRIM KODU GIR</p>
+                <AiOutlinePlus className=" text-primaryColor " />
+                <p className="text-sm tracking-tight">İNDİRİM KODU GİR</p>
               </div>
             </div>
           </div>
           <div className="flex justify-center">
-            <Button className="w-11/12">Siparisi Onayla</Button>
+            <Button className="w-11/12 bg-primaryColor">Siparisi Onayla</Button>
           </div>
         </div>
       </div>
