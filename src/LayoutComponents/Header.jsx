@@ -50,8 +50,6 @@ function Header() {
 
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
-  console.log("shopping card items", shopCardProducts);
-
   const productList = useSelector((state) => state.product.productList);
 
   // for (let i = 0; i < shopCardProducts.length; i++) {

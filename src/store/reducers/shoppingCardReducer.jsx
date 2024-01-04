@@ -1,4 +1,7 @@
-import { ADD_SHOPPING_CARD } from "../actions/shoppingAction";
+import {
+  ADD_SHOPPING_CARD,
+  DELETE_SHOPPING_CARD,
+} from "../actions/shoppingAction";
 
 const initialCardValues = {
   cart: [],
@@ -37,7 +40,11 @@ export const shopingCardReducer = (state = initialCardValues, action) => {
           ],
         };
       }
-
+    case DELETE_SHOPPING_CARD:
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.product.id !== action.payload),
+      };
     default:
       return state;
   }
