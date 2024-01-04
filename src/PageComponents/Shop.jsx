@@ -3,6 +3,7 @@ import Category from "./Shop/Category";
 import Products from "./Shop/Products";
 import { Route, Routes } from "react-router-dom";
 import ProductPage from "./Shop/ProductPage";
+import ShoppingCart from "./Shop/ShoppingCart";
 
 function Shop() {
   return (

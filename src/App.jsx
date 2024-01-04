@@ -18,6 +18,7 @@ import md5 from "md5";
 import { useDispatch } from "react-redux";
 import { loginData } from "./store/actions/globalAction";
 import gravatar from "gravatar";
+import ShoppingCart from "./PageComponents/Shop/ShoppingCart";
 //Shop/* verdim cunku alt componentler icin de path acildi
 function App() {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/shopping-cart" element={<ShoppingCart />} />
       </Routes>
       <Footer />
       <ToastContainer

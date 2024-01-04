@@ -352,9 +352,11 @@ function Header() {
                     </div>
                   </div>
                   <div className="flex gap-2 py-2 pl-3 h-[70px] bg-[#424D76]  text-darkBg">
-                    <Button className="bg-[#0E88CD] text-white">
-                      Sepete Git
-                    </Button>
+                    <Link to="/shopping-cart">
+                      <Button className="bg-[#0E88CD] text-white">
+                        Sepete Git
+                      </Button>
+                    </Link>
                     <Button className="bg-[#8994BD] text-white">
                       Siparisi Tamamla
                     </Button>
