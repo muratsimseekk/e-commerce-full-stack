@@ -3,11 +3,13 @@ import { HiOutlineCube } from "react-icons/hi2";
 import { FaSquareCheck } from "react-icons/fa6";
 import { FaShippingFast } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { AiOutlinePlus } from "react-icons/ai";
+
 import { Button } from "@material-tailwind/react";
 function ShoppingCart() {
   return (
-    <div className="w-full flex justify-center  bg-roseBg">
-      <div className="w-4/5 bg-green-50 flex flex-col gap-5">
+    <div className="w-full flex justify-center  bg-roseBg py-20">
+      <div className="w-[73%] bg-green-50 flex flex-col gap-5">
         <div className="py-3 bg-green-200">
           <h2 className="text-lg font-medium">Sepetim (2 Urun)</h2>
         </div>
@@ -130,6 +132,44 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="w-[22%] bg-red-300 flex justify-center">
+        <div className="w-5/6 bg-blue-gray-600 h-max py-2 flex flex-col gap-3">
+          <div className="flex justify-center">
+            <div className="w-11/12 flex flex-col gap-4 py-2">
+              <h2>Siparis Ozeti</h2>
+              <div className="bg-yellow text-sm">
+                <div className="flex justify-between">
+                  <h3>Urunun Toplami</h3>
+                  <p>8.448,99 TL</p>
+                </div>
+                <div className="flex justify-between">
+                  <h3>Kargo Toplami</h3>
+                  <p>29,99 TL</p>
+                </div>
+                <div className="flex justify-between">
+                  <h3>
+                    150 TL ve Uzeri <br />
+                    Kargo Bedava{" "}
+                  </h3>
+                  <p>-29.99 TL</p>
+                </div>
+              </div>
+              <hr />
+              <div className="flex justify-between">
+                <h3>Toplam</h3>
+                <p>8.448,99 TL</p>
+              </div>
+            </div>
+          </div>
+          <div className="border border-mutedColor rounded-md py-1">
+            <div className="flex items-center justify-center gap-2 hover:cursor-pointer">
+              <AiOutlinePlus className="" />
+              <p className="text-sm tracking-tight">INDIRIM KODU GIR</p>
+            </div>
+          </div>
+          <Button className="w-full">Siparisi Onayla</Button>
         </div>
       </div>
     </div>
