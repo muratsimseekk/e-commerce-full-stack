@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import "../css/login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { localStorageWrite } from "../store/reducers/globalReducer";
 import { loginData } from "../store/actions/globalAction";
 import { AxiosInstance } from "../api/api";
@@ -24,6 +24,8 @@ function Login() {
   };
 
   const user = useSelector((store) => store.general.roles);
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
 
   const dispatch = useDispatch();
 
@@ -45,7 +47,7 @@ function Login() {
           })
         );
       });
-      navigate("/");
+      navigate(from);
     } catch (error) {
       setLoginError(true);
       toast.error("Invalid User Informations");

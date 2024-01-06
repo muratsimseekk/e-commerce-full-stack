@@ -67,7 +67,7 @@ function ProductHeader() {
             <Carousel className="h-5/6">
               <img
                 className=" w-4/5 h-5/6 object-fill"
-                src={pageProduct.images[0].url}
+                src={pageProduct?.images[0].url}
               />
             </Carousel>
             <div className="h-1/6 flex ">

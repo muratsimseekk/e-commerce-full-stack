@@ -73,6 +73,7 @@ export const shopingCardReducer = (state = initialCardValues, action) => {
           }
         }),
       };
+
     default:
       return state;
   }

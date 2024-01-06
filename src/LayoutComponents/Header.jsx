@@ -323,13 +323,13 @@ function Header() {
                             <div className="flex ">
                               <div className="h-24 w-24">
                                 <img
-                                  src={item.product.images[0].url}
+                                  src={item.product?.images[0]?.url}
                                   className="w-full h-full object-contain"
                                 />
                               </div>
                               <div className="flex flex-col justify-between">
                                 <h2 className="text-darkBg font-medium tracking-wide">
-                                  {item.product.name}
+                                  {item.product?.name}
                                 </h2>
                                 <div className="flex text-[#6F7DAE] font-medium">
                                   <h3 className="tracking-wider">

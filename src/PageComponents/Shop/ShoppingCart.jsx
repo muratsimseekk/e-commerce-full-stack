@@ -64,13 +64,6 @@ function ShoppingCart() {
       )
     );
   }, [totalProduct]);
-  const navigateHandler = () => {
-    if (loginState) {
-      navigate("/order");
-    } else {
-      navigate("/login");
-    }
-  };
 
   return (
     <div className="w-full flex justify-center   py-20">
@@ -217,14 +210,13 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center w-full">
-            <Button
-              onClick={() => navigateHandler()}
-              className="w-11/12 bg-primaryColor"
-            >
-              Siparisi Onayla
-            </Button>
-          </div>
+          <Link to="/order">
+            <div className="flex justify-center w-full">
+              <Button className="w-11/12 bg-primaryColor">
+                Siparisi Onayla
+              </Button>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

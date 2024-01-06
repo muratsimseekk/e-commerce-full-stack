@@ -20,6 +20,7 @@ import { loginData } from "./store/actions/globalAction";
 import gravatar from "gravatar";
 import ShoppingCart from "./PageComponents/Shop/ShoppingCart";
 import OrderPage from "./PageComponents/Shop/OrderPage";
+import { ProtectedRoute } from "./PageComponents/ProtectedRoute";
 //Shop/* verdim cunku alt componentler icin de path acildi
 function App() {
   const dispatch = useDispatch();
@@ -76,7 +77,14 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
-        <Route path="/order" element={<OrderPage />} />
+        <Route
+          path="/order"
+          element={
+            <ProtectedRoute>
+              <OrderPage />
+            </ProtectedRoute>
+          }
+        ></Route>
       </Routes>
       <Footer />
       <ToastContainer
