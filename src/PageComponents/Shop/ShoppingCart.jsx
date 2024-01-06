@@ -66,7 +66,7 @@ function ShoppingCart() {
   }, [totalProduct]);
 
   return (
-    <div className="w-full flex justify-center   py-20">
+    <div className="w-full flex justify-center py-20">
       <div className="w-[73%]  flex flex-col gap-5">
         <div className="py-3 ">
           <h2 className="text-lg font-medium">
