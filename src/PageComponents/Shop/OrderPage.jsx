@@ -13,16 +13,15 @@ import { FaUser } from "react-icons/fa";
 import { MdOutlinePhoneIphone } from "react-icons/md";
 import { AxiosInstance } from "../../api/api";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 
 function OrderPage() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
 
+  // country and region selection
   const [country, setCountry] = useState("");
-  console.log("secilen ulke", country);
   const [region, setRegion] = useState("");
-  console.log("secilen bolge", region);
 
   const [newAddressMenu, setNewAddressMenu] = useState(false);
 
@@ -36,6 +35,7 @@ function OrderPage() {
   const loginState = useSelector((state) => state.general.roles.loggedIn);
   console.log("login state", loginState);
 
+  const [addressList, setAddressList] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ function OrderPage() {
     handleSubmit,
     setValue,
     formState: { errors, isValid },
-  } = useForm({ mode: "onSubmit" });
+  } = useForm({ mode: "onBlur" });
 
   const productList = useSelector((state) => state.product.productList);
 
@@ -83,20 +83,15 @@ function OrderPage() {
       )
     );
   }, [totalProduct]);
-  const getAddresses = () => {
-    AxiosInstance.get("/user/address")
-      .then((res) => console.log("res data", res))
-      .catch((err) => console.log(err));
-  };
 
   const submitHandler = (data) => {
     console.log("data", data);
     const formData = {
       title: data.title,
-      fullName: data.fullName,
-      phoneNumber: data.phoneNumber,
-      country: data.country,
-      region: data.region,
+      name: data.name,
+      surname: data.surname,
+      phone: data.phoneNumber,
+      city: data.region,
       district: data.district,
       neighborhood: data.neighborhood,
       address: data.address,
@@ -109,6 +104,22 @@ function OrderPage() {
       .catch((err) => console.log(err));
     getAddresses();
   };
+
+  const getAddresses = () => {
+    AxiosInstance.get("/user/address")
+      .then((res) => {
+        console.log("res data", res.data);
+        setAddressList(res.data);
+        console.log("address list", addressList);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getAddresses();
+    console.log("address list", addressList);
+  }, []);
+  // console.log("address list", addressList);
 
   return (
     <div className="w-full  flex justify-center py-20">
@@ -166,173 +177,49 @@ function OrderPage() {
                 </p>
               </div>
             </div>
-            <div className="flex flex-col w-[46%]  gap-2  ">
-              <div className="flex justify-between items-center">
-                <div>
-                  <label className="flex gap-2 items-center " htmlFor="">
-                    {" "}
-                    <input
-                      className="w-4 h-4 accent-primaryColor"
-                      type="radio"
-                      name="addressTitle"
-                    />
-                    Ev
-                  </label>
-                </div>
-                <p className="underline text-sm font-medium hover:cursor-pointer">
-                  {" "}
-                  Duzenle
-                </p>
-              </div>
-              <div className=" flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 ">
-                <div className="flex justify-between py-2">
-                  <div className="flex gap-2 items-center">
-                    <FaUser />
-                    <p>Mustafa</p>
-                  </div>
-                  <div className="flex  items-center">
-                    <MdOutlinePhoneIphone />
-                    <p>0534 123 45 67</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <h2>Adres:</h2>
-                  <p>jnadsfjknbskjdbfkjsadfkjasjkd </p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col w-[46%]  gap-2  ">
-              <div className="flex justify-between items-center">
-                <div>
-                  <label className="flex gap-2 items-center " htmlFor="">
-                    {" "}
-                    <input
-                      className="w-4 h-4 accent-primaryColor"
-                      type="radio"
-                      name="addressTitle"
-                    />
-                    Ev
-                  </label>
-                </div>
-                <p className="underline text-sm font-medium hover:cursor-pointer">
-                  {" "}
-                  Duzenle
-                </p>
-              </div>
-              <div className=" flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 ">
-                <div className="flex justify-between py-2">
-                  <div className="flex gap-2 items-center">
-                    <FaUser />
-                    <p>Mustafa</p>
-                  </div>
-                  <div className="flex  items-center">
-                    <MdOutlinePhoneIphone />
-                    <p>0534 123 45 67</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <h2>Adres:</h2>
-                  <p>jnadsfjknbskjdbfkjsadfkjasjkd </p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col w-[46%]  gap-2  ">
-              <div className="flex justify-between items-center">
-                <div>
-                  <label className="flex gap-2 items-center " htmlFor="">
-                    {" "}
-                    <input
-                      className="w-4 h-4 accent-primaryColor"
-                      type="radio"
-                      name="addressTitle"
-                    />
-                    Ev
-                  </label>
-                </div>
-                <p className="underline text-sm font-medium hover:cursor-pointer">
-                  {" "}
-                  Duzenle
-                </p>
-              </div>
-              <div className=" flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 ">
-                <div className="flex justify-between py-2">
-                  <div className="flex gap-2 items-center">
-                    <FaUser />
-                    <p>Mustafa</p>
-                  </div>
-                  <div className="flex  items-center">
-                    <MdOutlinePhoneIphone />
-                    <p>0534 123 45 67</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <h2>Adres:</h2>
-                  <p>jnadsfjknbskjdbfkjsadfkjasjkd </p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col w-[46%]  gap-2  ">
-              <div className="flex justify-between items-center">
-                <div>
-                  <label className="flex gap-2 items-center " htmlFor="">
-                    <input
-                      className="w-4 h-4 accent-primaryColor"
-                      type="radio"
-                      name="addressTitle"
-                      onClick={(e) => setRadioChecked(true)}
-                    />
-                    Ev
-                  </label>
-                </div>
-                <p className="underline text-sm font-medium hover:cursor-pointer">
-                  {" "}
-                  Duzenle
-                </p>
-              </div>
-              {radioChecked ? (
-                <div
-                  className={
-                    " flex flex-col h-[130px] border-2 border-primaryColor bg-[#EDF6FA] rounded-md shadow-sm px-4 "
-                  }
-                >
-                  <div className="flex justify-between py-2">
-                    <div className="flex gap-2 items-center">
-                      <FaUser />
-                      <p>Mustafa</p>
+            {addressList?.map((item) => {
+              return (
+                <div className="flex flex-col w-[46%]  gap-2  ">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <label className="flex gap-2 items-center " htmlFor="">
+                        {" "}
+                        <input
+                          className="w-4 h-4 accent-primaryColor"
+                          type="radio"
+                          name="addressTitle"
+                        />
+                        {item?.title}
+                      </label>
                     </div>
-                    <div className="flex  items-center">
-                      <MdOutlinePhoneIphone />
-                      <p>0534 123 45 67</p>
+                    <p className="underline text-sm font-medium hover:cursor-pointer">
+                      {" "}
+                      Duzenle
+                    </p>
+                  </div>
+                  <div className=" flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 ">
+                    <div className="flex justify-between py-2">
+                      <div className="flex gap-2 items-center">
+                        <FaUser />
+                        <p>{item?.name}</p>
+                        <p>{item?.surname}</p>
+                      </div>
+                      <div className="flex  items-center">
+                        <MdOutlinePhoneIphone />
+                        <p>{item?.phone}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <h2>Adres:</h2>
+                      <p>{item?.address}</p>
+                      <p>
+                        {item?.neighborhood} / {item?.district} / {item?.city}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex gap-2">
-                    <h2>Adres:</h2>
-                    <p>jnadsfjknbskjdbfkjsadfkjasjkd </p>
-                  </div>
                 </div>
-              ) : (
-                <div
-                  className={
-                    " flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 "
-                  }
-                >
-                  <div className="flex justify-between py-2">
-                    <div className="flex gap-2 items-center">
-                      <FaUser />
-                      <p>Mustafa</p>
-                    </div>
-                    <div className="flex  items-center">
-                      <MdOutlinePhoneIphone />
-                      <p>0534 123 45 67</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <h2>Adres:</h2>
-                    <p>jnadsfjknbskjdbfkjsadfkjasjkd </p>
-                  </div>
-                </div>
-              )}
-            </div>
+              );
+            })}
           </div>
         </div>
         {newAddressMenu && (
@@ -356,9 +243,20 @@ function OrderPage() {
               <div>
                 <label htmlFor="">
                   {" "}
-                  Full Name:
+                  Name:
                   <input
-                    {...register("fullName", { required: true })}
+                    {...register("name", { required: true })}
+                    type="text"
+                    className="border border-primaryColor"
+                  />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="">
+                  {" "}
+                  Surname:
+                  <input
+                    {...register("surname", { required: true })}
                     type="text"
                     className="border border-primaryColor"
                   />
