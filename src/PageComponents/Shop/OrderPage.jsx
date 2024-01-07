@@ -84,6 +84,9 @@ function OrderPage() {
     );
   }, [totalProduct]);
 
+  console.log("carttaki products", cartProducts);
+
+  console.log("satis sozlesmeisi ", satisChecked);
   const submitHandler = (data) => {
     console.log("data", data);
     const formData = {
@@ -119,7 +122,12 @@ function OrderPage() {
     getAddresses();
     console.log("address list", addressList);
   }, []);
-  // console.log("address list", addressList);
+
+  const completeOrder = () => {
+    if (cartProducts.length > 0 && radioChecked && satisChecked) {
+      navigate("/complete-order");
+    }
+  };
 
   return (
     <div className="w-full  flex justify-center py-20">
@@ -179,14 +187,7 @@ function OrderPage() {
             </div>
             {addressList?.map((item, index) => {
               return (
-                <div
-                  key={index}
-                  className={`flex flex-col w-[46%] ${
-                    radioChecked == item.id
-                      ? "border-b-8 border-primaryColor rounded-md"
-                      : null
-                  }  gap-2`}
-                >
+                <div key={index} className={`flex flex-col w-[46%]   gap-2`}>
                   <div className="flex justify-between items-center">
                     <div>
                       <label className="flex gap-2 items-center " htmlFor="">
@@ -206,7 +207,13 @@ function OrderPage() {
                       Duzenle
                     </p>
                   </div>
-                  <div className=" flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 ">
+                  <div
+                    className={`flex flex-col h-[130px] bg-[#EDF6FA] ${
+                      radioChecked == item.id
+                        ? "border-2 border-primaryColor "
+                        : null
+                    } rounded-md shadow-sm px-4 `}
+                  >
                     <div className="flex justify-between py-2">
                       <div className="flex gap-2 items-center">
                         <FaUser />
@@ -232,7 +239,7 @@ function OrderPage() {
           </div>
         </div>
         {newAddressMenu && (
-          <div className="py-5 border border-black ">
+          <div className="py-5 border border-black flex justify-between">
             <form
               className="flex flex-col gap-2"
               onSubmit={handleSubmit(submitHandler)}
@@ -345,6 +352,15 @@ function OrderPage() {
                 </button>
               </div>
             </form>
+            <div>
+              <button
+                onClick={() => setNewAddressMenu(false)}
+                type="button "
+                className="bg-roseBg"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -427,13 +443,12 @@ function OrderPage() {
               </div>
             </div>
           </div>
-          <Link to="/order">
-            <div className="flex justify-center w-full">
-              <Button className="w-11/12 bg-primaryColor">
-                Kaydet ve Devam Et
-              </Button>
-            </div>
-          </Link>
+
+          <div className="flex justify-center w-full">
+            <Button onClick={completeOrder} className="w-11/12 bg-primaryColor">
+              Kaydet ve Devam Et
+            </Button>
+          </div>
         </div>
       </div>
     </div>
