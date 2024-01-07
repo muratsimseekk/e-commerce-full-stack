@@ -28,7 +28,7 @@ function OrderPage() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [radioChecked, setRadioChecked] = useState(false);
-
+  console.log("radio checked", radioChecked);
   const [satisChecked, setSatisChecked] = useState(false);
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
@@ -177,9 +177,16 @@ function OrderPage() {
                 </p>
               </div>
             </div>
-            {addressList?.map((item) => {
+            {addressList?.map((item, index) => {
               return (
-                <div className="flex flex-col w-[46%]  gap-2  ">
+                <div
+                  key={index}
+                  className={`flex flex-col w-[46%] ${
+                    radioChecked == item.id
+                      ? "border-b-8 border-primaryColor rounded-md"
+                      : null
+                  }  gap-2`}
+                >
                   <div className="flex justify-between items-center">
                     <div>
                       <label className="flex gap-2 items-center " htmlFor="">
@@ -188,6 +195,8 @@ function OrderPage() {
                           className="w-4 h-4 accent-primaryColor"
                           type="radio"
                           name="addressTitle"
+                          id={item?.id}
+                          onClick={() => setRadioChecked(item.id)}
                         />
                         {item?.title}
                       </label>
