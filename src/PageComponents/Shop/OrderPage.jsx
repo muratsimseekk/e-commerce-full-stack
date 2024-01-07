@@ -11,24 +11,43 @@ import { IoCheckboxSharp } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { MdOutlinePhoneIphone } from "react-icons/md";
+import { AxiosInstance } from "../../api/api";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { useForm } from "react-hook-form";
 
 function OrderPage() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
 
+  const [country, setCountry] = useState("");
+  console.log("secilen ulke", country);
+  const [region, setRegion] = useState("");
+  console.log("secilen bolge", region);
+
+  const [newAddressMenu, setNewAddressMenu] = useState(false);
+
   const [totalPrice, setTotalPrice] = useState(0);
+
+  const [radioChecked, setRadioChecked] = useState(false);
 
   const [satisChecked, setSatisChecked] = useState(false);
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
   const loginState = useSelector((state) => state.general.roles.loggedIn);
   console.log("login state", loginState);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log("shopping card items", shopCardProducts);
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onSubmit" });
 
   const productList = useSelector((state) => state.product.productList);
-  // console.log("cart products ", cartProducts);
+
   useEffect(() => {
     const updatedCartProducts = shopCardProducts.map((cartItem) => {
       if (cartItem.product) {
@@ -64,86 +83,100 @@ function OrderPage() {
       )
     );
   }, [totalProduct]);
-  return (
-    <div className="w-full bg-red-200 flex justify-center">
-      <div className="bg-yellow w-[73%] flex flex-col">
-        <div className="flex w-full">
-          <div className="bg-blue-gray-200 w-1/2">
-            <h2>Adres Bilgileri</h2>
-            <h4>Ev</h4>
-            <p>Ankara/ Etimesgut</p>
-          </div>
-          <div className="bg-orange-300 w-1/2">
-            <h2>Ödeme Secenekleri</h2>
+  const getAddresses = () => {
+    AxiosInstance.get("/user/address")
+      .then((res) => console.log("res data", res))
+      .catch((err) => console.log(err));
+  };
 
-            <p>
-              Banka/Kredi Karti veya Alisveris Kredisi ile odemenizi guvenle
-              yapabilirsiniz.{" "}
+  const submitHandler = (data) => {
+    console.log("data", data);
+    const formData = {
+      title: data.title,
+      fullName: data.fullName,
+      phoneNumber: data.phoneNumber,
+      country: data.country,
+      region: data.region,
+      district: data.district,
+      neighborhood: data.neighborhood,
+      address: data.address,
+    };
+
+    AxiosInstance.post("/user/address", formData)
+      .then((res) => {
+        console.log("yollanan data", res.data);
+      })
+      .catch((err) => console.log(err));
+    getAddresses();
+  };
+
+  return (
+    <div className="w-full  flex justify-center py-20">
+      <div className=" w-[73%] flex flex-col gap-6">
+        <div className="flex w-full ">
+          <div className=" flex flex-col gap-2 w-1/2 px-4 py-3 border border-b-8 rounded-md border-[#6CB9D8]">
+            <h2 className="font-medium text-lg text-primaryColor">
+              Adres Bilgileri
+            </h2>
+            <h4 className="text-sm text-darkBg">Ev</h4>
+            <p className="text-sm text-secondText">Ankara/ Etimesgut</p>
+          </div>
+          <div className=" w-1/2 flex flex-col gap-2 px-4 py-3 border rounded-md border-[#6CB9D8]">
+            <h2 className="font-medium text-lg text-primaryColor">
+              Ödeme Secenekleri
+            </h2>
+            <p className="text-sm text-secondText">
+              <span className="text-darkBg font-medium">Banka/Kredi Karti</span>{" "}
+              veya{" "}
+              <span className="text-darkBg font-medium">Alisveris Kredisi</span>{" "}
+              ile odemenizi guvenle yapabilirsiniz.{" "}
             </p>
           </div>
         </div>
-        <div className="flex bg-green-200">
-          <RiErrorWarningFill />
-          <p>
+        <div className="flex px-4 py-3 gap-2 items-center border rounded-md border-[#6CB9D8]">
+          <RiErrorWarningFill className="w-6 h-6 text-primaryColor" />
+          <p className="text-darkBg font-medium text-sm">
             Kurumsal faturali alisveris yapmak icin "Faturami Ayni Adrese
             Gonder" tikini kaldirin ve Fatura adresi olarak kayitli Kurumsal
-            FAtura adresinizi secin.
+            Fatura adresinizi secin.
           </p>
         </div>
-        <div className="bg-alertColor flex flex-col gap-6">
-          <div className="flex justify-between bg-indigo-100">
-            <h2>Teslimat Adresi </h2>
+        <div className=" flex flex-col gap-6 py-5 rounded-md border-[#6CB9D8] border">
+          <div className="flex justify-between  px-4 py-3">
+            <h2 className="font-medium text-lg text-darkBg">
+              Teslimat Adresi{" "}
+            </h2>
             <div className="flex gap-2 items-center">
-              <IoCheckboxSharp />
-              <p>Faturami Ayni Adrese Gonder</p>
+              <IoCheckboxSharp className="w-6 h-6 text-primaryColor" />
+              <p className="text-secondText text-sm">
+                Faturami Ayni Adrese Gonder
+              </p>
             </div>
           </div>
-          <div className="w-full bg-gray-300 flex justify-between flex-wrap gap-y-10">
-            <div className="flex flex-col w-[43%] gap-2 bg-mutedColor ">
+          <div className="w-full  flex justify-between flex-wrap gap-y-10 px-4">
+            <div className="flex flex-col w-[46%] gap-2  ">
               <div className="flex justify-between h-[27px] items-center"></div>
-              <div className="flex flex-col justify-center items-center py-8 bg-red-100">
-                <AiOutlinePlus className=" text-primaryColor " />
-                <p className="text-sm">Yeni Adres Ekle</p>
+              <div
+                onClick={() => setNewAddressMenu(true)}
+                className="flex flex-col justify-center items-center h-[130px] hover:cursor-pointer rounded-md bg-[#EDF6FA]"
+              >
+                <AiOutlinePlus className=" text-primaryColor h-7 w-7" />
+                <p className="text-sm font-medium text-darkBg">
+                  Yeni Adres Ekle
+                </p>
               </div>
             </div>
-            <div className="flex flex-col w-[43%]  gap-2 bg-mutedColor ">
+            <div className="flex flex-col w-[46%]  gap-2  ">
               <div className="flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                  <label
-                    class="relative flex items-center rounded-full cursor-pointer"
-                    htmlFor="react_version2"
-                  >
+                <div>
+                  <label className="flex gap-2 items-center " htmlFor="">
+                    {" "}
                     <input
-                      name="description"
+                      className="w-4 h-4 accent-primaryColor"
                       type="radio"
-                      class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-blue-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-500 checked:before:bg-blue-500 hover:before:opacity-10"
-                      id="react_version2"
+                      name="addressTitle"
                     />
-                    <span class="absolute text-blue-500 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-3.5 w-3.5"
-                        viewBox="0 0 16 16"
-                        fill="currentColor"
-                      >
-                        <circle
-                          data-name="ellipse"
-                          cx="8"
-                          cy="8"
-                          r="8"
-                        ></circle>
-                      </svg>
-                    </span>
-                  </label>
-                  <label
-                    class="mt-px font-light text-gray-700 cursor-pointer select-none"
-                    htmlFor="react_version2"
-                  >
-                    <div>
-                      <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                        Ev
-                      </p>
-                    </div>
+                    Ev
                   </label>
                 </div>
                 <p className="underline text-sm font-medium hover:cursor-pointer">
@@ -151,8 +184,8 @@ function OrderPage() {
                   Duzenle
                 </p>
               </div>
-              <div className=" flex flex-col p-3 bg-brown-400 rounded-md shadow-sm">
-                <div className="flex justify-between ">
+              <div className=" flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 ">
+                <div className="flex justify-between py-2">
                   <div className="flex gap-2 items-center">
                     <FaUser />
                     <p>Mustafa</p>
@@ -168,10 +201,247 @@ function OrderPage() {
                 </div>
               </div>
             </div>
+            <div className="flex flex-col w-[46%]  gap-2  ">
+              <div className="flex justify-between items-center">
+                <div>
+                  <label className="flex gap-2 items-center " htmlFor="">
+                    {" "}
+                    <input
+                      className="w-4 h-4 accent-primaryColor"
+                      type="radio"
+                      name="addressTitle"
+                    />
+                    Ev
+                  </label>
+                </div>
+                <p className="underline text-sm font-medium hover:cursor-pointer">
+                  {" "}
+                  Duzenle
+                </p>
+              </div>
+              <div className=" flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 ">
+                <div className="flex justify-between py-2">
+                  <div className="flex gap-2 items-center">
+                    <FaUser />
+                    <p>Mustafa</p>
+                  </div>
+                  <div className="flex  items-center">
+                    <MdOutlinePhoneIphone />
+                    <p>0534 123 45 67</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <h2>Adres:</h2>
+                  <p>jnadsfjknbskjdbfkjsadfkjasjkd </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col w-[46%]  gap-2  ">
+              <div className="flex justify-between items-center">
+                <div>
+                  <label className="flex gap-2 items-center " htmlFor="">
+                    {" "}
+                    <input
+                      className="w-4 h-4 accent-primaryColor"
+                      type="radio"
+                      name="addressTitle"
+                    />
+                    Ev
+                  </label>
+                </div>
+                <p className="underline text-sm font-medium hover:cursor-pointer">
+                  {" "}
+                  Duzenle
+                </p>
+              </div>
+              <div className=" flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 ">
+                <div className="flex justify-between py-2">
+                  <div className="flex gap-2 items-center">
+                    <FaUser />
+                    <p>Mustafa</p>
+                  </div>
+                  <div className="flex  items-center">
+                    <MdOutlinePhoneIphone />
+                    <p>0534 123 45 67</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <h2>Adres:</h2>
+                  <p>jnadsfjknbskjdbfkjsadfkjasjkd </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col w-[46%]  gap-2  ">
+              <div className="flex justify-between items-center">
+                <div>
+                  <label className="flex gap-2 items-center " htmlFor="">
+                    <input
+                      className="w-4 h-4 accent-primaryColor"
+                      type="radio"
+                      name="addressTitle"
+                      onClick={(e) => setRadioChecked(true)}
+                    />
+                    Ev
+                  </label>
+                </div>
+                <p className="underline text-sm font-medium hover:cursor-pointer">
+                  {" "}
+                  Duzenle
+                </p>
+              </div>
+              {radioChecked ? (
+                <div
+                  className={
+                    " flex flex-col h-[130px] border-2 border-primaryColor bg-[#EDF6FA] rounded-md shadow-sm px-4 "
+                  }
+                >
+                  <div className="flex justify-between py-2">
+                    <div className="flex gap-2 items-center">
+                      <FaUser />
+                      <p>Mustafa</p>
+                    </div>
+                    <div className="flex  items-center">
+                      <MdOutlinePhoneIphone />
+                      <p>0534 123 45 67</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <h2>Adres:</h2>
+                    <p>jnadsfjknbskjdbfkjsadfkjasjkd </p>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className={
+                    " flex flex-col h-[130px] bg-[#EDF6FA] rounded-md shadow-sm px-4 "
+                  }
+                >
+                  <div className="flex justify-between py-2">
+                    <div className="flex gap-2 items-center">
+                      <FaUser />
+                      <p>Mustafa</p>
+                    </div>
+                    <div className="flex  items-center">
+                      <MdOutlinePhoneIphone />
+                      <p>0534 123 45 67</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <h2>Adres:</h2>
+                    <p>jnadsfjknbskjdbfkjsadfkjasjkd </p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
+        {newAddressMenu && (
+          <div className="py-5 border border-black ">
+            <form
+              className="flex flex-col gap-2"
+              onSubmit={handleSubmit(submitHandler)}
+            >
+              <h3 className="">New Address</h3>
+              <div>
+                <label htmlFor="">
+                  {" "}
+                  Address Title :
+                  <input
+                    {...register("title", { required: true })}
+                    type="text"
+                    className="border border-primaryColor"
+                  />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="">
+                  {" "}
+                  Full Name:
+                  <input
+                    {...register("fullName", { required: true })}
+                    type="text"
+                    className="border border-primaryColor"
+                  />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="">
+                  {" "}
+                  Phone Number:
+                  <input
+                    {...register("phoneNumber", { required: true })}
+                    type="number"
+                    className="border border-primaryColor"
+                  />
+                </label>
+              </div>
+              <div>
+                <div>
+                  <CountryDropdown
+                    {...register("country", { required: true })}
+                    value={country}
+                    onChange={(val) => {
+                      setCountry(val);
+                      setValue("country", val);
+                    }}
+                    classes="border border-primaryColor bg-[#ACD8E9] w-1/6"
+                  />
+                  <RegionDropdown
+                    {...register("region", { required: true })}
+                    country={country}
+                    value={region}
+                    onChange={(val) => {
+                      setRegion(val);
+                      setValue("region", val);
+                    }}
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="">
+                  District :
+                  <input
+                    {...register("district", { required: true })}
+                    type="text"
+                    className="border border-primaryColor"
+                  />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="">
+                  Neighborhood :
+                  <input
+                    {...register("neighborhood", { required: true })}
+                    type="text"
+                    className="border border-primaryColor"
+                  />
+                </label>
+              </div>
+              <div className="flex">
+                <label htmlFor="address" className="">
+                  Address :
+                </label>
+                <textarea
+                  name="address"
+                  id="address"
+                  cols="30"
+                  rows="3"
+                  className="border border-primaryColor"
+                ></textarea>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="bg-blue-gray-400 py-1 px-3 rounded-lg"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
-      <div className="w-[22%] flex flex-col items-center justify-center">
+      <div className="w-[22%] flex flex-col items-center justify-start">
         <div className="w-5/6 py-2  flex gap-2 justify-center">
           <div className=" border border-[#6CB9D8] rounded-lg w-11/12">
             <div className="flex px-2 py-2 justify-center items-start">
