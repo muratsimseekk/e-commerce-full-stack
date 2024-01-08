@@ -244,7 +244,7 @@ function OrderPage() {
               className="flex flex-col p-3 rounded-md  gap-4 "
               onSubmit={handleSubmit(submitHandler)}
             >
-              <h3 className="font-semibold text-xl text-darkBg border-b-2 border-primaryColor">
+              <h3 className="font-semibold text-xl text-darkBg border-b-2 w-4/5 border-primaryColor">
                 New Address
               </h3>
               <div>
