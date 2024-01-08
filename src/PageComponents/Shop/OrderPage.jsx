@@ -239,58 +239,75 @@ function OrderPage() {
           </div>
         </div>
         {newAddressMenu && (
-          <div className="py-5 border border-black flex justify-between">
+          <div className="py-5 px-10 border border-[#6CB9D8] rounded-md flex justify-between">
             <form
-              className="flex flex-col gap-2"
+              className="flex flex-col p-3 rounded-md  gap-4 "
               onSubmit={handleSubmit(submitHandler)}
             >
-              <h3 className="">New Address</h3>
+              <h3 className="font-semibold text-xl text-darkBg border-b-2 border-primaryColor">
+                New Address
+              </h3>
               <div>
-                <label htmlFor="">
-                  {" "}
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="addressTitle"
+                >
                   Address Title :
                   <input
                     {...register("title", { required: true })}
                     type="text"
-                    className="border border-primaryColor"
+                    id="addressTitle"
+                    className="border border-primaryColor p-[2px]"
                   />
                 </label>
               </div>
               <div>
-                <label htmlFor="">
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="name"
+                >
                   {" "}
                   Name:
                   <input
                     {...register("name", { required: true })}
                     type="text"
+                    id="name"
                     className="border border-primaryColor"
                   />
                 </label>
               </div>
               <div>
-                <label htmlFor="">
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="surname"
+                >
                   {" "}
                   Surname:
                   <input
                     {...register("surname", { required: true })}
                     type="text"
+                    id="surname"
                     className="border border-primaryColor"
                   />
                 </label>
               </div>
               <div>
-                <label htmlFor="">
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="phoneNumber"
+                >
                   {" "}
                   Phone Number:
                   <input
                     {...register("phoneNumber", { required: true })}
                     type="number"
+                    id="phoneNumber"
                     className="border border-primaryColor"
                   />
                 </label>
               </div>
               <div>
-                <div>
+                <div className="font-medium flex items-center  gap-5">
                   <CountryDropdown
                     {...register("country", { required: true })}
                     value={country}
@@ -308,31 +325,43 @@ function OrderPage() {
                       setRegion(val);
                       setValue("region", val);
                     }}
+                    classes="border border-primaryColor bg-[#ACD8E9] w-1/6"
                   />
                 </div>
               </div>
               <div>
-                <label htmlFor="">
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="district"
+                >
                   District :
                   <input
                     {...register("district", { required: true })}
                     type="text"
+                    id="district"
                     className="border border-primaryColor"
                   />
                 </label>
               </div>
               <div>
-                <label htmlFor="">
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="neighborhood"
+                >
                   Neighborhood :
                   <input
                     {...register("neighborhood", { required: true })}
                     type="text"
+                    id="neighborhood"
                     className="border border-primaryColor"
                   />
                 </label>
               </div>
               <div className="flex">
-                <label htmlFor="address" className="">
+                <label
+                  htmlFor="address"
+                  className="font-medium flex items-center  gap-5"
+                >
                   Address :
                 </label>
                 <textarea
@@ -346,7 +375,7 @@ function OrderPage() {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="bg-blue-gray-400 py-1 px-3 rounded-lg"
+                  className="rounded-lg py-1 px-3 bg-[#6CB9D8] text-white"
                 >
                   Submit
                 </button>
@@ -356,7 +385,7 @@ function OrderPage() {
               <button
                 onClick={() => setNewAddressMenu(false)}
                 type="button "
-                className="bg-roseBg"
+                className="border-[#6CB9D8] border text-darkBg  px-3 py-2 rounded-lg hover:bg-[#6CB9D8] hover:text-white"
               >
                 Cancel
               </button>
