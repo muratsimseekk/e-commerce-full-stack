@@ -1,7 +1,7 @@
 import { Button } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
-import Cards from "react-credit-cards-2";
-import "react-credit-cards-2/dist/es/styles-compiled.css";
+// import Cards from "react-credit-cards-2";
+// import "react-credit-cards-2/dist/es/styles-compiled.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -335,7 +335,7 @@ function OrderCompletePage() {
             </div>
           </div>
         </div>
-        {newCard && (
+        {/* {newCard && (
           <div className="w-full  flex justify-center">
             <div className="w-full border flex flex-col gap-4 border-[#6CB9D8] rounded-md px-4 py-6">
               <div className="flex justify-between items-center pb-2 border-b-2 border-[#EDF6FA] ">
@@ -454,7 +454,7 @@ function OrderCompletePage() {
               </form>
             </div>
           </div>
-        )}
+        )} */}
       </div>
       <div className="w-[22%] flex flex-col items-center justify-start">
         <div className="w-5/6 py-2  flex gap-2 justify-center">
