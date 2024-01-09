@@ -4,21 +4,17 @@ import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
-import { RiErrorWarningFill } from "react-icons/ri";
-import { IoCheckboxSharp } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
-import { MdOutlinePhoneIphone } from "react-icons/md";
 import { FaCcMastercard } from "react-icons/fa";
 import { GrRadialSelected } from "react-icons/gr";
 
 import { AxiosInstance } from "../../api/api";
 
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 function OrderCompletePage() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -29,12 +25,12 @@ function OrderCompletePage() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [radioChecked, setRadioChecked] = useState(false);
-  console.log("radio checked", radioChecked);
+  // console.log("radio checked", radioChecked);
   const [satisChecked, setSatisChecked] = useState(false);
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
   const loginState = useSelector((state) => state.general.roles.loggedIn);
-  console.log("login state", loginState);
+  // console.log("login state", loginState);
 
   const [addressList, setAddressList] = useState([]);
   const dispatch = useDispatch();
@@ -85,9 +81,9 @@ function OrderCompletePage() {
     );
   }, [totalProduct]);
 
-  console.log("carttaki products", cartProducts);
+  // console.log("carttaki products", cartProducts);
 
-  console.log("satis sozlesmeisi ", satisChecked);
+  // console.log("satis sozlesmeisi ", satisChecked);
   const submitHandler = (data) => {
     console.log("data", data);
     const formData = {
@@ -130,8 +126,6 @@ function OrderCompletePage() {
     }
   };
 
-  const saveCardHandler = () => {};
-
   const [state, setState] = useState({
     number: "",
     expiry: "",
@@ -139,7 +133,7 @@ function OrderCompletePage() {
     name: "",
     focus: "",
   });
-  console.log("state", state);
+  // console.log("state", state);
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -158,6 +152,36 @@ function OrderCompletePage() {
   const handleInputFocus = (evt) => {
     setState((prev) => ({ ...prev, focus: evt.target.name }));
   };
+
+  const saveCardHandler = (data) => {
+    console.log("tiklandi");
+    const cardData = {
+      number: data.number,
+      expiry: data.expiry,
+      cvc: data.cvc,
+      name: data.name,
+    };
+    console.log("Card data", data);
+
+    // cannot post card data
+
+    AxiosInstance.post("/card", cardData)
+      .then((res) => {
+        console.log("yollanan card data", res.data);
+      })
+      .catch((err) => console.log("error occurs posting card data", err));
+    // cannot get card list
+
+    AxiosInstance.get("/card")
+      .then((res) => {
+        console.log("card list", res.data);
+      })
+      .catch((err) => console.log("error occurs getting card list", err));
+  };
+
+  // useEffect(() => {
+  //   cardListFetch();
+  // }, []);
 
   return (
     <div className="w-full  flex justify-center py-20">
@@ -313,10 +337,7 @@ function OrderCompletePage() {
         </div>
         {newCard && (
           <div className="w-full  flex justify-center">
-            <form
-              onSubmit={handleSubmit(saveCardHandler)}
-              className="w-full border flex flex-col gap-4 border-[#6CB9D8] rounded-md px-4 py-6"
-            >
+            <div className="w-full border flex flex-col gap-4 border-[#6CB9D8] rounded-md px-4 py-6">
               <div className="flex justify-between items-center pb-2 border-b-2 border-[#EDF6FA] ">
                 <h3 className="text-xl font-semibold ">Kart Bilgileri</h3>
                 <p
@@ -327,14 +348,17 @@ function OrderCompletePage() {
                 </p>
               </div>
 
-              <Cards
-                number={state.number}
-                expiry={state.expiry}
-                cvc={state.cvc}
-                name={state.name}
-                focused={state.focus}
-              />
-              <form className="flex flex-col flex-wrap gap-y-4 ">
+              <form
+                onSubmit={handleSubmit(saveCardHandler)}
+                className="flex flex-col flex-wrap gap-y-4 "
+              >
+                <Cards
+                  number={state.number}
+                  expiry={state.expiry}
+                  cvc={state.cvc}
+                  name={state.name}
+                  focused={state.focus}
+                />
                 <div className="flex gap-6 items-center">
                   <label
                     className=" border-b-2 border-l-2 border-l-secondText border-b-secondText text-darkBg px-2 py-1 "
@@ -345,8 +369,6 @@ function OrderCompletePage() {
                   <input
                     {...register("number", {
                       required: true,
-                      minLength: 16,
-                      maxLength: 16,
                     })}
                     id="number"
                     type="number"
@@ -366,6 +388,9 @@ function OrderCompletePage() {
                     Card Holder Name :
                   </label>
                   <input
+                    {...register("name", {
+                      required: true,
+                    })}
                     id="name"
                     type="text"
                     name="name"
@@ -386,8 +411,6 @@ function OrderCompletePage() {
                   <input
                     {...register("expiry", {
                       required: true,
-                      minLength: 4,
-                      maxLength: 4,
                     })}
                     id="expiry"
                     type="number"
@@ -407,6 +430,9 @@ function OrderCompletePage() {
                     CVC :
                   </label>
                   <input
+                    {...register("cvc", {
+                      required: true,
+                    })}
                     id="cvc"
                     type="number"
                     name="cvc"
@@ -419,14 +445,14 @@ function OrderCompletePage() {
                 </div>
                 <div className=" flex justify-center">
                   <button
-                    className="bg-darkBg text-white px-2 py-1 rounded-lg hover:bg-white hover:text-darkBg border border-darkBg hover:font-medium"
                     type="submit"
+                    className="bg-darkBg text-white px-2 py-1 rounded-lg hover:bg-white hover:text-darkBg border border-darkBg hover:font-medium"
                   >
                     Save Card
                   </button>
                 </div>
               </form>
-            </form>
+            </div>
           </div>
         )}
       </div>
