@@ -15,7 +15,7 @@ import { AxiosInstance } from "../../api/api";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { set, useForm } from "react-hook-form";
 
-function OrderPage() {
+function OrderPage({ discount, discountCode, discountApply }) {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
 
@@ -475,14 +475,6 @@ function OrderPage() {
                   </p>
                 </div>
               )}
-            </div>
-          </div>
-          <div className="flex justify-center ">
-            <div className="border border-[#6CB9D8] rounded-md py-1 w-11/12">
-              <div className="flex items-center justify-center gap-2 hover:cursor-pointer w-full">
-                <AiOutlinePlus className=" text-primaryColor " />
-                <p className="text-sm tracking-tight">İNDİRİM KODU GİR</p>
-              </div>
             </div>
           </div>
 

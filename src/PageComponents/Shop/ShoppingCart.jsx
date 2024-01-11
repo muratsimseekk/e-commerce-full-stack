@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 function ShoppingCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
+
   const [discount, setDiscount] = useState(false);
   const [discountCode, setDiscountCode] = useState("");
   const [discountApply, setDiscountApply] = useState(false);
@@ -70,11 +71,14 @@ function ShoppingCart() {
     );
   }, [totalProduct]);
 
+  console.log("cart products", cartProducts);
   const discountCodeHandler = () => {
-    if (discountCode == "KOD123") {
+    if (discountCode == "KOD123" && !discountApply) {
       setDiscount(false);
       toast.success("İndirim kodu başarıyla uygulandı");
       setDiscountApply(true);
+    } else if (discountApply && discountCode == "KOD123") {
+      toast.warning("İndirim kodu zaten uygulanmış");
     } else {
       toast.error("İndirim kodu yanlış");
       setDiscountApply(false);
@@ -223,7 +227,8 @@ function ShoppingCart() {
                   <p className="font-semibold text-xl text-primaryColor">
                     ${" "}
                     {(
-                      totalPrice - (discountApply ? Number("29.99") : Number(0))
+                      Number(totalPrice) -
+                      Number(discountApply ? Number(29, 99) : Number(0))
                     ).toFixed(2)}
                   </p>
                 </div>
@@ -232,12 +237,12 @@ function ShoppingCart() {
                   <h3>Toplam</h3>
                   <p className="font-semibold text-xl text-primaryColor">
                     ${" "}
-                    {Number(
-                      Number(totalPrice).toFixed(2) +
-                        (cartProducts.length == 0
-                          ? Number(0)
-                          : Number(29, 99)) -
-                        (discountApply ? Number(29, 99) : Number(0))
+                    {(
+                      Number(totalPrice) +
+                      Number(
+                        cartProducts.length == 0 ? Number(0) : Number(29, 99)
+                      ) -
+                      Number(discountApply ? Number(29, 99) : Number(0))
                     ).toFixed(2)}
                   </p>
                 </div>

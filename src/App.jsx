@@ -1,5 +1,5 @@
 // App.jsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Footer from "./LayoutComponents/Footer";
@@ -27,6 +27,10 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const hasToken = localStorage.getItem("token");
+
+  const [discount, setDiscount] = useState(false);
+  const [discountCode, setDiscountCode] = useState("");
+  const [discountApply, setDiscountApply] = useState(false);
 
   const getGravatar = (email) => {
     return gravatar.url(email, { s: "100", r: "x", d: "monsterid" }, true);
@@ -77,7 +81,11 @@ function App() {
           path="/order/*"
           element={
             <ProtectedRoute>
-              <OrderPage />
+              <OrderPage
+                discount={discount}
+                discountCode={discountCode}
+                discountApply={discountApply}
+              />
             </ProtectedRoute>
           }
         ></Route>
