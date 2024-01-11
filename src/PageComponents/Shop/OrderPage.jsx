@@ -25,15 +25,15 @@ function OrderPage() {
 
   const [newAddressMenu, setNewAddressMenu] = useState(false);
 
+  const [satisError, setSatisError] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [radioChecked, setRadioChecked] = useState(false);
-  console.log("radio checked", radioChecked);
   const [satisChecked, setSatisChecked] = useState(false);
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
   const loginState = useSelector((state) => state.general.roles.loggedIn);
-  console.log("login state", loginState);
+  // console.log("login state", loginState);
 
   const [addressList, setAddressList] = useState([]);
   const dispatch = useDispatch();
@@ -84,10 +84,9 @@ function OrderPage() {
     );
   }, [totalProduct]);
 
-  console.log("carttaki products", cartProducts);
+  // console.log("carttaki products", cartProducts);
 
-  console.log("satis sozlesmeisi ", satisChecked);
-  const submitHandler = (data) => {
+  const submitHandler = async (data) => {
     console.log("data", data);
     const formData = {
       title: data.title,
@@ -100,32 +99,36 @@ function OrderPage() {
       address: data.address,
     };
 
-    AxiosInstance.post("/user/address", formData)
+    await AxiosInstance.post("/user/address", formData)
       .then((res) => {
         console.log("yollanan data", res.data);
+        getAddresses();
       })
       .catch((err) => console.log(err));
-    getAddresses();
   };
 
-  const getAddresses = () => {
-    AxiosInstance.get("/user/address")
-      .then((res) => {
+  const getAddresses = async () => {
+    try {
+      await AxiosInstance.get("/user/address").then((res) => {
         console.log("res data", res.data);
         setAddressList(res.data);
+        console.log("setAddressList tetiklendi");
         console.log("address list", addressList);
-      })
-      .catch((err) => console.log(err));
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
     getAddresses();
-    console.log("address list", addressList);
   }, []);
 
   const completeOrder = () => {
     if (cartProducts.length > 0 && radioChecked && satisChecked) {
       navigate("/complete-order");
+    } else {
+      setSatisError(true);
     }
   };
 
@@ -394,7 +397,7 @@ function OrderPage() {
         )}
       </div>
       <div className="w-[22%] flex flex-col items-center justify-start">
-        <div className="w-5/6 py-2  flex gap-2 justify-center">
+        <div className="w-5/6 py-2  flex flex-col gap-2 justify-center items-center">
           <div className=" border border-[#6CB9D8] rounded-lg w-11/12">
             <div className="flex px-2 py-2 justify-center items-start">
               {satisChecked ? (
@@ -420,6 +423,11 @@ function OrderPage() {
               </p>
             </div>
           </div>
+          {satisError && (
+            <p className="text-dangerRed text-xs px-3">
+              Devam etmek icin satis sozlesmesini onaylamalisiniz .
+            </p>
+          )}
         </div>
         <div className="w-5/6  h-max py-2 flex flex-col gap-3">
           <div className="flex justify-center">
@@ -458,7 +466,12 @@ function OrderPage() {
                 <div className="flex justify-between items-center">
                   <h3>Toplam</h3>
                   <p className="font-semibold text-xl text-primaryColor">
-                    $ {Number(Number(totalPrice) + Number(29, 99)).toFixed(2)}
+                    ${" "}
+                    {Number(
+                      Number(totalPrice) + cartProducts.length == 0
+                        ? Number(0)
+                        : Number(29, 99)
+                    ).toFixed(2)}
                   </p>
                 </div>
               )}

@@ -457,7 +457,15 @@ function OrderCompletePage() {
         )}
       </div>
       <div className="w-[22%] flex flex-col items-center justify-start">
-        <div className="w-5/6 py-2  flex gap-2 justify-center">
+        <div className="w-5/6 py-2 flex-col items-center flex gap-3 justify-center">
+          <div className="flex justify-center w-full">
+            <Button
+              onClick={completeOrder}
+              className="w-11/12 tracking-widest bg-primaryColor"
+            >
+              Odeme Yap
+            </Button>
+          </div>
           <div className=" border border-[#6CB9D8] rounded-lg w-11/12">
             <div className="flex px-2 py-2 justify-center items-start">
               {satisChecked ? (
@@ -527,18 +535,12 @@ function OrderCompletePage() {
               )}
             </div>
           </div>
-          <div className="flex justify-center ">
-            <div className="border border-[#6CB9D8] rounded-md py-1 w-11/12">
-              <div className="flex items-center justify-center gap-2 hover:cursor-pointer w-full">
-                <AiOutlinePlus className=" text-primaryColor " />
-                <p className="text-sm tracking-tight">İNDİRİM KODU GİR</p>
-              </div>
-            </div>
-          </div>
-
           <div className="flex justify-center w-full">
-            <Button onClick={completeOrder} className="w-11/12 bg-primaryColor">
-              Kaydet ve Devam Et
+            <Button
+              onClick={completeOrder}
+              className="w-11/12 tracking-widest bg-primaryColor"
+            >
+              Odeme Yap
             </Button>
           </div>
         </div>

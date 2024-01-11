@@ -88,8 +88,8 @@ function ShoppingCart() {
                 </div>
               )}
               <div className="border-b-2 py-5 w-full flex justify-center">
-                <div className="w-11/12  flex justify-between">
-                  <div className="flex  w-3/5 items-center gap-2">
+                <div className="w-11/12  flex justify-between items-center">
+                  <div className="flex  w-[65%] items-center gap-2">
                     <div className="flex flex-col justify-center">
                       <FaSquareCheck className="h-7 w-7 text-primaryColor" />
                     </div>
@@ -116,32 +116,41 @@ function ShoppingCart() {
                         </p>
                       </div>
                     </div>
+                    <div className="min-w-max flex flex-col items-center">
+                      <p className="font-medium ">Adet fiyati</p>
+                      <p className="text-base font-semibold text-primaryColor">
+                        $ {item.product.price}
+                      </p>
+                    </div>
                   </div>
-                  <div className=" flex items-center ">
+                  <div className=" flex items-center">
                     <Button
                       size="sm"
-                      className="h-2/5 flex justify-center items-center bg-[#E2F3FD] text-white rounded-none"
+                      className="h-[45px] flex justify-center items-center bg-[#E2F3FD] text-white rounded-none"
                       onClick={() =>
                         dispatch(decrementProduct(item.product.id))
                       }
                     >
                       <span className="font-bold text-3xl text-darkBg">-</span>
                     </Button>
-                    <div className="border h-2/5 w-12 flex justify-center items-center text-lg font-medium">
+                    <div className="border h-[45px] w-12 flex justify-center items-center text-lg font-medium">
                       <p>{item.count}</p>
                     </div>
 
                     <Button
                       size="sm"
-                      className="h-2/5 flex justify-center items-center bg-[#E2F3FD] text-white rounded-none"
+                      className="h-[45px] flex justify-center items-center bg-[#E2F3FD] text-white rounded-none"
                       onClick={() => dispatch(increaseProduct(item.product.id))}
                     >
                       <span className="font-bold text-xl text-darkBg">+</span>
                     </Button>
                   </div>
-                  <div className=" flex justify-center items-center">
-                    <p className="text-lg font-semibold text-primaryColor">
-                      $ {item.product.price}
+                  <div className="flex flex-col items-center ">
+                    <p className=" text-darkBg font-medium min-w-max">
+                      Urun toplami{" "}
+                    </p>
+                    <p className="text-base font-semibold text-primaryColor">
+                      ${(item.product.price * item.count).toFixed(2)}
                     </p>
                   </div>
                   <div className=" flex justify-center items-center hover:cursor-pointer">
@@ -170,10 +179,13 @@ function ShoppingCart() {
                     $ {totalPrice.toFixed(2)}
                   </p>
                 </div>
-                <div className="flex justify-between">
-                  <h3>Kargo Toplamı</h3>
-                  <p>$ 29,99 </p>
-                </div>
+                {cartProducts.length !== 0 && (
+                  <div className="flex justify-between">
+                    <h3>Kargo Toplamı</h3>
+                    <p>$ 29,99 </p>
+                  </div>
+                )}
+
                 {totalPrice.toFixed(2) >= 150 && (
                   <div className="flex justify-between">
                     <h3>
@@ -196,7 +208,11 @@ function ShoppingCart() {
                 <div className="flex justify-between items-center">
                   <h3>Toplam</h3>
                   <p className="font-semibold text-xl text-primaryColor">
-                    $ {Number(Number(totalPrice) + Number(29, 99)).toFixed(2)}
+                    ${" "}
+                    {Number(
+                      Number(totalPrice) +
+                        (cartProducts.length == 0 ? Number(0) : Number(29, 99))
+                    ).toFixed(2)}
                   </p>
                 </div>
               )}

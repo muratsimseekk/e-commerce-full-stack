@@ -50,7 +50,6 @@ function App() {
           );
         })
         .catch((err) => {
-          toast.error("An error occurs on verify process");
           localStorage.removeItem("token");
         });
     } catch {}
@@ -58,11 +57,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (hasToken == null) {
-        navigate("/signup");
-      } else {
-        await verifyHandler();
-      }
+      await verifyHandler();
     };
     fetchData();
   }, []);
