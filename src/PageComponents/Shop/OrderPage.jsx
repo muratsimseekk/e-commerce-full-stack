@@ -169,7 +169,9 @@ function OrderPage() {
         </div>
         {radioError && (
           <div>
-            <p className="text-dangerRed ">*Teslimat adresi secmelisin</p>{" "}
+            <p className="text-dangerRed text-xl">
+              *Teslimat adresi secmelisiniz.
+            </p>{" "}
           </div>
         )}
 

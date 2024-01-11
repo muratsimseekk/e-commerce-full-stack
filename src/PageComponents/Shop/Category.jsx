@@ -22,6 +22,7 @@ function Category() {
   useEffect(() => {
     fetchProcess();
   }, []);
+
   const categories = useSelector((state) => state.general.categories);
 
   const sorted = categories.sort((a, b) => b.rating - a.rating);

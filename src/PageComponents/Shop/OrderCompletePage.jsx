@@ -22,8 +22,6 @@ function OrderCompletePage() {
 
   const [newCard, setNewCard] = useState(false);
 
-  const [totalPrice, setTotalPrice] = useState(0);
-
   const [radioChecked, setRadioChecked] = useState(false);
   // console.log("radio checked", radioChecked);
   const [satisChecked, setSatisChecked] = useState(false);

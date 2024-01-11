@@ -31,6 +31,7 @@ function App() {
   const [discount, setDiscount] = useState(false);
   const [discountCode, setDiscountCode] = useState("");
   const [discountApply, setDiscountApply] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const getGravatar = (email) => {
     return gravatar.url(email, { s: "100", r: "x", d: "monsterid" }, true);
@@ -81,11 +82,7 @@ function App() {
           path="/order/*"
           element={
             <ProtectedRoute>
-              <OrderPage
-                discount={discount}
-                discountCode={discountCode}
-                discountApply={discountApply}
-              />
+              <OrderPage />
             </ProtectedRoute>
           }
         ></Route>

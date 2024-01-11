@@ -253,6 +253,7 @@ function ShoppingCart() {
                 <div className="flex justify-between items-center">
                   <h3>Toplam</h3>
                   <p className="font-semibold text-xl text-primaryColor">
+                    ${" "}
                     {totalPrice.toFixed(2) == 0
                       ? Number(0)
                       : (
@@ -264,7 +265,6 @@ function ShoppingCart() {
                           ) -
                           Number(discountApply ? Number(29, 99) : Number(0))
                         ).toFixed(2)}
-                    ${" "}
                   </p>
                 </div>
               )}

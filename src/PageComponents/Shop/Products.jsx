@@ -35,7 +35,7 @@ function Products() {
 
   const [page, setPage] = useState(0);
   const urlParam = useParams();
-  const parametre = urlParam["*"].replace("/", ":");
+  let parametre = urlParam["*"].replace("/", ":");
 
   const fetchData = () => {
     setLoading(true);
@@ -93,7 +93,6 @@ function Products() {
   };
 
   const products = useSelector((state) => state.product.productList);
-  // console.log("current products", products);
   return loading ? (
     <div className="flex justify-center">
       <Spinner color="blue" className="w-36 h-36 pb-8" />
@@ -153,7 +152,7 @@ function Products() {
               {products?.map((item, i) => (
                 <div
                   key={i}
-                  className=" xl:w-[23%] flex flex-col text-center justify-between xl:gap-6 gap-8 "
+                  className=" xl:w-[23%] flex shadow-sm hover:shadow-xl flex-col text-center justify-between xl:gap-6 gap-8 "
                 >
                   <Link to={`/shop/category/${item.id}/${item.name}`}>
                     <img
@@ -176,7 +175,7 @@ function Products() {
                   <div className="flex gap-2 justify-center">
                     <button
                       onClick={() => dispatch(addShoppingCard(item))}
-                      className="w-full py-1 bg-primaryColor rounded-md text-white shadow-md"
+                      className="w-full py-1 bg-[#9AD6F8] hover:bg-primaryColor rounded-md text-white shadow-md"
                     >
                       Sepete Ekle
                     </button>
