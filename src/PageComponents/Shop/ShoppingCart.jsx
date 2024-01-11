@@ -3,7 +3,7 @@ import { HiOutlineCube } from "react-icons/hi2";
 import { FaSquareCheck } from "react-icons/fa6";
 import { FaShippingFast } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 import { Button } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,9 +13,14 @@ import {
   increaseProduct,
 } from "../../store/actions/shoppingAction";
 import { Link, useNavigate } from "react-router-dom";
+import { set } from "react-hook-form";
+import { toast } from "react-toastify";
 function ShoppingCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
+  const [discount, setDiscount] = useState(false);
+  const [discountCode, setDiscountCode] = useState("");
+  const [discountApply, setDiscountApply] = useState(false);
 
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -65,6 +70,16 @@ function ShoppingCart() {
     );
   }, [totalProduct]);
 
+  const discountCodeHandler = () => {
+    if (discountCode == "KOD123") {
+      setDiscount(false);
+      toast.success("İndirim kodu başarıyla uygulandı");
+      setDiscountApply(true);
+    } else {
+      toast.error("İndirim kodu yanlış");
+      setDiscountApply(false);
+    }
+  };
   return (
     <div className="w-full flex justify-center py-20">
       <div className="w-[73%]  flex flex-col gap-5">
@@ -185,7 +200,6 @@ function ShoppingCart() {
                     <p>$ 29,99 </p>
                   </div>
                 )}
-
                 {totalPrice.toFixed(2) >= 150 && (
                   <div className="flex justify-between">
                     <h3>
@@ -195,13 +209,22 @@ function ShoppingCart() {
                     <p className="text-primaryColor">-$ 29.99</p>
                   </div>
                 )}
+                {discountApply && (
+                  <div className="flex justify-between">
+                    <h3>İndirim Kodu</h3>
+                    <p className="text-primaryColor">-$ 29.99</p>
+                  </div>
+                )}
               </div>
               <hr className="border border-primaryColor" />
               {totalPrice.toFixed(2) >= 150 ? (
                 <div className="flex justify-between items-center">
                   <h3>Toplam</h3>
                   <p className="font-semibold text-xl text-primaryColor">
-                    $ {totalPrice.toFixed(2)}
+                    ${" "}
+                    {(
+                      totalPrice - (discountApply ? Number("29.99") : Number(0))
+                    ).toFixed(2)}
                   </p>
                 </div>
               ) : (
@@ -210,20 +233,45 @@ function ShoppingCart() {
                   <p className="font-semibold text-xl text-primaryColor">
                     ${" "}
                     {Number(
-                      Number(totalPrice) +
-                        (cartProducts.length == 0 ? Number(0) : Number(29, 99))
+                      Number(totalPrice).toFixed(2) +
+                        (cartProducts.length == 0
+                          ? Number(0)
+                          : Number(29, 99)) -
+                        (discountApply ? Number(29, 99) : Number(0))
                     ).toFixed(2)}
                   </p>
                 </div>
               )}
             </div>
           </div>
-          <div className="flex justify-center ">
+          <div className="flex flex-col items-center gap-1 ">
+            {discount && (
+              <input
+                onChange={(e) => setDiscountCode(e.target.value)}
+                className="w-11/12 text-center border border-[#6CB9D8] rounded-md py-[2px]"
+                type="text"
+                placeholder="Indirim Kodu"
+              />
+            )}
             <div className="border border-[#6CB9D8] rounded-md py-1 w-11/12">
-              <div className="flex items-center justify-center gap-2 hover:cursor-pointer w-full">
-                <AiOutlinePlus className=" text-primaryColor " />
-                <p className="text-sm tracking-tight">İNDİRİM KODU GİR</p>
-              </div>
+              {discount ? (
+                <div
+                  onClick={() => {
+                    discountCodeHandler();
+                  }}
+                  className="flex items-center justify-center gap-2 hover:cursor-pointer w-full"
+                >
+                  <p className="text-sm tracking-tight">KODU GIR</p>
+                </div>
+              ) : (
+                <div
+                  onClick={() => setDiscount(true)}
+                  className="flex items-center justify-center gap-2 hover:cursor-pointer w-full"
+                >
+                  <AiOutlinePlus className=" text-primaryColor " />
+                  <p className="text-sm tracking-tight">İNDİRİM KODU GİR</p>
+                </div>
+              )}
             </div>
           </div>
           <Link to="/order">
