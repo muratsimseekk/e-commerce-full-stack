@@ -19,11 +19,12 @@ import {
   faStripe,
 } from "@fortawesome/free-brands-svg-icons";
 import { Link, useParams } from "react-router-dom";
-import { AxiosInstance } from "../../api/api";
+
 import { productFetch } from "../../store/actions/thunkAction";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { addShoppingCard } from "../../store/actions/shoppingAction";
 
 function Products() {
   const dispatch = useDispatch();
@@ -92,7 +93,7 @@ function Products() {
   };
 
   const products = useSelector((state) => state.product.productList);
-  console.log("current products", products);
+  // console.log("current products", products);
   return loading ? (
     <div className="flex justify-center">
       <Spinner color="blue" className="w-36 h-36 pb-8" />
@@ -173,10 +174,12 @@ function Products() {
                     </span>
                   </div>
                   <div className="flex gap-2 justify-center">
-                    <button className="h-5 w-5 bg-primaryColor rounded-full"></button>
-                    <button className="h-5 w-5 bg-secondaryColorGreen rounded-full"></button>
-                    <button className="h-5 w-5 bg-alertColor rounded-full"></button>
-                    <button className="h-5 w-5 bg-darkBg rounded-full"></button>
+                    <button
+                      onClick={() => dispatch(addShoppingCard(item))}
+                      className="w-full py-1 bg-primaryColor rounded-md text-white shadow-md"
+                    >
+                      Sepete Ekle
+                    </button>
                   </div>
                 </div>
               ))}

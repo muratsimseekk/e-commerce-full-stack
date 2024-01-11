@@ -50,35 +50,32 @@ function Header() {
 
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
-  const productList = useSelector((state) => state.product.productList);
+  console.log("shopping carttaki itemlar", shopCardProducts);
+  const allProducts = useSelector((state) => state.product.productList);
+  console.log("all products", allProducts);
 
   useEffect(() => {
     const updatedCartProducts = shopCardProducts.map((cartItem) => {
-      if (cartItem.product) {
-        // Check if cartItem.product is defined
-        const matchingProduct = productList.find(
-          (product) => product.id === cartItem.product.id
-        );
-
-        if (matchingProduct) {
-          return {
-            ...cartItem,
-            product: matchingProduct,
-          };
-        } else {
-          return cartItem;
-        }
+      const matchingProduct = allProducts.find(
+        (product) => product.id === cartItem.product.id
+      );
+      console.log("matching product", matchingProduct);
+      if (matchingProduct) {
+        return {
+          ...cartItem,
+          product: matchingProduct,
+        };
       } else {
         return cartItem;
       }
     });
 
-    setTotalProduct((prev) =>
-      shopCardProducts.reduce((total, item) => total + item.count, 0)
+    setTotalProduct(() =>
+      updatedCartProducts.reduce((total, item) => total + item.count, 0)
     );
 
     setCartProducts(updatedCartProducts);
-  }, [shopCardProducts, productList]);
+  }, [shopCardProducts, allProducts]);
 
   const userNav = useSelector((state) => state.general.roles);
 

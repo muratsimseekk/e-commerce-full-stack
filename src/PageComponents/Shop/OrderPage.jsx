@@ -15,7 +15,7 @@ import { AxiosInstance } from "../../api/api";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { set, useForm } from "react-hook-form";
 
-function OrderPage({ discount, discountCode, discountApply }) {
+function OrderPage() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
 
@@ -30,6 +30,8 @@ function OrderPage({ discount, discountCode, discountApply }) {
 
   const [radioChecked, setRadioChecked] = useState(false);
   const [satisChecked, setSatisChecked] = useState(false);
+
+  const [radioError, setRadioError] = useState(false);
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
   const loginState = useSelector((state) => state.general.roles.loggedIn);
@@ -127,8 +129,10 @@ function OrderPage({ discount, discountCode, discountApply }) {
   const completeOrder = () => {
     if (cartProducts.length > 0 && radioChecked && satisChecked) {
       navigate("/complete-order");
-    } else {
+    } else if (satisChecked == false) {
       setSatisError(true);
+    } else if (radioChecked == false) {
+      setRadioError(true);
     }
   };
 
@@ -163,6 +167,12 @@ function OrderPage({ discount, discountCode, discountApply }) {
             Fatura adresinizi secin.
           </p>
         </div>
+        {radioError && (
+          <div>
+            <p className="text-dangerRed ">*Teslimat adresi secmelisin</p>{" "}
+          </div>
+        )}
+
         <div className=" flex flex-col gap-6 py-5 rounded-md border-[#6CB9D8] border">
           <div className="flex justify-between  px-4 py-3">
             <h2 className="font-medium text-lg text-darkBg">

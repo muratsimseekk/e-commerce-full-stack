@@ -1,5 +1,6 @@
 import {
   ADD_SHOPPING_CARD,
+  CHECKED_BUTTON,
   DECREMENT_BUTTON,
   DELETE_SHOPPING_CARD,
   INCREMENT_BUTTON,
@@ -37,6 +38,7 @@ export const shopingCardReducer = (state = initialCardValues, action) => {
             ...state.cart,
             {
               count: 1,
+              checked: true,
               product: { id: action.payload.id },
             },
           ],
@@ -68,6 +70,18 @@ export const shopingCardReducer = (state = initialCardValues, action) => {
             } else {
               return { ...item, count: item.count - 1 };
             }
+          } else {
+            return item;
+          }
+        }),
+      };
+
+    case CHECKED_BUTTON:
+      return {
+        ...state,
+        cart: state.cart.map((item) => {
+          if (item.product.id === action.payload) {
+            return { ...item, checked: !item.checked };
           } else {
             return item;
           }

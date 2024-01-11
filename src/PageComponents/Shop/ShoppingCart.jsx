@@ -4,10 +4,12 @@ import { FaSquareCheck } from "react-icons/fa6";
 import { FaShippingFast } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { ImCheckboxUnchecked } from "react-icons/im";
 
 import { Button } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  checkedProduct,
   decrementProduct,
   deleteShoppingCard,
   increaseProduct,
@@ -65,11 +67,12 @@ function ShoppingCart() {
   useEffect(() => {
     setTotalPrice(
       cartProducts.reduce(
-        (total, item) => total + item.product.price * item.count,
+        (total, item) =>
+          total + (item.checked ? item.product.price * item.count : 0),
         0
       )
     );
-  }, [totalProduct]);
+  }, [totalProduct, cartProducts]);
 
   console.log("cart products", cartProducts);
   const discountCodeHandler = () => {
@@ -110,7 +113,21 @@ function ShoppingCart() {
                 <div className="w-11/12  flex justify-between items-center">
                   <div className="flex  w-[65%] items-center gap-2">
                     <div className="flex flex-col justify-center">
-                      <FaSquareCheck className="h-7 w-7 text-primaryColor" />
+                      {item.checked ? (
+                        <FaSquareCheck
+                          onClick={() =>
+                            dispatch(checkedProduct(item.product.id))
+                          }
+                          className="h-7 w-7 text-primaryColor"
+                        />
+                      ) : (
+                        <ImCheckboxUnchecked
+                          onClick={() =>
+                            dispatch(checkedProduct(item.product.id))
+                          }
+                          className="h-7 w-7 text-primaryColor"
+                        />
+                      )}
                     </div>
                     <div className="h-24 w-24">
                       <img
@@ -236,14 +253,18 @@ function ShoppingCart() {
                 <div className="flex justify-between items-center">
                   <h3>Toplam</h3>
                   <p className="font-semibold text-xl text-primaryColor">
+                    {totalPrice.toFixed(2) == 0
+                      ? Number(0)
+                      : (
+                          Number(totalPrice) +
+                          Number(
+                            cartProducts.length == 0
+                              ? Number(0)
+                              : Number(29, 99)
+                          ) -
+                          Number(discountApply ? Number(29, 99) : Number(0))
+                        ).toFixed(2)}
                     ${" "}
-                    {(
-                      Number(totalPrice) +
-                      Number(
-                        cartProducts.length == 0 ? Number(0) : Number(29, 99)
-                      ) -
-                      Number(discountApply ? Number(29, 99) : Number(0))
-                    ).toFixed(2)}
                   </p>
                 </div>
               )}
