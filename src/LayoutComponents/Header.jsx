@@ -27,6 +27,12 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutChange } from "../store/actions/globalAction";
 import { Button } from "@material-tailwind/react";
+import {
+  decrementProduct,
+  deleteShoppingCard,
+  increaseProduct,
+} from "../store/actions/shoppingAction";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 function Header() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -76,6 +82,8 @@ function Header() {
 
     setCartProducts(updatedCartProducts);
   }, [shopCardProducts, allProducts]);
+
+  console.log("cart products", cartProducts);
 
   const userNav = useSelector((state) => state.general.roles);
 
@@ -328,16 +336,47 @@ function Header() {
                                 <h2 className="text-darkBg font-medium tracking-wide">
                                   {item.product?.name}
                                 </h2>
-                                <div className="flex text-[#6F7DAE] font-medium">
+                                <div className="flex font-medium items-center gap-2 text-[#6F7DAE]">
                                   <h3 className="tracking-wider">
                                     Adet:&nbsp;
                                   </h3>
-                                  <p>{item.count}</p>
+                                  <div className="flex gap-2 items-center">
+                                    <button
+                                      onClick={() =>
+                                        dispatch(
+                                          decrementProduct(item.product.id)
+                                        )
+                                      }
+                                      className=" px-[6px] text-[#424D76] rounded-sm bg-[#7C89B6] flex justify-center items-start"
+                                    >
+                                      -
+                                    </button>
+                                    <p className="">{item?.count}</p>
+                                    <button
+                                      onClick={() =>
+                                        dispatch(
+                                          increaseProduct(item.product.id)
+                                        )
+                                      }
+                                      className=" text-[#424D76] px-[6px] rounded-sm bg-[#7C89B6] flex justify-center items-start"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+                                  <div className="ml-3">
+                                    <RiDeleteBin5Line
+                                      onClick={() =>
+                                        dispatch(
+                                          deleteShoppingCard(item.product.id)
+                                        )
+                                      }
+                                      className="h-4 w-4 text-[#424D76] hover:cursor-pointer"
+                                    />
+                                  </div>
                                 </div>
                                 <p className="font-semibold tracking-wider">
-                                  $ {item.product.price}
+                                  $ {item?.product.price}
                                 </p>
-                                <div></div>
                               </div>
                             </div>
                             <hr className="border mt-2 border-[#424D76]" />
