@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 function OrderCompletePage() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const [newCard, setNewCard] = useState(false);
 

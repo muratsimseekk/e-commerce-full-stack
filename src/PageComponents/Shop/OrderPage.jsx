@@ -240,7 +240,7 @@ function OrderPage() {
                         <p>{item?.phone}</p>
                       </div>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 overflow-hidden">
                       <h2>Adres:</h2>
                       <p>{item?.address}</p>
                       <p>
