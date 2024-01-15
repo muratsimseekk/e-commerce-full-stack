@@ -15,11 +15,14 @@ import { GrRadialSelected } from "react-icons/gr";
 import { AxiosInstance } from "../../api/api";
 
 import { useForm } from "react-hook-form";
+import card from "@material-tailwind/react/theme/components/card";
 
 function OrderCompletePage() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+
+  const [creditCards, setCreditCards] = useState([]);
 
   const [newCard, setNewCard] = useState(false);
 
@@ -152,36 +155,54 @@ function OrderCompletePage() {
     setState((prev) => ({ ...prev, focus: evt.target.name }));
   };
 
-  const saveCardHandler = (data) => {
-    console.log("tiklandi");
+  const saveCardHandler = async (data) => {
+    console.log("tiklandi", data);
+    const splt = data.expiry.split("");
+    console.log(splt);
+
+    const month = splt.slice(0, 2).join("");
+
+    console.log("month", month);
+
+    const year = splt.slice(2, 4).join("");
+    console.log("year", year);
+
     const cardData = {
-      number: data.number,
-      expiry: data.expiry,
-      cvc: data.cvc,
-      name: data.name,
+      card_no: data.number,
+      expire_month: month,
+      expire_year: year,
+      name_on_card: data.name,
     };
     console.log("Card data", data);
 
     // cannot post card data
 
-    AxiosInstance.post("/card", cardData)
+    await AxiosInstance.post("/user/card", cardData)
       .then((res) => {
         console.log("yollanan card data", res.data);
+        getCards();
       })
       .catch((err) => console.log("error occurs posting card data", err));
     // cannot get card list
-
-    AxiosInstance.get("/card")
-      .then((res) => {
-        console.log("card list", res.data);
-      })
-      .catch((err) => console.log("error occurs getting card list", err));
   };
 
-  // useEffect(() => {
-  //   cardListFetch();
-  // }, []);
+  const getCards = async () => {
+    try {
+      AxiosInstance.get("/user/card").then((res) => {
+        console.log("gelen card data ", res.data);
+        setCreditCards(res.data);
+      });
+    } catch (err) {
+      console.log("Data cekilirken hata ile karsilasildi", err);
+    }
+  };
 
+  useEffect(() => {
+    console.log("cardlar getirildi");
+    getCards();
+  }, []);
+
+  console.log("Credit Cards", creditCards);
   return (
     <div className="w-full  flex justify-center py-20">
       <div className=" w-[73%] flex flex-col gap-6">
@@ -240,66 +261,40 @@ function OrderCompletePage() {
                 </p>
               </div>
               <div className="flex justify-between flex-wrap gap-y-6">
-                <div className="flex w-[47%] flex-col">
-                  <div className="flex items-center  rounded-t-lg gap-3">
-                    <input type="radio" className="w-4 h-4" name="" id="" />
-                    <h2>BONUS kartim</h2>
-                  </div>
-                  <div className="w-full flex flex-col gap-4 p-3 rounded-b-lg bg-[#EDF6FA]">
-                    <div className="flex justify-between items-center ">
-                      <h2>BonusCard</h2>
-                      <FaCcMastercard className="w-6 h-6 text-white bg-gradient-to-r from-red-600 via-orange-500 to-yellow" />
+                {creditCards?.map((item, index) => {
+                  return (
+                    <div key={index} className="flex w-[47%] flex-col">
+                      <div className="flex items-center  rounded-t-lg gap-3">
+                        <input
+                          type="radio"
+                          className="w-4 h-4"
+                          name=""
+                          id={item.id}
+                        />
+                        <h2>Kart {item.id}</h2>
+                      </div>
+                      <div className="w-full flex flex-col gap-4 p-3 rounded-b-lg bg-[#EDF6FA]">
+                        <div className="flex justify-between items-center ">
+                          <h2 className="text-sm capitalize">
+                            <span className="font-medium ">Name : </span>
+                            {item.name_on_card}
+                          </h2>
+                          <FaCcMastercard className="w-6 h-6 text-white bg-gradient-to-r from-red-600 via-orange-500 to-yellow" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-end text-darkBg">
+                            {item.card_no}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-end text-darkBg">
+                            {item.expire_month}/{item.expire_year}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-semibold text-end">
-                        5555 60** **** 6885
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-end">8/2030</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex w-[47%] flex-col">
-                  <div className="flex items-center  rounded-t-lg gap-3">
-                    <input type="radio" className="w-4 h-4" name="" id="" />
-                    <h2>BONUS kartim</h2>
-                  </div>
-                  <div className="w-full flex flex-col gap-4 p-3 rounded-b-lg bg-[#EDF6FA]">
-                    <div className="flex justify-between items-center ">
-                      <h2>BonusCard</h2>
-                      <FaCcMastercard className="w-6 h-6 text-white bg-gradient-to-r from-red-600 via-orange-500 to-yellow" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-end">
-                        5555 60** **** 6885
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-end">8/2030</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex w-[47%] flex-col">
-                  <div className="flex items-center  rounded-t-lg gap-3">
-                    <input type="radio" className="w-4 h-4" name="" id="" />
-                    <h2>BONUS kartim</h2>
-                  </div>
-                  <div className="w-full flex flex-col gap-4 p-3 rounded-b-lg bg-[#EDF6FA]">
-                    <div className="flex justify-between items-center ">
-                      <h2>BonusCard</h2>
-                      <FaCcMastercard className="w-6 h-6 text-white bg-gradient-to-r from-red-600 via-orange-500 to-yellow" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-end">
-                        5555 60** **** 6885
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-end">8/2030</p>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
             <div className="w-2/5 flex flex-col gap-5 px-4">
