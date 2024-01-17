@@ -8,14 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
-import { AiOutlinePlus } from "react-icons/ai";
 import { FaCcMastercard } from "react-icons/fa";
 import { GrRadialSelected } from "react-icons/gr";
 
 import { AxiosInstance } from "../../api/api";
 
 import { useForm } from "react-hook-form";
-import card from "@material-tailwind/react/theme/components/card";
 
 function OrderCompletePage() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -27,6 +25,9 @@ function OrderCompletePage() {
   const [newCard, setNewCard] = useState(false);
 
   const [radioChecked, setRadioChecked] = useState(false);
+
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedPayment, setSelectedPayment] = useState(1);
   // console.log("radio checked", radioChecked);
   const [satisChecked, setSatisChecked] = useState(false);
   const shopCardProducts = useSelector((state) => state.shopping.cart);
@@ -202,6 +203,17 @@ function OrderCompletePage() {
     getCards();
   }, []);
 
+  const handleCardSelect = (id) => {
+    setSelectedCard(id);
+  };
+
+  const handlePaymentSelect = (id) => {
+    setSelectedPayment(id);
+  };
+  console.log("secilen kartin id si", selectedCard);
+
+  console.log("secilen taksit sayisi", selectedPayment);
+
   console.log("Credit Cards", creditCards);
   return (
     <div className="w-full  flex justify-center py-20">
@@ -263,17 +275,26 @@ function OrderCompletePage() {
               <div className="flex justify-between flex-wrap gap-y-6">
                 {creditCards?.map((item, index) => {
                   return (
-                    <div key={index} className="flex w-[47%] flex-col">
-                      <div className="flex items-center  rounded-t-lg gap-3">
-                        <input
-                          type="radio"
-                          className="w-4 h-4"
-                          name=""
-                          id={item.id}
-                        />
-                        <h2>Kart {item.id}</h2>
+                    <div key={index} className="flex w-[47%] flex-col gap-2">
+                      <div className="flex items-center justify-between rounded-t-lg ">
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="radio"
+                            className="w-4 h-4 accent-[#6CB9D8]"
+                            name="creditCard"
+                            id={item.id}
+                            checked={selectedCard == item.id}
+                            onChange={() => handleCardSelect(item.id)}
+                          />
+                          <h2 className="text-sm">Kart {item.id}</h2>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium hover:cursor-pointer hover:underline hover:text-dangerRed">
+                            Duzenle
+                          </p>
+                        </div>
                       </div>
-                      <div className="w-full flex flex-col gap-4 p-3 rounded-b-lg bg-[#EDF6FA]">
+                      <div className="w-full flex flex-col gap-4 p-3 rounded-lg bg-[#EDF6FA]">
                         <div className="flex justify-between items-center ">
                           <h2 className="text-sm capitalize">
                             <span className="font-medium ">Name : </span>
@@ -281,13 +302,15 @@ function OrderCompletePage() {
                           </h2>
                           <FaCcMastercard className="w-6 h-6 text-white bg-gradient-to-r from-red-600 via-orange-500 to-yellow" />
                         </div>
-                        <div>
-                          <p className="text-sm font-semibold text-end text-darkBg">
-                            {item.card_no}
-                          </p>
+                        <div className="flex justify-between items-center">
+                          <p className="text-sm font-medium">Kart No :</p>
+                          <p className="text-sm  ">{item.card_no}</p>
                         </div>
-                        <div>
-                          <p className="text-sm font-semibold text-end text-darkBg">
+                        <div className="flex justify-between items-center">
+                          <p className="text-sm font-medium">
+                            Son Kullanma Tarihi :
+                          </p>
+                          <p className="text-sm  text-end ">
                             {item.expire_month}/{item.expire_year}
                           </p>
                         </div>
@@ -304,26 +327,62 @@ function OrderCompletePage() {
                   Kartiniza uygun taksit secenegini seciniz
                 </p>
               </div>
-              <div className="border border-[#6CB9D8] rounded-lg  flex ">
-                <div className=" w-1/2 border-r border-[#6CB9D8]">
-                  <div className="border-b border-[#6CB9D8] bg-[#EDF6FA] rounded-l-lg pl-4 py-2 tracking-wide font-medium">
+              <div className="border border-[#6CB9D8]  rounded-lg  flex flex-col">
+                <div className=" w-full border-r flex rounded-md  border-[#6CB9D8]">
+                  <div className="border-b border-r w-1/2 border-[#6CB9D8] bg-[#EDF6FA] rounded-md pl-4 py-2 tracking-wide font-medium">
                     Taksit Sayisi
                   </div>
-                  <div className="pl-4 py-2 text-primaryColor items-center flex gap-3 ">
+                  <div className="border-l border-b border-[#6CB9D8] rounded-md w-1/2 bg-[#EDF6FA]  pl-4 py-2 tracking-wide font-medium">
+                    Aylik Odeme
+                  </div>
+                </div>
+                <div className="w-full flex border-b border-[#6CB9D8] rounded-md">
+                  <div className="pl-4 py-2 text-primaryColor border-r border-[#6CB9D8] rounded-md items-center w-1/2 flex gap-3 ">
                     <input
                       className="accent-[#6CB9D8]"
                       type="radio"
                       name=""
-                      id=""
+                      id="1"
+                      checked={selectedPayment == "1"}
+                      onChange={() => setSelectedPayment("1")}
                     />
                     <p className="text-sm ">Tek Cekim</p>
                   </div>
-                </div>
-                <div className="w-1/2">
-                  <div className="border-b border-[#6CB9D8] bg-[#EDF6FA] rounded-r-lg pl-4 py-2 tracking-wide font-medium">
-                    Aylik Odeme
+                  <div className=" py-2 w-1/2 text-center border-l border-[#6CB9D8] rounded-md text-primaryColor">
+                    $ {totalPrice.toFixed(2)}
                   </div>
-                  <div className="pl-4 py-2 text-primaryColor">6.604,22 TL</div>
+                </div>
+                <div className="w-full flex border-b border-[#6CB9D8] rounded-md">
+                  <div className="pl-4 py-2 text-primaryColor border-r border-[#6CB9D8] rounded-md items-center w-1/2 flex gap-3 ">
+                    <input
+                      className="accent-[#6CB9D8]"
+                      type="radio"
+                      name=""
+                      id="3"
+                      checked={selectedPayment == "3"}
+                      onChange={() => setSelectedPayment("3")}
+                    />
+                    <p className="text-sm ">3 Taksit</p>
+                  </div>
+                  <div className=" py-2 w-1/2 text-center border-l border-[#6CB9D8] rounded-md text-primaryColor">
+                    $ {(totalPrice / 3).toFixed(2)}
+                  </div>
+                </div>
+                <div className="w-full flex  border-[#6CB9D8] rounded-md">
+                  <div className="pl-4 py-2 text-primaryColor border-r border-[#6CB9D8] rounded-md items-center w-1/2 flex gap-3 ">
+                    <input
+                      className="accent-[#6CB9D8]"
+                      type="radio"
+                      name=""
+                      id="6"
+                      checked={selectedPayment == "6"}
+                      onChange={() => setSelectedPayment("6")}
+                    />
+                    <p className="text-sm ">6 Taksit</p>
+                  </div>
+                  <div className=" py-2 w-1/2 text-center border-l border-[#6CB9D8] rounded-md text-primaryColor">
+                    $ {(totalPrice / 6).toFixed(2)}
+                  </div>
                 </div>
               </div>
             </div>
@@ -510,7 +569,22 @@ function OrderCompletePage() {
                     <p className="text-primaryColor">-$ 29.99</p>
                   </div>
                 )}
+                <div className="flex justify-between">
+                  <h3 className="">Taksit Sayisi</h3>
+                  {selectedPayment == "1" ? (
+                    <p className=" text-sm font-medium">Tek Cekim</p>
+                  ) : (
+                    <p className="text-sm font-medium">
+                      {selectedPayment} Taksit
+                    </p>
+                  )}
+                </div>
+                <div className="flex justify-between">
+                  <h3 className="">Aylik Odeme</h3>
+                  <p>$ {(totalPrice / Number(selectedPayment)).toFixed(2)}</p>
+                </div>
               </div>
+
               <hr className="border border-primaryColor" />
               {totalPrice.toFixed(2) >= 150 ? (
                 <div className="flex justify-between items-center">
