@@ -14,6 +14,7 @@ import { MdOutlinePhoneIphone } from "react-icons/md";
 import { AxiosInstance } from "../../api/api";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { set, useForm } from "react-hook-form";
+import { orderAddressId } from "../../store/actions/orderAction";
 
 function OrderPage() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -115,7 +116,6 @@ function OrderPage() {
         console.log("res data", res.data);
         setAddressList(res.data);
         console.log("setAddressList tetiklendi");
-        console.log("address list", addressList);
       });
     } catch (err) {
       console.log(err);
@@ -128,6 +128,7 @@ function OrderPage() {
 
   const completeOrder = () => {
     if (cartProducts.length > 0 && radioChecked && satisChecked) {
+      dispatch(orderAddressId(radioChecked));
       navigate("/complete-order");
     } else if (satisChecked == false) {
       setSatisError(true);

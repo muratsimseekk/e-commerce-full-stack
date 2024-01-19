@@ -14,6 +14,7 @@ import { GrRadialSelected } from "react-icons/gr";
 import { AxiosInstance } from "../../api/api";
 
 import { useForm } from "react-hook-form";
+import { orderCardDetails } from "../../store/actions/orderAction";
 
 function OrderCompletePage() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -28,6 +29,8 @@ function OrderCompletePage() {
 
   const [selectedCard, setSelectedCard] = useState(null);
   const [selectedPayment, setSelectedPayment] = useState(1);
+
+  const [orderCard, setOrderCard] = useState({});
   // console.log("radio checked", radioChecked);
   const [satisChecked, setSatisChecked] = useState(false);
   const shopCardProducts = useSelector((state) => state.shopping.cart);
@@ -125,6 +128,7 @@ function OrderCompletePage() {
 
   const completeOrder = () => {
     if (cartProducts.length > 0 && radioChecked && satisChecked) {
+      dispatch(orderCardDetails(orderCard));
       navigate("/complete-order");
     }
   };
@@ -205,6 +209,11 @@ function OrderCompletePage() {
 
   const handleCardSelect = (id) => {
     setSelectedCard(id);
+    for (let i = 0; i < creditCards.length; i++) {
+      if (selectedCard == creditCards[i].id) {
+        setOrderCard(creditCards[i]);
+      }
+    }
   };
 
   const handlePaymentSelect = (id) => {
@@ -215,6 +224,7 @@ function OrderCompletePage() {
   console.log("secilen taksit sayisi", selectedPayment);
 
   console.log("Credit Cards", creditCards);
+  console.log("anlik secilen kart bu dur ", orderCard);
   return (
     <div className="w-full  flex justify-center py-20">
       <div className=" w-[73%] flex flex-col gap-6">

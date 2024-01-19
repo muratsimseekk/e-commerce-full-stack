@@ -1,4 +1,8 @@
-import { ORDER_PRODUCT_LIST } from "../actions/orderAction";
+import {
+  ORDER_ADDRESS_ID,
+  ORDER_CARD_DETAILS,
+  ORDER_PRODUCT_LIST,
+} from "../actions/orderAction";
 
 const initialOrderValues = {
   address_id: null,
@@ -23,6 +27,18 @@ export const orderReducer = (state = initialOrderValues, action) => {
       return {
         ...state,
         products: [...state.products, ...newProducts],
+      };
+
+    case ORDER_ADDRESS_ID:
+      return { ...state, address_id: action.payload };
+
+    case ORDER_CARD_DETAILS:
+      return {
+        ...state,
+        card_no: action.payload.card_no,
+        card_name: action.payload.name_on_card,
+        card_expire_month: action.payload.expire_month,
+        card_expire_year: action.payload.expire_year,
       };
 
     default:
