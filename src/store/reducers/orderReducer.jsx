@@ -1,6 +1,7 @@
 import {
   ORDER_ADDRESS_ID,
   ORDER_CARD_DETAILS,
+  ORDER_PRICE,
   ORDER_PRODUCT_LIST,
 } from "../actions/orderAction";
 
@@ -40,6 +41,9 @@ export const orderReducer = (state = initialOrderValues, action) => {
         card_expire_month: action.payload.expire_month,
         card_expire_year: action.payload.expire_year,
       };
+
+    case ORDER_PRICE:
+      return { ...state, price: action.payload };
 
     default:
       return state;

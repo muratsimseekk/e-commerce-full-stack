@@ -17,10 +17,11 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { set } from "react-hook-form";
 import { toast } from "react-toastify";
-import { orderProductList } from "../../store/actions/orderAction";
+import { orderPrice, orderProductList } from "../../store/actions/orderAction";
 function ShoppingCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
+  const [orderTotalPrice, setOrderTotalPrice] = useState(0);
 
   const [discount, setDiscount] = useState(false);
   const [discountCode, setDiscountCode] = useState("");
@@ -75,10 +76,32 @@ function ShoppingCart() {
     );
   }, [totalProduct, cartProducts]);
 
+  useEffect(() => {
+    if (totalPrice.toFixed(2) >= 150) {
+      setOrderTotalPrice(
+        (
+          Number(totalPrice) -
+          Number(discountApply ? Number(29, 99) : Number(0))
+        ).toFixed(2)
+      );
+    } else {
+      setOrderTotalPrice(
+        totalPrice.toFixed(2) == 0
+          ? Number(0)
+          : (
+              Number(totalPrice) +
+              Number(cartProducts.length == 0 ? Number(0) : Number(29, 99)) -
+              Number(discountApply ? Number(29, 99) : Number(0))
+            ).toFixed(2)
+      );
+    }
+  }, [totalPrice]);
+
   console.log("cart products", cartProducts);
 
   const orderHandler = () => {
     dispatch(orderProductList(cartProducts));
+    dispatch(orderPrice(orderTotalPrice));
   };
 
   const discountCodeHandler = () => {
