@@ -5,14 +5,19 @@ import {
   ORDER_PRODUCT_LIST,
 } from "../actions/orderAction";
 
+const timeElapsed = Date.now();
+const today = new Date(timeElapsed);
+
+const orderDate = today.toISOString();
+
 const initialOrderValues = {
   address_id: null,
-  order_date: "",
+  order_date: orderDate,
   card_no: null,
   card_name: "",
   card_expire_month: null,
   card_expire_year: null,
-  card_ccv: null,
+  card_ccv: 321,
   price: null,
   products: [],
 };

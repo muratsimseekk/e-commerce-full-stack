@@ -33,6 +33,9 @@ function OrderCompletePage() {
   const [orderCard, setOrderCard] = useState({});
   // console.log("radio checked", radioChecked);
   const [satisChecked, setSatisChecked] = useState(false);
+
+  const orderSummaryReducer = useSelector((state) => state.order);
+
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
   const loginState = useSelector((state) => state.general.roles.loggedIn);
@@ -126,13 +129,6 @@ function OrderCompletePage() {
     console.log("address list", addressList);
   }, []);
 
-  const completeOrder = () => {
-    if (cartProducts.length > 0 && radioChecked && satisChecked) {
-      dispatch(orderCardDetails(orderCard));
-      navigate("/complete-order");
-    }
-  };
-
   const [state, setState] = useState({
     number: "",
     expiry: "",
@@ -209,10 +205,22 @@ function OrderCompletePage() {
 
   const handleCardSelect = (id) => {
     setSelectedCard(id);
+  };
+
+  useEffect(() => {
     for (let i = 0; i < creditCards.length; i++) {
       if (selectedCard == creditCards[i].id) {
         setOrderCard(creditCards[i]);
+        dispatch(orderCardDetails(creditCards[i]));
       }
+    }
+  }, [selectedCard]);
+
+  const completeOrder = () => {
+    if (cartProducts.length > 0 && selectedCard) {
+      AxiosInstance.post("/order", orderSummaryReducer).then((res) => {
+        console.log("Siparis verildi ", res.data);
+      });
     }
   };
 
@@ -225,6 +233,8 @@ function OrderCompletePage() {
 
   console.log("Credit Cards", creditCards);
   console.log("anlik secilen kart bu dur ", orderCard);
+
+  console.log("orderSummaryReducer anlik", orderSummaryReducer);
   return (
     <div className="w-full  flex justify-center py-20">
       <div className=" w-[73%] flex flex-col gap-6">
