@@ -22,6 +22,7 @@ import ShoppingCart from "./PageComponents/Shop/ShoppingCart";
 import OrderPage from "./PageComponents/Shop/OrderPage";
 import { ProtectedRoute } from "./PageComponents/ProtectedRoute";
 import OrderCompletePage from "./PageComponents/Shop/OrderCompletePage";
+import PreviousOrders from "./PageComponents/Shop/PreviousOrders";
 //Shop/* verdim cunku alt componentler icin de path acildi
 function App() {
   const dispatch = useDispatch();
@@ -83,6 +84,15 @@ function App() {
           element={
             <ProtectedRoute>
               <OrderPage />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/previos-orders"
+          element={
+            <ProtectedRoute>
+              <PreviousOrders />
             </ProtectedRoute>
           }
         ></Route>

@@ -15,6 +15,7 @@ import { AxiosInstance } from "../../api/api";
 
 import { useForm } from "react-hook-form";
 import { orderCardDetails } from "../../store/actions/orderAction";
+import { toast } from "react-toastify";
 
 function OrderCompletePage() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -33,6 +34,9 @@ function OrderCompletePage() {
   const [orderCard, setOrderCard] = useState({});
   // console.log("radio checked", radioChecked);
   const [satisChecked, setSatisChecked] = useState(false);
+
+  const [orderInfoMenu, setOrderInfoMenu] = useState(false);
+  const [orderInfoData, setOrderInfoData] = useState();
 
   const orderSummaryReducer = useSelector((state) => state.order);
 
@@ -217,11 +221,29 @@ function OrderCompletePage() {
   }, [selectedCard]);
 
   const completeOrder = () => {
-    if (cartProducts.length > 0 && selectedCard) {
-      AxiosInstance.post("/order", orderSummaryReducer).then((res) => {
-        console.log("Siparis verildi ", res.data);
-      });
+    if (
+      orderSummaryReducer.address_id &&
+      orderSummaryReducer.card_no &&
+      orderSummaryReducer.price
+    ) {
+      AxiosInstance.post("/order", orderSummaryReducer)
+        .then((res) => {
+          console.log("Siparis verildi ", res.data);
+          setOrderInfoData(res.data);
+          setOrderInfoMenu(true);
+          toast.success("Siparis basariyla verildi");
+          previousOrders();
+        })
+        .catch((err) =>
+          console.log("order data yollanirken hata bir seyler eksik", err)
+        );
     }
+  };
+
+  const previousOrders = async () => {
+    await AxiosInstance.get("/order").then((res) => {
+      console.log("previous siparislerden donen data ", res.data);
+    });
   };
 
   const handlePaymentSelect = (id) => {
@@ -236,7 +258,60 @@ function OrderCompletePage() {
 
   console.log("orderSummaryReducer anlik", orderSummaryReducer);
   return (
-    <div className="w-full  flex justify-center py-20">
+    <div className="w-full relative flex justify-center py-20">
+      {orderInfoMenu && (
+        <div className="absolute  w-1/2 h-2/3 left-1/2 transform -translate-x-1/2  ">
+          <div className="w-full h-full  flex justify-center items-center">
+            <div className="w-2/3 bg-darkBg h-4/5 flex flex-col opacity-90 items-center gap-8 pt-16 rounded-xl">
+              <h2 className="text-dangerRed border-b-2 ">
+                Siparis basariyla olusturuldu .
+              </h2>
+              <div className="flex flex-col items-center text-white gap-4">
+                <p>
+                  Siparis ID :{" "}
+                  <span className="text-dangerRed ">{orderInfoData?.id}</span>
+                </p>
+                <p>
+                  Siparis verilme tarihi :{" "}
+                  <span className="text-dangerRed">
+                    {(orderInfoData?.order_date).slice(
+                      0,
+                      (orderInfoData?.order_date).indexOf("T")
+                    )}
+                  </span>
+                </p>
+                <p>
+                  Siparis Fiyati :{" "}
+                  <span className="text-dangerRed">
+                    {" "}
+                    $ {orderInfoData?.price}
+                  </span>
+                </p>
+              </div>
+              <div className="flex gap-5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOrderInfoMenu(false);
+                    navigate("/previos-orders");
+                  }}
+                  className="border py-[2px] px-[6px] rounded-lg text-white hover:bg-dangerRed"
+                >
+                  Siparislerim
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setOrderInfoMenu(false)}
+                  className="border py-[2px] px-[6px] rounded-lg text-white hover:bg-dangerRed"
+                >
+                  Kapat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className=" w-[73%] flex flex-col gap-6">
         <div className="flex w-full ">
           <div className="w-1/2 flex flex-col gap-2 px-4 py-3 border rounded-md border-[#6CB9D8]">
