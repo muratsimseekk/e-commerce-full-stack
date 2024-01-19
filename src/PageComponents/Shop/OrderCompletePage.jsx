@@ -32,6 +32,9 @@ function OrderCompletePage() {
   const [selectedPayment, setSelectedPayment] = useState(1);
 
   const [orderCard, setOrderCard] = useState({});
+
+  const [satisError, setSatisError] = useState(true);
+  const [cardSelectionError, setCardSelectionError] = useState(false);
   // console.log("radio checked", radioChecked);
   const [satisChecked, setSatisChecked] = useState(false);
 
@@ -224,7 +227,9 @@ function OrderCompletePage() {
     if (
       orderSummaryReducer.address_id &&
       orderSummaryReducer.card_no &&
-      orderSummaryReducer.price
+      orderSummaryReducer.price &&
+      selectedCard != null &&
+      satisChecked
     ) {
       AxiosInstance.post("/order", orderSummaryReducer)
         .then((res) => {
@@ -237,30 +242,21 @@ function OrderCompletePage() {
         .catch((err) =>
           console.log("order data yollanirken hata bir seyler eksik", err)
         );
+    } else if (!satisChecked) {
+      setSatisError(true);
+    } else if (!selectedCard) {
+      setCardSelectionError(true);
     }
-  };
-
-  const previousOrders = async () => {
-    await AxiosInstance.get("/order").then((res) => {
-      console.log("previous siparislerden donen data ", res.data);
-    });
   };
 
   const handlePaymentSelect = (id) => {
     setSelectedPayment(id);
   };
-  console.log("secilen kartin id si", selectedCard);
 
-  console.log("secilen taksit sayisi", selectedPayment);
-
-  console.log("Credit Cards", creditCards);
-  console.log("anlik secilen kart bu dur ", orderCard);
-
-  console.log("orderSummaryReducer anlik", orderSummaryReducer);
   return (
     <div className="w-full relative flex justify-center py-20">
       {orderInfoMenu && (
-        <div className="absolute  w-1/2 h-2/3 left-1/2 transform -translate-x-1/2  ">
+        <div className="absolute  w-1/2 h-2/3 left-1/2 transform -translate-x-1/2  z-50">
           <div className="w-full h-full  flex justify-center items-center">
             <div className="w-2/3 bg-darkBg h-4/5 flex flex-col opacity-90 items-center gap-8 pt-16 rounded-xl">
               <h2 className="text-dangerRed border-b-2 ">
@@ -358,6 +354,11 @@ function OrderCompletePage() {
           </div>
           <div className="flex py-5">
             <div className="w-3/5 border-r-2 gap-6 px-4 py-3 flex flex-col">
+              {cardSelectionError && (
+                <p className="text-dangerRed text-sm font-medium">
+                  Devam etmek icin bir kart secmelisiniz.*
+                </p>
+              )}
               <div className="flex justify-between ">
                 <h3 className="text-base font-semibold">Kart Bilgileri</h3>
                 <p
@@ -379,7 +380,10 @@ function OrderCompletePage() {
                             name="creditCard"
                             id={item.id}
                             checked={selectedCard == item.id}
-                            onChange={() => handleCardSelect(item.id)}
+                            onChange={() => {
+                              setCardSelectionError(false);
+                              handleCardSelect(item.id);
+                            }}
                           />
                           <h2 className="text-sm">Kart {item.id}</h2>
                         </div>
@@ -624,7 +628,10 @@ function OrderCompletePage() {
               ) : (
                 <MdCheckBoxOutlineBlank
                   className="w-12 h-12 text-darkBg"
-                  onClick={() => setSatisChecked(true)}
+                  onClick={() => {
+                    setSatisChecked(true);
+                    setSatisError(false);
+                  }}
                 />
               )}
               <p className="text-xs px-4">
@@ -639,6 +646,11 @@ function OrderCompletePage() {
               </p>
             </div>
           </div>
+          {satisError && (
+            <p className="text-dangerRed text-xs px-3">
+              Devam etmek icin satis sozlesmesini onaylamalisiniz .
+            </p>
+          )}
         </div>
         <div className="w-5/6  h-max py-2 flex flex-col gap-3">
           <div className="flex justify-center">
