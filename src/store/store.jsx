@@ -10,6 +10,7 @@ import { userReducer } from "./reducers/userReducer";
 import { storeReducer } from "./reducers/storeReducer";
 import { shopingCardReducer } from "./reducers/shoppingCardReducer";
 import { productReducer } from "./reducers/productReducer";
+import { orderReducer } from "./reducers/orderReducer";
 
 export const reducers = combineReducers({
   general: globalReducer,
@@ -17,6 +18,7 @@ export const reducers = combineReducers({
   store: storeReducer,
   shopping: shopingCardReducer,
   product: productReducer,
+  order: orderReducer,
   //   user: userReducer,
 });
 

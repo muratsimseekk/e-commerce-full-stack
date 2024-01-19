@@ -572,16 +572,20 @@ function OrderCompletePage() {
                 <div className="flex justify-between">
                   <h3 className="">Taksit Sayisi</h3>
                   {selectedPayment == "1" ? (
-                    <p className=" text-sm font-medium">Tek Cekim</p>
+                    <p className=" text-sm font-medium text-primaryColor">
+                      Tek Cekim
+                    </p>
                   ) : (
-                    <p className="text-sm font-medium">
+                    <p className="text-sm font-medium text-primaryColor">
                       {selectedPayment} Taksit
                     </p>
                   )}
                 </div>
                 <div className="flex justify-between">
                   <h3 className="">Aylik Odeme</h3>
-                  <p>$ {(totalPrice / Number(selectedPayment)).toFixed(2)}</p>
+                  <p className="font-medium text-primaryColor">
+                    $ {(totalPrice / Number(selectedPayment)).toFixed(2)}
+                  </p>
                 </div>
               </div>
 

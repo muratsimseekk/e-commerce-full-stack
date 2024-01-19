@@ -17,6 +17,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { set } from "react-hook-form";
 import { toast } from "react-toastify";
+import { orderProductList } from "../../store/actions/orderAction";
 function ShoppingCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
@@ -75,6 +76,11 @@ function ShoppingCart() {
   }, [totalProduct, cartProducts]);
 
   console.log("cart products", cartProducts);
+
+  const orderHandler = () => {
+    dispatch(orderProductList(cartProducts));
+  };
+
   const discountCodeHandler = () => {
     if (discountCode == "KOD123" && !discountApply) {
       setDiscount(false);
@@ -302,7 +308,10 @@ function ShoppingCart() {
           </div>
           <Link to="/order">
             <div className="flex justify-center w-full">
-              <Button className="w-11/12 bg-primaryColor">
+              <Button
+                onClick={orderHandler}
+                className="w-11/12 bg-primaryColor"
+              >
                 Siparisi Onayla
               </Button>
             </div>
