@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import {
   ADD_SHOPPING_CARD,
   CHECKED_BUTTON,
@@ -16,6 +17,7 @@ let i = 1;
 export const shopingCardReducer = (state = initialCardValues, action) => {
   switch (action.type) {
     case ADD_SHOPPING_CARD:
+      toast.success("Sepete Eklendi.");
       const existingProductIndex = state.cart.findIndex(
         (item) => item.product.id === action.payload.id
       );
@@ -45,6 +47,7 @@ export const shopingCardReducer = (state = initialCardValues, action) => {
         };
       }
     case DELETE_SHOPPING_CARD:
+      toast.error("Sepetten cikarildi.");
       return {
         ...state,
         cart: state.cart.filter((item) => item.product.id !== action.payload),

@@ -16,6 +16,7 @@ import { AxiosInstance } from "../../api/api";
 import { useForm } from "react-hook-form";
 import { orderCardDetails } from "../../store/actions/orderAction";
 import { toast } from "react-toastify";
+import card from "@material-tailwind/react/theme/components/card";
 
 function OrderCompletePage() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -23,6 +24,8 @@ function OrderCompletePage() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [creditCards, setCreditCards] = useState([]);
+  const [editCardMenu, setEditCardMenu] = useState(false);
+  const [editCardSelection, setEditCardSelection] = useState(null);
 
   const [newCard, setNewCard] = useState(false);
 
@@ -252,6 +255,60 @@ function OrderCompletePage() {
     setSelectedPayment(id);
   };
 
+  useEffect(() => {
+    const selectedCard = creditCards.filter(
+      (kart) => kart.id == editCardSelection
+    );
+    setSelectedCard(selectedCard);
+  }, [editCardSelection]);
+  console.log("Secilen kart bilgileri", selectedCard);
+  const editCardHandler = (cardID) => {
+    console.log(cardID, " tiklandi");
+    setEditCardMenu(true);
+    setEditCardSelection(cardID);
+  };
+
+  const editCardSubmit = async (data) => {
+    console.log("edited data", data);
+
+    const splt = data.expiry.split("");
+    console.log(splt);
+
+    const month = splt.slice(0, 2).join("");
+
+    console.log("month", month);
+
+    const year = splt.slice(2, 4).join("");
+    console.log("year", year);
+
+    const cardData = {
+      id: editCardSelection,
+      card_no: data.number,
+      expire_month: month,
+      expire_year: year,
+      name_on_card: data.name,
+    };
+
+    await AxiosInstance.put("/user/card", cardData).then((res) => {
+      console.log("donen data", res.data);
+      const updatedCardList = creditCards.filter((item) => {
+        if ((item.id = editCardSelection)) {
+          console.log(true);
+          item.id = editCardSelection;
+          item.card_no = selectedCard.card_no;
+          item.expire_month = selectedCard.expire_month;
+          item.expire_year = selectedCard.expire_year;
+          item.name_on_card = selectedCard.name_on_card;
+        }
+      });
+
+      setCreditCards(updatedCardList);
+    });
+
+    getCards();
+  };
+  console.log("Kartlar", creditCards);
+
   return (
     <div className="w-full relative flex justify-center py-20">
       {orderInfoMenu && (
@@ -387,7 +444,10 @@ function OrderCompletePage() {
                           <h2 className="text-sm">Kart {item.id}</h2>
                         </div>
                         <div>
-                          <p className="text-sm font-medium hover:cursor-pointer hover:underline hover:text-dangerRed">
+                          <p
+                            onClick={() => editCardHandler(item.id)}
+                            className="text-sm font-medium hover:cursor-pointer hover:underline hover:text-dangerRed"
+                          >
                             Duzenle
                           </p>
                         </div>
@@ -486,6 +546,129 @@ function OrderCompletePage() {
             </div>
           </div>
         </div>
+        {editCardMenu && (
+          <div className="w-full  flex justify-center">
+            <div className="w-full border flex flex-col gap-4 border-[#6CB9D8] rounded-md px-4 py-6">
+              <div className="flex justify-between items-center pb-2 border-b-2 border-[#EDF6FA] ">
+                <h3 className="text-xl font-semibold ">Kart Bilgileri</h3>
+                <p
+                  onClick={() => {
+                    setEditCardMenu(false);
+                    setNewCard(false);
+                  }}
+                  className="text-sm hover:cursor-pointer font-medium text-secondText underline"
+                >
+                  Kart duzenlemekten vazgec
+                </p>
+              </div>
+
+              <form
+                onSubmit={handleSubmit(editCardSubmit)}
+                className="flex flex-col flex-wrap gap-y-4 "
+              >
+                <Cards
+                  number={state.number}
+                  expiry={state.expiry}
+                  cvc={state.cvc}
+                  name={state.name}
+                  focused={state.focus}
+                />
+                <div className="flex gap-6 items-center">
+                  <label
+                    className=" border-b-2 border-l-2 border-l-secondText border-b-secondText text-darkBg px-2 py-1 "
+                    htmlFor="number"
+                  >
+                    Card Number :
+                  </label>
+                  <input
+                    {...register("number", {
+                      required: true,
+                    })}
+                    id="number"
+                    type="number"
+                    name="number"
+                    placeholder="Card Number"
+                    value={state.number}
+                    onChange={handleInputChange}
+                    onFocus={handleInputFocus}
+                    className=" border border-l-4 border-l-darkBg  bg-[#EDF6FA] p-1 rounded-md"
+                  />
+                </div>
+                <div className="flex gap-6 items-center">
+                  <label
+                    className=" border-b-2 border-l-2 border-l-secondText border-b-secondText text-darkBg px-2 py-1 "
+                    htmlFor="name"
+                  >
+                    Card Holder Name :
+                  </label>
+                  <input
+                    {...register("name", {
+                      required: true,
+                    })}
+                    id="name"
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    value={state.name}
+                    onChange={handleInputChange}
+                    onFocus={handleInputFocus}
+                    className=" border border-l-4 border-l-darkBg  bg-[#EDF6FA] p-1 rounded-md"
+                  />
+                </div>
+                <div className="flex gap-6 items-center">
+                  <label
+                    className=" border-b-2 border-l-2 border-l-secondText border-b-secondText text-darkBg px-2 py-1 "
+                    htmlFor="expiry"
+                  >
+                    Expiry Date :
+                  </label>
+                  <input
+                    {...register("expiry", {
+                      required: true,
+                    })}
+                    id="expiry"
+                    type="number"
+                    name="expiry"
+                    placeholder="Expiration Date"
+                    value={state.expiry}
+                    onChange={handleInputChange}
+                    onFocus={handleInputFocus}
+                    className=" border border-l-4 border-l-darkBg  bg-[#EDF6FA] p-1 rounded-md"
+                  />
+                </div>
+                <div className="flex gap-6 items-center">
+                  <label
+                    className=" border-b-2 border-l-2 border-l-secondText border-b-secondText text-darkBg px-2 py-1 "
+                    htmlFor="cvc"
+                  >
+                    CVC :
+                  </label>
+                  <input
+                    {...register("cvc", {
+                      required: true,
+                    })}
+                    id="cvc"
+                    type="number"
+                    name="cvc"
+                    placeholder="Expiration Date"
+                    value={state.cvc}
+                    onChange={handleInputChange}
+                    onFocus={handleInputFocus}
+                    className=" border border-l-4 border-l-darkBg  bg-[#EDF6FA] p-1 rounded-md"
+                  />
+                </div>
+                <div className=" flex justify-center">
+                  <button
+                    type="submit"
+                    className="bg-darkBg text-white px-2 py-1 rounded-lg hover:bg-white hover:text-darkBg border border-darkBg hover:font-medium"
+                  >
+                    Edit Card
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
         {newCard && (
           <div className="w-full  flex justify-center">
             <div className="w-full border flex flex-col gap-4 border-[#6CB9D8] rounded-md px-4 py-6">
