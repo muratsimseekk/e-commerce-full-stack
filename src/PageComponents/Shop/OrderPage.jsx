@@ -15,6 +15,7 @@ import { AxiosInstance } from "../../api/api";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { set, useForm } from "react-hook-form";
 import { orderAddressId } from "../../store/actions/orderAction";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 function OrderPage() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -25,6 +26,11 @@ function OrderPage() {
   const [region, setRegion] = useState("");
 
   const [newAddressMenu, setNewAddressMenu] = useState(false);
+
+  const [editMenu, setEditMenu] = useState(false);
+  const [editedAddress, setEditedAddress] = useState(null);
+
+  const [editAddressInfo, setEditAddressInfo] = useState(null);
 
   const [satisError, setSatisError] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -126,6 +132,54 @@ function OrderPage() {
     getAddresses();
   }, []);
 
+  useEffect(() => {
+    const selectedAddress = addressList.filter(
+      (add) => add.id == editedAddress
+    );
+    console.log("Secilen address bilgileri", selectedAddress);
+
+    setEditAddressInfo(selectedAddress);
+  }, [editedAddress]);
+  console.log("Edited address id ", editedAddress);
+
+  const handleEdit = (addressID) => {
+    setEditMenu(true);
+    setEditedAddress(addressID);
+  };
+
+  const editSubmit = async (data) => {
+    console.log("edited data", data);
+    const formData = {
+      id: editedAddress,
+      title: data.title,
+      name: data.name,
+      surname: data.surname,
+      phone: data.phoneNumber,
+      city: data.region,
+      district: data.district,
+      neighborhood: data.neighborhood,
+      address: data.address,
+    };
+
+    await AxiosInstance.put("/user/address", formData).then((res) => {
+      console.log("edited address donen data", res.data);
+      const updatedAddressList = addressList.filter((item) => {
+        if (item.id == editedAddress) {
+          item.title = editAddressInfo.title;
+          item.name = editAddressInfo.name;
+          item.surname = editAddressInfo.surname;
+          item.phone = editAddressInfo.phone;
+          item.neighborhood = editAddressInfo.neighborhood;
+          item.district = editAddressInfo.district;
+          item.city = editAddressInfo.city;
+          item.address = editAddressInfo.address;
+        }
+      });
+      setAddressList(updatedAddressList);
+    });
+    getAddresses();
+  };
+
   const completeOrder = () => {
     if (cartProducts.length > 0 && radioChecked && satisChecked) {
       dispatch(orderAddressId(radioChecked));
@@ -138,6 +192,8 @@ function OrderPage() {
   };
 
   console.log(addressList);
+  console.log(editAddressInfo);
+  console.log(editedAddress);
 
   return (
     <div className="w-full  flex justify-center py-20">
@@ -194,7 +250,10 @@ function OrderPage() {
             <div className="flex flex-col w-[46%] gap-2  ">
               <div className="flex justify-between h-[27px] items-center"></div>
               <div
-                onClick={() => setNewAddressMenu(true)}
+                onClick={() => {
+                  setEditMenu(false);
+                  setNewAddressMenu(true);
+                }}
                 className="flex flex-col justify-center items-center h-[130px] hover:cursor-pointer rounded-md bg-[#EDF6FA]"
               >
                 <AiOutlinePlus className=" text-primaryColor h-7 w-7" />
@@ -220,7 +279,10 @@ function OrderPage() {
                         {item?.title}
                       </label>
                     </div>
-                    <p className="underline text-sm font-medium hover:cursor-pointer">
+                    <p
+                      onClick={() => handleEdit(item.id)}
+                      className="underline text-sm font-medium hover:cursor-pointer"
+                    >
                       {" "}
                       Duzenle
                     </p>
@@ -256,6 +318,169 @@ function OrderPage() {
             })}
           </div>
         </div>
+        {editMenu && (
+          <div className="py-5 px-10 border border-[#6CB9D8] rounded-md flex justify-between">
+            <form
+              className="flex flex-col p-3 rounded-md  gap-4 "
+              onSubmit={handleSubmit(editSubmit)}
+            >
+              <h3 className="font-semibold text-xl text-darkBg border-b-2 w-4/5 border-primaryColor">
+                Edit Address
+              </h3>
+              <div>
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="addressTitle"
+                >
+                  Address Title :
+                  <input
+                    {...register("title", { required: true })}
+                    type="text"
+                    id="addressTitle"
+                    className="border border-primaryColor p-[2px]"
+                    placeholder={editAddressInfo[0]?.title}
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="name"
+                >
+                  {" "}
+                  Name:
+                  <input
+                    {...register("name", { required: true })}
+                    type="text"
+                    id="name"
+                    className="border border-primaryColor"
+                    placeholder={editAddressInfo[0]?.name}
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="surname"
+                >
+                  {" "}
+                  Surname:
+                  <input
+                    {...register("surname", { required: true })}
+                    type="text"
+                    id="surname"
+                    className="border border-primaryColor"
+                    placeholder={editAddressInfo[0]?.surname}
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="phoneNumber"
+                >
+                  {" "}
+                  Phone Number:
+                  <input
+                    {...register("phoneNumber", { required: true })}
+                    type="number"
+                    id="phoneNumber"
+                    className="border border-primaryColor"
+                    placeholder={editAddressInfo[0]?.phone}
+                  />
+                </label>
+              </div>
+              <div>
+                <div className="font-medium flex items-center  gap-5">
+                  <CountryDropdown
+                    {...register("country", { required: true })}
+                    value={country}
+                    onChange={(val) => {
+                      setCountry(val);
+                      setValue("country", val);
+                    }}
+                    classes="border border-primaryColor bg-[#ACD8E9] w-1/6"
+                  />
+                  <RegionDropdown
+                    {...register("region", { required: true })}
+                    country={country}
+                    value={region}
+                    onChange={(val) => {
+                      setRegion(val);
+                      setValue("region", val);
+                    }}
+                    classes="border border-primaryColor bg-[#ACD8E9] w-1/6"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="district"
+                >
+                  District :
+                  <input
+                    {...register("district", { required: true })}
+                    type="text"
+                    id="district"
+                    className="border border-primaryColor"
+                    placeholder={editAddressInfo[0]?.district}
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  className="font-medium flex items-center  gap-5"
+                  htmlFor="neighborhood"
+                >
+                  Neighborhood :
+                  <input
+                    {...register("neighborhood", { required: true })}
+                    type="text"
+                    id="neighborhood"
+                    className="border border-primaryColor"
+                    placeholder={editAddressInfo[0]?.neighborhood}
+                  />
+                </label>
+              </div>
+              <div className="flex">
+                <label
+                  htmlFor="address"
+                  className="font-medium flex items-center  gap-5"
+                >
+                  Address :
+                </label>
+                <textarea
+                  name="address"
+                  id="address"
+                  cols="30"
+                  rows="3"
+                  className="border border-primaryColor"
+                ></textarea>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="rounded-lg py-1 px-3 bg-[#6CB9D8] text-white"
+                >
+                  Edit
+                </button>
+              </div>
+            </form>
+            <div>
+              <button
+                onClick={() => {
+                  setEditMenu(false);
+                  setNewAddressMenu(false);
+                }}
+                type="button "
+                className="border-[#6CB9D8] border text-darkBg  px-3 py-2 rounded-lg hover:bg-[#6CB9D8] hover:text-white"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
         {newAddressMenu && (
           <div className="py-5 px-10 border border-[#6CB9D8] rounded-md flex justify-between">
             <form
