@@ -137,6 +137,8 @@ function OrderPage() {
     }
   };
 
+  console.log(addressList);
+
   return (
     <div className="w-full  flex justify-center py-20">
       <div className=" w-[73%] flex flex-col gap-6">
@@ -170,7 +172,7 @@ function OrderPage() {
         </div>
         {radioError && (
           <div>
-            <p className="text-dangerRed text-xl">
+            <p className="text-dangerRed text-base font-medium">
               *Teslimat adresi secmelisiniz.
             </p>{" "}
           </div>

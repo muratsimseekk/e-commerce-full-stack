@@ -1,9 +1,6 @@
 import { Button, Carousel, Typography } from "@material-tailwind/react";
 import React from "react";
 
-import carousel1 from "../../assets/hero/carousel2/carousel2-1.png";
-import carousel2 from "../../assets/hero/carousel2/carousel2-2.png";
-
 function CarouselBottom() {
   return (
     <Carousel
@@ -25,7 +22,7 @@ function CarouselBottom() {
     >
       <div className="relative h-full w-full">
         <img
-          src={carousel1}
+          src={`./slider/carousel2-1.png`}
           className="absolute xl:right-[10%] xl:bottom-0 bottom-0 right-0 xl:h-4/5  xl:w-[31.5%] h-2/5 w-full"
         />
         <div className="absolute  grid h-full w-full xl:place-items-center ">
@@ -75,7 +72,7 @@ function CarouselBottom() {
         </div>
       </div>
       <div className="relative h-full w-full ">
-        <img src={carousel2} className="h-full w-full " />
+        <img src={`./slider/carousel2-2.png`} className="h-full w-full " />
         <div className="absolute  inset-0 grid h-full w-full place-items-center ">
           <div className="w-full  flex flex-col gap-10 ml-8 text-start md:w-3/4">
             <Typography

@@ -56,16 +56,16 @@ function Header() {
 
   const shopCardProducts = useSelector((state) => state.shopping.cart);
 
-  console.log("shopping carttaki itemlar", shopCardProducts);
+  // console.log("shopping carttaki itemlar", shopCardProducts);
   const allProducts = useSelector((state) => state.product.productList);
-  console.log("all products", allProducts);
+  // console.log("all products", allProducts);
 
   useEffect(() => {
     const updatedCartProducts = shopCardProducts.map((cartItem) => {
       const matchingProduct = allProducts.find(
         (product) => product.id === cartItem.product.id
       );
-      console.log("matching product", matchingProduct);
+      // console.log("matching product", matchingProduct);
       if (matchingProduct) {
         return {
           ...cartItem,
@@ -83,7 +83,7 @@ function Header() {
     setCartProducts(updatedCartProducts);
   }, [shopCardProducts, allProducts]);
 
-  console.log("cart products", cartProducts);
+  // console.log("cart products", cartProducts);
 
   const userNav = useSelector((state) => state.general.roles);
 

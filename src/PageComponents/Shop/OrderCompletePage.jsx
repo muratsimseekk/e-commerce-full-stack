@@ -237,7 +237,6 @@ function OrderCompletePage() {
           setOrderInfoData(res.data);
           setOrderInfoMenu(true);
           toast.success("Siparis basariyla verildi");
-          previousOrders();
         })
         .catch((err) =>
           console.log("order data yollanirken hata bir seyler eksik", err)
@@ -256,7 +255,7 @@ function OrderCompletePage() {
   return (
     <div className="w-full relative flex justify-center py-20">
       {orderInfoMenu && (
-        <div className="absolute  w-1/2 h-2/3 left-1/2 transform -translate-x-1/2  z-50">
+        <div className="absolute  w-1/2 h-[650px] left-1/2 transform -translate-x-1/2  z-50">
           <div className="w-full h-full  flex justify-center items-center">
             <div className="w-2/3 bg-darkBg h-4/5 flex flex-col opacity-90 items-center gap-8 pt-16 rounded-xl">
               <h2 className="text-dangerRed border-b-2 ">
